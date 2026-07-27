@@ -6,15 +6,17 @@ export function About() {
   return (
     <section id="about" className="theme-light">
       <div className="grid lg:grid-cols-12">
-        <div className="relative aspect-[4/3] lg:col-span-6 lg:aspect-auto">
-          <ParallaxImage className="h-full min-h-[420px] w-full lg:min-h-[640px]">
+        {/* Height comes from the wrapper (aspect on mobile, min-h on desktop);
+            the image absolutely fills it — no aspect/min-h conflict. */}
+        <div className="relative aspect-[4/3] w-full overflow-hidden sm:aspect-[3/2] lg:col-span-6 lg:aspect-auto lg:min-h-[640px]">
+          <ParallaxImage className="absolute inset-0 h-full w-full">
             <span className="text-idx absolute bottom-6 left-6 text-[10px] opacity-60">
               {about.shotBrief}
             </span>
           </ParallaxImage>
         </div>
 
-        <div className="flex items-center px-6 py-20 sm:px-10 lg:col-span-5 lg:col-start-8 lg:px-0 lg:py-0">
+        <div className="flex items-center px-6 py-16 sm:px-10 sm:py-20 lg:col-span-5 lg:col-start-8 lg:px-0 lg:py-0">
           <Reveal variant="slideRight">
             <span className="text-idx text-xs text-acc">{about.index}</span>
             <h2 className="mt-7 font-serif text-display-lg font-light">
