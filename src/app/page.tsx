@@ -9,7 +9,7 @@ import { TrustedPartners } from "@/components/sections/TrustedPartners";
 import { Team } from "@/components/sections/Team";
 import { Coverage } from "@/components/sections/Coverage";
 import { WhyUs } from "@/components/sections/WhyUs";
-import { Testimonial } from "@/components/sections/Testimonial";
+import { Trust } from "@/components/sections/Trust";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/sections/Footer";
 
@@ -28,7 +28,7 @@ export default function Home() {
         <Team />
         <Coverage />
         <WhyUs />
-        <Testimonial />
+        <Trust />
         <Contact />
       </main>
       <Footer />

@@ -74,7 +74,19 @@ const config: Config = {
       },
       aspectRatio: {
         "4/3": "4 / 3",
+        "4/5": "4 / 5",
         map: "1200 / 380",
+      },
+      keyframes: {
+        // Seamless logo marquee — track holds two identical copies,
+        // so translating by -50% loops with no visible jump.
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+      },
+      animation: {
+        marquee: "marquee 60s linear infinite",
       },
     },
   },

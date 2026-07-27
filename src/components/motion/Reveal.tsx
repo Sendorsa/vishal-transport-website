@@ -9,7 +9,7 @@ type RevealProps = {
   /** Seconds before the animation starts. */
   delay?: number;
   /** Render as a different element (default div). */
-  as?: "div" | "section" | "span" | "li" | "p" | "h2";
+  as?: "div" | "section" | "span" | "li" | "p" | "h2" | "h3";
 } & Omit<HTMLMotionProps<"div">, "variants" | "initial" | "whileInView" | "viewport">;
 
 /**

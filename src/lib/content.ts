@@ -94,11 +94,16 @@ export const partners = {
 
 export const team = {
   index: "07 — Leadership",
-  quote:
-    "Ten years in, Vishal Group has become a recognised leader in manpower and transportation for automobile and manufacturing — 2,000+ employees, 200+ vehicles, and a habit of adapting before we're asked to.",
+  // Name reserved — supply the real MD name to render it above the role.
+  name: "",
   role: "Managing Director",
   org: "Vishal Transport and HR Solutions",
-  shotBrief: "Reserved for portrait — studio lighting, neutral backdrop",
+  message: [
+    "Ten years in, Vishal Group has become a recognised leader in manpower and transportation for automobile and manufacturing.",
+    "2,000+ employees, 200+ vehicles, and a habit of adapting before we're asked to — that is the operation we hold ourselves to, every shift.",
+  ],
+  cta: { label: "Start a conversation", href: "#contact" },
+  shotBrief: "Reserved for portrait — executive, studio lighting, neutral backdrop",
 };
 
 export const coverage = {
@@ -135,29 +140,32 @@ export const whyUs = {
     "Image briefs, top to bottom — archival highway, drone coverage shot, driver inspection, GPS dashboard, truck convoy, workforce portrait.",
 };
 
-export const testimonial = {
-  index: "10 — Word Of Mouth",
-  quote: "“— reserved for a verified quote from a manufacturing partner —”",
-  note: "Testimonials, coming soon",
-  faq: [
-    {
-      q: "What services does Vishal Group provide?",
-      a: "Staff transportation, domestic cargo management, and manpower consulting for the automobile and manufacturing sectors.",
-    },
-    {
-      q: "Which regions do you operate in?",
-      a: "Hosur, Tamil Nadu and Bengaluru, Karnataka, along the corridor connecting the two.",
-    },
-    {
-      q: "How large is your fleet?",
-      a: "200+ trucks and buses, supported by 2,000+ skilled employees delivering 16,000+ man-hours daily.",
-    },
-    {
-      q: "Are you GST registered in both states?",
-      a: "Yes — separate GST registrations are held for Tamil Nadu and Karnataka, listed under Coverage above.",
-    },
-  ],
+export const trust = {
+  index: "10 — Trusted By",
+  title: ["Trusted by", "industry leaders."],
+  body: "Vishal Group proudly supports some of South India's leading manufacturing and industrial organisations — moving their people and cargo, dependably, shift after shift.",
+  footnote:
+    "Partner marks shown are placeholders, reserved for the logos of the manufacturers we serve.",
 };
+
+export const faq = [
+  {
+    q: "What services does Vishal Group provide?",
+    a: "Staff transportation, domestic cargo management, and manpower consulting for the automobile and manufacturing sectors.",
+  },
+  {
+    q: "Which regions do you operate in?",
+    a: "Hosur, Tamil Nadu and Bengaluru, Karnataka, along the corridor connecting the two.",
+  },
+  {
+    q: "How large is your fleet?",
+    a: "200+ trucks and buses, supported by 2,000+ skilled employees delivering 16,000+ man-hours daily.",
+  },
+  {
+    q: "Are you GST registered in both states?",
+    a: "Yes — separate GST registrations are held for Tamil Nadu and Karnataka, listed under Coverage above.",
+  },
+];
 
 export const contact = {
   index: "11 — Contact",
