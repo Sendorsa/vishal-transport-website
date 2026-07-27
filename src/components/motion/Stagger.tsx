@@ -38,7 +38,7 @@ export function Stagger({
 }
 
 type StaggerItemProps = {
-  as?: "div" | "li" | "span";
+  as?: "div" | "li" | "span" | "p";
 } & Omit<HTMLMotionProps<"div">, "variants">;
 
 /** A single staggered child. Must live inside <Stagger>. */

@@ -98,12 +98,18 @@ export const team = {
   name: "",
   role: "Managing Director",
   org: "Vishal Transport and HR Solutions",
-  message: [
-    "Ten years in, Vishal Group has become a recognised leader in manpower and transportation for automobile and manufacturing.",
-    "2,000+ employees, 200+ vehicles, and a habit of adapting before we're asked to — that is the operation we hold ourselves to, every shift.",
-  ],
-  cta: { label: "Start a conversation", href: "#contact" },
   shotBrief: "Reserved for portrait — executive, studio lighting, neutral backdrop",
+  // Executive letter — polished rewrite of the MD's original statement.
+  letter: {
+    label: "Our Promise to You",
+    heading: ["From the Managing", "Director's Desk"],
+    paragraphs: [
+      "Over the past decade, Vishal Group has grown into a trusted leader in manpower and transportation for the automobile and manufacturing sectors. With more than 2,000 skilled employees and a fleet of 200+ vehicles, we deliver dependable service to every partner we work with.",
+      "Our commitment is simple — to move with the future by continually refining our processes, investing in our people, and raising the standard of what an operations partner should be.",
+      "Discover what's possible with Vishal Group: your trusted partner in transportation and manpower solutions.",
+    ],
+    signoff: "Managing Director",
+  },
 };
 
 export const coverage = {
