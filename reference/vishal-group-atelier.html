@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vishal Group — We Move Industry</title>
+<meta name="description" content="Vishal Group is a transportation and manpower partner for the automobile and manufacturing sectors in Hosur, Tamil Nadu and Bengaluru, Karnataka. 200+ vehicles, 2,000+ skilled employees, ten years on the road." />
+<meta name="theme-color" content="#0B0B0C" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Vishal Group" />
+<meta property="og:title" content="Vishal Group — We Move Industry" />
+<meta property="og:description" content="A transportation and manpower partner for manufacturing operations across Tamil Nadu and Karnataka." />
+<meta property="og:locale" content="en_IN" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Vishal Group — We Move Industry" />
+<meta name="twitter:description" content="Staff transportation, cargo management and manpower consulting for manufacturing companies in Hosur and Bengaluru." />
+
+<link rel="canonical" href="https://vishal-transport.com/" />
+<meta name="robots" content="index, follow" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MovingCompany",
+  "name": "Vishal Transport and HR Solutions",
+  "alternateName": "Vishal Group",
+  "email": "vishaladml1@gmail.com",
+  "telephone": "+91-9994391696",
+  "areaServed": ["Hosur", "Bengaluru", "Tamil Nadu", "Karnataka"],
+  "address": [
+    { "@type": "PostalAddress", "streetAddress": "#2/158 Upparapalli Village, Hosur to Thally Main Road", "addressLocality": "Hosur", "addressRegion": "Tamil Nadu", "postalCode": "635114", "addressCountry": "IN" },
+    { "@type": "PostalAddress", "streetAddress": "C12B, Sarjapura Attibele Road, Indiabele Village, Anekal Taluk", "addressLocality": "Bengaluru", "addressRegion": "Karnataka", "postalCode": "562107", "addressCountry": "IN" }
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          serif: ['Fraunces', 'ui-serif', 'Georgia'],
+          sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+          mono: ['"IBM Plex Mono"', 'ui-monospace', 'monospace'],
+        },
+        maxWidth: { container: '1480px' },
+      }
+    }
+  }
+</script>
+
+<style>
+  :root{ color-scheme: dark; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
+  }
+  body{ font-family:'Inter',sans-serif; background:#0B0B0C; }
+
+  /* theme tokens */
+  .t-dark{ --bg:#0B0B0C; --ink:#F5F3EE; --ink2:#AFACA4; --acc:#D4AF6A; --hair:rgba(255,255,255,0.14); background:var(--bg); color:var(--ink); }
+  .t-light{ --bg:#F7F5F0; --ink:#15140F; --ink2:#635F55; --acc:#9C7A3E; --hair:rgba(0,0,0,0.12); background:var(--bg); color:var(--ink); }
+
+  .serif{ font-family:'Fraunces', serif; }
+  .idx{ font-family:'IBM Plex Mono', monospace; letter-spacing:.14em; }
+
+  .display-xl{ font-size: clamp(2.6rem, 8vw, 7.5rem); line-height:0.98; letter-spacing:-0.01em; }
+  .display-lg{ font-size: clamp(2.2rem, 5.6vw, 4.6rem); line-height:1.02; letter-spacing:-0.01em; }
+  .display-md{ font-size: clamp(1.8rem, 3.4vw, 2.8rem); line-height:1.1; }
+  .body-lg{ font-size: 19px; line-height:1.75; }
+
+  ::selection{ background:var(--acc, #D4AF6A); color:var(--bg, #0B0B0C); }
+  :focus-visible{ outline:2px solid var(--acc, #D4AF6A); outline-offset:3px; }
+
+  /* mask text reveal */
+  .mask{ overflow:hidden; display:block; }
+  .mask > span{ display:inline-block; transform: translateY(112%); transition: transform 1.1s cubic-bezier(.19,1,.22,1); }
+  .mask.in > span{ transform:translateY(0); }
+
+  .fade{ opacity:0; transition: opacity 1s ease; }
+  .fade.in{ opacity:1; }
+  .rise{ opacity:0; transform: translateY(36px); transition: opacity .9s cubic-bezier(.19,1,.22,1), transform .9s cubic-bezier(.19,1,.22,1); }
+  .rise.in{ opacity:1; transform:none; }
+  .wipe-left{ opacity:0; transform: translateX(-50px); transition: opacity .9s cubic-bezier(.19,1,.22,1), transform .9s cubic-bezier(.19,1,.22,1); }
+  .wipe-left.in{ opacity:1; transform:none; }
+  .wipe-right{ opacity:0; transform: translateX(50px); transition: opacity .9s cubic-bezier(.19,1,.22,1), transform .9s cubic-bezier(.19,1,.22,1); }
+  .wipe-right.in{ opacity:1; transform:none; }
+
+  .hair-b{ border-color: var(--hair); }
+  .btn{ display:inline-flex; align-items:center; justify-content:center; height:56px; padding:0 34px; border-radius:999px; font-weight:600; gap:12px; transition: transform .35s ease, background-color .35s ease, box-shadow .35s ease, color .35s ease, border-color .35s ease; }
+  .btn-fill{ background:var(--ink); color:var(--bg); }
+  .btn-fill:hover{ background:var(--acc); box-shadow: 0 14px 32px -12px rgba(212,175,106,0.55); transform: translateY(-2px) scale(1.02); }
+  .btn-line{ border:1px solid var(--hair); color:var(--ink); }
+  .btn-line:hover{ border-color: var(--acc); color:var(--acc); }
+  .btn .arrow{ transition: transform .35s ease; }
+  .btn:hover .arrow{ transform: translateX(4px); }
+
+  .ph{ position:relative; overflow:hidden; background: linear-gradient(155deg, rgba(212,175,106,0.14), rgba(212,175,106,0.02)); }
+  .t-light .ph{ background: linear-gradient(155deg, rgba(156,122,62,0.10), rgba(156,122,62,0.02)); }
+  .ph-zoom{ transition: transform 2.2s cubic-bezier(.19,1,.22,1); filter: saturate(0.82) contrast(1.08); }
+  .ph:hover .ph-zoom{ transform: scale(1.03); }
+  .ph-vignette{ position:absolute; inset:0; pointer-events:none; background: radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,0.32) 100%); }
+  .ph-grain::before{ content:''; position:absolute; inset:0; pointer-events:none; opacity:.05; mix-blend-mode:overlay; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  .img-reveal{ opacity:0; transform: scale(1.045); transition: opacity 1.1s ease, transform 1.2s cubic-bezier(.19,1,.22,1); }
+  .img-reveal.in{ opacity:1; transform:scale(1); }
+  .img-caption{ font-family:'IBM Plex Mono',monospace; letter-spacing:.1em; }
+  .ph-tag{ font-family:'IBM Plex Mono',monospace; letter-spacing:.14em; }
+
+  .num-counter{ font-variant-numeric: tabular-nums; }
+
+  .hover-line{ position:relative; }
+  .hover-line::after{ content:''; position:absolute; left:0; bottom:-4px; width:0; height:1px; background: var(--acc); transition:width .4s ease; }
+  .hover-line:hover::after{ width:100%; }
+
+  .svc-row{ transition: padding-left .5s cubic-bezier(.19,1,.22,1), background-color .5s ease; }
+  .svc-row:hover{ padding-left: 22px; background: rgba(212,175,106,0.05); }
+  .svc-row:hover .svc-num{ color: var(--acc); }
+  .svc-num{ transition: color .4s ease; }
+
+  .accordion-body{ max-height:0; overflow:hidden; transition:max-height .5s cubic-bezier(.19,1,.22,1); }
+  .accordion.open .accordion-body{ max-height:300px; }
+  .accordion .plus{ transition: transform .4s ease; }
+  .accordion.open .plus{ transform: rotate(45deg); }
+
+  .nav-bare{ background:transparent; }
+  .nav-scrolled{ background: rgba(11,11,12,0.82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom:1px solid rgba(255,255,255,0.1); }
+
+  .gallery-pin{ position: sticky; top:0; height:100vh; display:flex; align-items:center; overflow:hidden; }
+  .gallery-track{ display:flex; will-change: transform; }
+  @media (max-width: 1023px){
+    .gallery-pin{ position:static; height:auto; }
+    .gallery-track{ overflow-x:auto; scroll-snap-type:x mandatory; }
+    .gallery-track > *{ scroll-snap-align:start; }
+  }
+
+  .map-path{ stroke-dasharray: 1100; stroke-dashoffset: 1100; transition: stroke-dashoffset 1.9s cubic-bezier(.19,1,.22,1); }
+  .map-path.in{ stroke-dashoffset: 0; }
+  .map-dot{ opacity:0; transition: opacity .4s ease; }
+  .map-dot.in{ opacity:1; }
+  .map-pin{ opacity:0; transform: translateY(8px); transition: opacity .5s ease, transform .5s ease; }
+  .map-pin.in{ opacity:1; transform:none; }
+
+  input, textarea{ transition: border-color .3s ease; }
+</style>
+</head>
+
+<body class="antialiased">
+
+<svg width="0" height="0" class="absolute" aria-hidden="true">
+<defs>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><circle cx="12" cy="9.3" r="2.2" fill="none" stroke="currentColor" stroke-width="1.3"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><path d="M7 3.5 9.5 8 7.2 9.8a11 11 0 0 0 5 5l1.8-2.3 4.5 2.5-.6 3a2 2 0 0 1-2.2 1.6C9.8 18.8 5.2 14.2 4.4 8.3a2 2 0 0 1 1.6-2.2l1-.6z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+<symbol id="i-linkedin" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M7.5 10v6.5M7.5 7.6v.1M11.5 16.5V10M11.5 12.7c0-1.5 1-2.7 2.6-2.7 1.7 0 2.4 1.1 2.4 2.9v3.6" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></symbol>
+<symbol id="i-instagram" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.2"/></symbol>
+<symbol id="i-facebook" viewBox="0 0 24 24"><path d="M14.5 21v-7h2.3l.4-3h-2.7V8.9c0-.9.2-1.5 1.5-1.5h1.3V4.8C16.9 4.7 16 4.6 15 4.6c-2.2 0-3.7 1.3-3.7 3.8V11H9v3h2.3v7h3.2z" fill="currentColor"/></symbol>
+</defs>
+</svg>
+
+<div class="fixed top-0 left-0 w-full h-[2px] z-[70] bg-white/10">
+  <div id="progress" class="h-full bg-[#D4AF6A]" style="width:0%"></div>
+</div>
+
+<!-- NAV -->
+<header id="nav" class="t-dark nav-bare fixed top-0 left-0 w-full z-[60] transition-colors duration-500">
+  <div class="max-w-container mx-auto px-6 sm:px-10 h-24 flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-3">
+      <span class="idx text-xs" style="color:var(--acc)">VG</span>
+      <span class="hidden sm:block idx text-[11px] opacity-70 uppercase">Vishal&nbsp;Group</span>
+    </a>
+    <nav class="hidden lg:flex items-center gap-10 text-[15px]">
+      <a href="#about" class="hover-line">About</a>
+      <a href="#services" class="hover-line">Services</a>
+      <a href="#industries" class="hover-line">Industries</a>
+      <a href="#coverage" class="hover-line">Coverage</a>
+      <a href="#contact" class="hover-line">Contact</a>
+    </nav>
+    <a href="#contact" class="hidden lg:inline-flex btn btn-line text-sm !h-11 !px-6" style="--hair:rgba(255,255,255,0.25);">Get a Quote</a>
+    <button id="menuBtn" aria-label="Menu" aria-expanded="false" class="lg:hidden w-11 h-11 flex items-center justify-center border border-white/20">
+      <svg id="menuIcon" class="w-5 h-5"><use href="#i-menu"/></svg>
+    </button>
+  </div>
+  <div id="mobileMenu" class="hidden lg:hidden bg-[var(--bg)] border-b border-white/10 px-6 py-8 flex flex-col gap-6 text-lg">
+    <a href="#about" class="mlink">About</a>
+    <a href="#services" class="mlink">Services</a>
+    <a href="#industries" class="mlink">Industries</a>
+    <a href="#coverage" class="mlink">Coverage</a>
+    <a href="#contact" class="mlink">Contact</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ 01 — OPENING STATEMENT (dark, full bleed, typography-led) ============ -->
+<section id="hero" class="t-dark relative min-h-screen flex flex-col justify-between overflow-hidden">
+  <div id="heroVisual" class="absolute inset-0 ph-grain">
+    <div id="heroZoom" class="w-full h-full">
+      <div class="ken-burns w-full h-full ph"></div>
+    </div>
+    <div class="ph-vignette"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-[#0B0B0C] via-[#0B0B0C]/70 to-[#0B0B0C]/30"></div>
+    <span class="ph-tag absolute top-1/2 right-6 sm:right-10 -translate-y-1/2 text-[10px] uppercase opacity-50 hidden sm:block [writing-mode:vertical-rl]">Shot brief — Aerial, empty highway, golden hour, fleet in motion</span>
+  </div>
+
+  <div class="relative max-w-container mx-auto w-full px-6 sm:px-10 pt-32 flex items-center justify-between">
+    <span class="idx text-xs opacity-60 uppercase">Hosur — Bengaluru</span>
+    <span class="idx text-xs opacity-60 uppercase hidden sm:block">01 / Est. 10 years</span>
+  </div>
+
+  <div class="relative max-w-container mx-auto w-full px-6 sm:px-10 pb-20">
+    <h1 class="serif display-xl font-light max-w-4xl">
+      <span class="mask in"><span>We move</span></span>
+      <span class="mask in"><span style="transition-delay:120ms">the machines</span></span>
+      <span class="mask in"><span style="transition-delay:240ms">of industry.</span></span>
+    </h1>
+    <div class="rise in mt-10 flex flex-wrap items-end justify-between gap-8" style="transition-delay:420ms">
+      <p class="body-lg max-w-md" style="color:var(--ink2)">Staff transportation. Cargo. Manpower. Ten years, without pause, across Tamil Nadu and Karnataka.</p>
+      <a href="#contact" class="btn btn-fill">Get a Quote <svg class="w-4 h-4 arrow"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 — ABOUT (light, asymmetric: full-bleed image left, text right) ============ -->
+<section id="about" class="t-light">
+  <div class="grid lg:grid-cols-12">
+    <div class="lg:col-span-6 rise ph ph-grain aspect-[4/3] lg:aspect-auto">
+      <div class="ph-zoom w-full h-full min-h-[420px] lg:min-h-[640px]"></div>
+      <div class="ph-vignette"></div>
+      <span class="ph-tag absolute bottom-6 left-6 text-[10px] uppercase opacity-60">Shot brief — Fleet parked at the operations yard, blue hour</span>
+    </div>
+    <div class="lg:col-span-5 lg:col-start-8 flex items-center py-20 lg:py-0 px-6 sm:px-10 lg:px-0">
+      <div class="wipe-right">
+        <span class="idx text-xs uppercase" style="color:var(--acc)">02 — About</span>
+        <h2 class="serif display-lg font-light mt-7">Ten years<br/>on the road.</h2>
+        <p class="body-lg mt-9 max-w-md" style="color:var(--ink2)">Vishal Transport and HR Solutions moves the people and cargo behind the automobile and manufacturing plants of Hosur and Bengaluru — staff mobilisation, domestic logistics, and manpower, under one accountable operation.</p>
+        <div class="mt-12 grid grid-cols-3 gap-6 border-t hair-b pt-8 max-w-md">
+          <div><div class="idx text-xl">10+</div><div class="text-xs mt-2" style="color:var(--ink2)">Years</div></div>
+          <div><div class="idx text-xl">2</div><div class="text-xs mt-2" style="color:var(--ink2)">States</div></div>
+          <div><div class="idx text-xl">2</div><div class="text-xs mt-2" style="color:var(--ink2)">Sectors</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 — FULL BLEED CINEMATIC TRANSITION (dark) ============ -->
+<section id="corridor" class="t-dark relative h-[85vh] overflow-hidden ph-grain">
+  <div class="absolute inset-0 ph">
+    <div class="ph-zoom w-full h-full"></div>
+  </div>
+  <div class="ph-vignette"></div>
+  <div class="absolute inset-0 bg-gradient-to-t from-[#0B0B0C] via-transparent to-[#0B0B0C]/40"></div>
+  <div class="relative h-full max-w-container mx-auto px-6 sm:px-10 flex flex-col justify-between py-16">
+    <div class="fade in flex justify-between items-start">
+      <span class="ph-tag text-[10px] uppercase opacity-45">Shot brief — Highway, dusk, long exposure, Hosur–Bengaluru corridor</span>
+      <span class="idx text-xs uppercase opacity-70">5,000,000+ km covered</span>
+    </div>
+    <p class="rise in serif italic display-md max-w-xl" style="transition-delay:100ms">The corridor between Hosur and Bengaluru never stops.</p>
+  </div>
+</section>
+
+<!-- ============ 04 — LARGE TYPOGRAPHIC NUMBERS (light) ============ -->
+<section class="t-light py-24 lg:py-40">
+  <div class="max-w-container mx-auto px-6 sm:px-10">
+    <span class="idx text-xs uppercase rise in" style="color:var(--acc)">04 — Scale</span>
+    <div class="mt-14 grid lg:grid-cols-12 gap-y-16">
+      <div class="rise lg:col-span-6">
+        <div class="counter idx font-light" style="font-size:clamp(3.5rem,9vw,8rem); line-height:1;" data-count="200" data-suffix="+">0</div>
+        <div class="mt-2 text-lg" style="color:var(--ink2)">Vehicles on the road</div>
+      </div>
+      <div class="wipe-right lg:col-span-5 lg:col-start-8 lg:pt-10" style="transition-delay:100ms">
+        <div class="counter idx font-light" style="font-size:clamp(3rem,7vw,6rem); line-height:1;" data-count="2000" data-suffix="+">0</div>
+        <div class="mt-2 text-lg" style="color:var(--ink2)">Skilled employees</div>
+      </div>
+      <div class="wipe-left lg:col-span-5 lg:pt-6" style="transition-delay:200ms">
+        <div class="counter idx font-light" style="font-size:clamp(3rem,7vw,6rem); line-height:1;" data-count="16000" data-suffix="+">0</div>
+        <div class="mt-2 text-lg" style="color:var(--ink2)">Man-hours, daily</div>
+      </div>
+      <div class="rise lg:col-span-4 lg:col-start-9 lg:pt-14" style="transition-delay:300ms">
+        <div class="counter idx font-light" style="font-size:clamp(3rem,6vw,5rem); line-height:1;" data-count="10" data-suffix="">0</div>
+        <div class="mt-2 text-lg" style="color:var(--ink2)">Years in operation</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 — SERVICES (dark, editorial index, no cards) ============ -->
+<section id="services" class="t-dark py-24 lg:py-36">
+  <div class="max-w-container mx-auto px-6 sm:px-10">
+    <span class="idx text-xs uppercase rise in" style="color:var(--acc)">05 — What We Do</span>
+    <h2 class="serif display-lg font-light mt-7 rise in" style="transition-delay:80ms">Three ways<br/>we keep industry moving.</h2>
+
+    <div class="mt-16 border-t hair-b">
+      <div class="svc-row rise border-b hair-b grid lg:grid-cols-12 gap-4 lg:gap-8 items-center py-10">
+        <div class="svc-num idx text-sm lg:col-span-1" style="color:var(--ink2)">01</div>
+        <div class="ph ph-grain lg:col-span-2 aspect-[4/3] rounded-xl overflow-hidden">
+          <div class="ph-zoom w-full h-full"></div>
+          <div class="ph-vignette"></div>
+        </div>
+        <h3 class="serif text-3xl lg:text-4xl font-light lg:col-span-3">Staff Transportation</h3>
+        <p class="lg:col-span-5 body-lg" style="color:var(--ink2)">200+ buses, daily. Employees moved safely between home and factory, shift after shift.</p>
+        <div class="lg:col-span-1 flex lg:justify-end"><svg class="w-5 h-5" style="color:var(--acc)"><use href="#i-arrow"/></svg></div>
+      </div>
+      <div class="svc-row rise border-b hair-b grid lg:grid-cols-12 gap-4 lg:gap-8 items-center py-10" style="transition-delay:100ms">
+        <div class="svc-num idx text-sm lg:col-span-1" style="color:var(--ink2)">02</div>
+        <div class="ph ph-grain lg:col-span-2 aspect-[4/3] rounded-xl overflow-hidden">
+          <div class="ph-zoom w-full h-full"></div>
+          <div class="ph-vignette"></div>
+        </div>
+        <h3 class="serif text-3xl lg:text-4xl font-light lg:col-span-3">Cargo Management</h3>
+        <p class="lg:col-span-5 body-lg" style="color:var(--ink2)">Cost down, transit time down — domestic delivery, planned around production.</p>
+        <div class="lg:col-span-1 flex lg:justify-end"><svg class="w-5 h-5" style="color:var(--acc)"><use href="#i-arrow"/></svg></div>
+      </div>
+      <div class="svc-row rise border-b hair-b grid lg:grid-cols-12 gap-4 lg:gap-8 items-center py-10" style="transition-delay:200ms">
+        <div class="svc-num idx text-sm lg:col-span-1" style="color:var(--ink2)">03</div>
+        <div class="ph ph-grain lg:col-span-2 aspect-[4/3] rounded-xl overflow-hidden">
+          <div class="ph-zoom w-full h-full"></div>
+          <div class="ph-vignette"></div>
+        </div>
+        <h3 class="serif text-3xl lg:text-4xl font-light lg:col-span-3">Manpower Consulting</h3>
+        <p class="lg:col-span-5 body-lg" style="color:var(--ink2)">Skilled people, matched precisely to the machines and methods of manufacturing.</p>
+        <div class="lg:col-span-1 flex lg:justify-end"><svg class="w-5 h-5" style="color:var(--acc)"><use href="#i-arrow"/></svg></div>
+      </div>
+    </div>
+    <p class="rise mt-8 text-xs" style="color:var(--ink2)">Image briefs — 01: bus fleet on the highway, golden hour. 02: distribution centre, wide interior. 03: skilled workforce, industrial floor.</p>
+  </div>
+</section>
+
+<!-- ============ 06 — INDUSTRIES (full-bleed horizontal gallery) ============ -->
+<section id="industries" class="t-light relative">
+  <div class="max-w-container mx-auto px-6 sm:px-10 pt-24 lg:pt-28">
+    <span class="idx text-xs uppercase rise" style="color:var(--acc)">06 — Who We Serve</span>
+    <h2 class="serif display-lg font-light mt-7 rise" style="transition-delay:80ms">Industries we<br/>move for.</h2>
+  </div>
+
+  <div class="gallery-outer relative mt-14 lg:mt-20 lg:h-[220vh]">
+    <div class="gallery-pin">
+      <div class="gallery-track">
+        <div class="ph ph-grain relative w-[86vw] sm:w-[560px] h-[62vh] lg:h-[70vh] shrink-0 ml-6 sm:ml-10 lg:ml-0">
+          <div class="ph-zoom w-full h-full"></div>
+          <div class="ph-vignette"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent"></div>
+          <span class="absolute bottom-7 left-7 serif text-2xl text-white font-light">Automobile<br/>Manufacturing<br/><span class="ph-tag text-[10px] uppercase opacity-70">assembly line, telephoto compression</span></span>
+        </div>
+        <div class="ph ph-grain relative w-[86vw] sm:w-[560px] h-[62vh] lg:h-[70vh] shrink-0 ml-6">
+          <div class="ph-zoom w-full h-full"></div>
+          <div class="ph-vignette"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent"></div>
+          <span class="absolute bottom-7 left-7 serif text-2xl text-white font-light">Industrial<br/>Engineering<br/><span class="ph-tag text-[10px] uppercase opacity-70">heavy machinery, plant floor</span></span>
+        </div>
+        <div class="ph ph-grain relative w-[86vw] sm:w-[560px] h-[62vh] lg:h-[70vh] shrink-0 ml-6">
+          <div class="ph-zoom w-full h-full"></div>
+          <div class="ph-vignette"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent"></div>
+          <span class="absolute bottom-7 left-7 serif text-2xl text-white font-light">Warehousing &amp;<br/>Distribution<br/><span class="ph-tag text-[10px] uppercase opacity-70">interior, wide angle</span></span>
+        </div>
+        <div class="ph ph-grain relative w-[86vw] sm:w-[560px] h-[62vh] lg:h-[70vh] shrink-0 mx-6 lg:mr-[8vw]">
+          <div class="ph-zoom w-full h-full"></div>
+          <div class="ph-vignette"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent"></div>
+          <span class="absolute bottom-7 left-7 serif text-2xl text-white font-light">Corporate<br/>Workforce<br/><span class="ph-tag text-[10px] uppercase opacity-70">environmental portrait</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="max-w-container mx-auto px-6 sm:px-10">
+    <p class="rise mt-10 pb-20 lg:pb-28 text-xs" style="color:var(--ink2)">All photography is a placeholder, reserved for original imagery.</p>
+  </div>
+</section>
+
+<!-- ============ 07 — LEADERSHIP (dark, massive pull-quote, asymmetric portrait) ============ -->
+<section class="t-dark relative py-24 lg:py-40">
+  <div class="max-w-container mx-auto px-6 sm:px-10">
+    <span class="idx text-xs uppercase rise" style="color:var(--acc)">07 — Leadership</span>
+    <div class="mt-10 grid lg:grid-cols-12 gap-10 items-end">
+      <p class="rise lg:col-span-9 serif italic font-light" style="font-size:clamp(1.6rem,3.6vw,3rem); line-height:1.3; transition-delay:100ms">
+        "Ten years in, Vishal Group has become a recognised leader in manpower and transportation for automobile and manufacturing — 2,000+ employees, 200+ vehicles, and a habit of adapting before we're asked to."
+      </p>
+      <div class="wipe-left lg:col-span-3 flex flex-col items-end gap-2" style="transition-delay:200ms">
+        <div class="ph ph-grain w-32 h-32 lg:w-40 lg:h-40 rounded-full overflow-hidden shrink-0">
+          <div class="ph-zoom w-full h-full"></div>
+        </div>
+        <span class="ph-tag text-[9px] uppercase opacity-50 text-right max-w-[10rem]">Reserved for portrait — studio lighting, neutral backdrop</span>
+      </div>
+    </div>
+    <div class="rise mt-10 border-t hair-b pt-6 max-w-md" style="transition-delay:260ms">
+      <div class="font-medium">Managing Director</div>
+      <div class="text-sm mt-1" style="color:var(--ink2)">Vishal Transport and HR Solutions</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 08 — COVERAGE MAP (light, full-width visual) ============ -->
+<section id="coverage" class="t-light py-24 lg:py-36">
+  <div class="max-w-container mx-auto px-6 sm:px-10">
+    <span class="idx text-xs uppercase rise" style="color:var(--acc)">08 — Coverage</span>
+    <h2 class="serif display-lg font-light mt-7 rise" style="transition-delay:80ms">One corridor.<br/>Two states.</h2>
+
+    <div id="mapWrap" class="fade mt-16 relative aspect-[1200/380]" style="transition-delay:120ms">
+      <svg viewBox="0 0 1200 380" class="w-full h-full">
+        <path id="mapPath" class="map-path" d="M 140 300 C 450 120, 750 60, 1060 110" fill="none" stroke="#9C7A3E" stroke-width="2" stroke-linecap="round"/>
+        <circle class="map-dot" cx="140" cy="300" r="5" fill="#9C7A3E"/>
+        <circle class="map-dot" cx="1060" cy="110" r="5" fill="#9C7A3E"/>
+      </svg>
+      <div class="map-pin absolute" style="left:11.7%; top:78.9%;" data-delay="0">
+        <div class="border-l pl-4" style="border-color:var(--acc)">
+          <div class="idx text-xs uppercase" style="color:var(--acc)">Tamil Nadu</div>
+          <div class="serif text-2xl font-light mt-1">Hosur</div>
+        </div>
+      </div>
+      <div class="map-pin absolute text-right" style="right:11.7%; top:28.9%;" data-delay="1">
+        <div class="border-r pr-4" style="border-color:var(--acc)">
+          <div class="idx text-xs uppercase" style="color:var(--acc)">Karnataka</div>
+          <div class="serif text-2xl font-light mt-1">Bengaluru</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-16 grid sm:grid-cols-2 gap-10 border-t hair-b pt-10">
+      <div class="rise">
+        <div class="text-sm" style="color:var(--ink2)">#2/158 Upparapalli Village, Hosur to Thally Main Road, Hosur, Tamil Nadu – 635114</div>
+        <div class="idx text-xs mt-3" style="color:var(--ink2)">GSTIN 33AAICV0267HI2D</div>
+      </div>
+      <div class="rise" style="transition-delay:100ms">
+        <div class="text-sm" style="color:var(--ink2)">C12B, Sarjapura Attibele Road, Anekal Taluk, Indiabele Village, Bengaluru, Karnataka – 562107</div>
+        <div class="idx text-xs mt-3" style="color:var(--ink2)">GSTIN 29AAICV0267H1Z2</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 09 — WHY CHOOSE US (dark, split statement + list) ============ -->
+<section class="t-dark py-24 lg:py-36 border-t hair-b">
+  <div class="max-w-container mx-auto px-6 sm:px-10 grid lg:grid-cols-12 gap-12">
+    <div class="lg:col-span-5">
+      <span class="idx text-xs uppercase rise" style="color:var(--acc)">09 — Why Us</span>
+      <h2 class="serif display-lg font-light mt-7 rise" style="transition-delay:80ms">Why manufacturers<br/>choose us.</h2>
+    </div>
+    <div class="lg:col-span-6 lg:col-start-7">
+      <div class="rise border-b hair-b py-6 flex items-center gap-5">
+        <div class="ph ph-grain w-14 h-14 rounded-lg overflow-hidden shrink-0"><div class="ph-zoom w-full h-full"></div></div>
+        <div class="flex-1 flex items-baseline justify-between gap-6"><span class="text-lg">A decade of experience</span><span class="text-sm" style="color:var(--ink2)">10+ years</span></div>
+      </div>
+      <div class="rise border-b hair-b py-6 flex items-center gap-5" style="transition-delay:60ms">
+        <div class="ph ph-grain w-14 h-14 rounded-lg overflow-hidden shrink-0"><div class="ph-zoom w-full h-full"></div></div>
+        <div class="flex-1 flex items-baseline justify-between gap-6"><span class="text-lg">Strong client portfolio</span><span class="text-sm" style="color:var(--ink2)">Hosur &amp; region</span></div>
+      </div>
+      <div class="rise border-b hair-b py-6 flex items-center gap-5" style="transition-delay:120ms">
+        <div class="ph ph-grain w-14 h-14 rounded-lg overflow-hidden shrink-0"><div class="ph-zoom w-full h-full"></div></div>
+        <div class="flex-1 flex items-baseline justify-between gap-6"><span class="text-lg">Trained, professional drivers</span><span class="text-sm" style="color:var(--ink2)">Safety-first</span></div>
+      </div>
+      <div class="rise border-b hair-b py-6 flex items-center gap-5" style="transition-delay:180ms">
+        <div class="ph ph-grain w-14 h-14 rounded-lg overflow-hidden shrink-0"><div class="ph-zoom w-full h-full"></div></div>
+        <div class="flex-1 flex items-baseline justify-between gap-6"><span class="text-lg">Cutting-edge tracking technology</span><span class="text-sm" style="color:var(--ink2)">Live visibility</span></div>
+      </div>
+      <div class="rise border-b hair-b py-6 flex items-center gap-5" style="transition-delay:240ms">
+        <div class="ph ph-grain w-14 h-14 rounded-lg overflow-hidden shrink-0"><div class="ph-zoom w-full h-full"></div></div>
+        <div class="flex-1 flex items-baseline justify-between gap-6"><span class="text-lg">A large, modern fleet</span><span class="text-sm" style="color:var(--ink2)">200+ vehicles</span></div>
+      </div>
+      <div class="rise py-6 flex items-center gap-5" style="transition-delay:300ms">
+        <div class="ph ph-grain w-14 h-14 rounded-lg overflow-hidden shrink-0"><div class="ph-zoom w-full h-full"></div></div>
+        <div class="flex-1 flex items-baseline justify-between gap-6"><span class="text-lg">A deep skilled workforce</span><span class="text-sm" style="color:var(--ink2)">2,000+ people</span></div>
+      </div>
+      <p class="rise mt-6 text-xs" style="color:var(--ink2); transition-delay:340ms">Image briefs, top to bottom — archival highway, drone coverage shot, driver inspection, GPS dashboard, truck convoy, workforce portrait.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 10 — TESTIMONIAL + FAQ (light, minimal) ============ -->
+<section class="t-light py-24 lg:py-36">
+  <div class="max-w-container mx-auto px-6 sm:px-10 grid lg:grid-cols-12 gap-16">
+    <div class="lg:col-span-5">
+      <span class="idx text-xs uppercase rise" style="color:var(--acc)">10 — Word Of Mouth</span>
+      <div class="rise mt-8 flex items-center gap-3" style="transition-delay:40ms">
+        <div class="w-10 h-10 rounded-full flex items-center justify-center border hair-b idx text-[10px]" style="color:var(--ink2)">—</div>
+        <span class="ph-tag text-[9px] uppercase opacity-50">Reserved for client portrait</span>
+      </div>
+      <p class="rise serif italic font-light mt-6" style="font-size:clamp(1.4rem,2.6vw,2rem); line-height:1.35; transition-delay:80ms">"— reserved for a verified quote from a manufacturing partner —"</p>
+      <div class="rise idx text-xs uppercase mt-6" style="color:var(--ink2); transition-delay:140ms">Testimonials, coming soon</div>
+    </div>
+
+    <div id="faq" class="lg:col-span-6 lg:col-start-7">
+      <div class="accordion rise border-t hair-b">
+        <button class="acc-btn w-full flex items-center justify-between gap-4 py-7 text-left text-lg">What services does Vishal Group provide?<svg class="plus w-4 h-4 shrink-0" style="color:var(--acc)"><use href="#i-plus"/></svg></button>
+        <div class="accordion-body text-sm" style="color:var(--ink2)"><p class="pb-7 max-w-md">Staff transportation, domestic cargo management, and manpower consulting for the automobile and manufacturing sectors.</p></div>
+      </div>
+      <div class="accordion rise border-t hair-b">
+        <button class="acc-btn w-full flex items-center justify-between gap-4 py-7 text-left text-lg">Which regions do you operate in?<svg class="plus w-4 h-4 shrink-0" style="color:var(--acc)"><use href="#i-plus"/></svg></button>
+        <div class="accordion-body text-sm" style="color:var(--ink2)"><p class="pb-7 max-w-md">Hosur, Tamil Nadu and Bengaluru, Karnataka, along the corridor connecting the two.</p></div>
+      </div>
+      <div class="accordion rise border-t hair-b">
+        <button class="acc-btn w-full flex items-center justify-between gap-4 py-7 text-left text-lg">How large is your fleet?<svg class="plus w-4 h-4 shrink-0" style="color:var(--acc)"><use href="#i-plus"/></svg></button>
+        <div class="accordion-body text-sm" style="color:var(--ink2)"><p class="pb-7 max-w-md">200+ trucks and buses, supported by 2,000+ skilled employees delivering 16,000+ man-hours daily.</p></div>
+      </div>
+      <div class="accordion rise border-t border-b hair-b">
+        <button class="acc-btn w-full flex items-center justify-between gap-4 py-7 text-left text-lg">Are you GST registered in both states?<svg class="plus w-4 h-4 shrink-0" style="color:var(--acc)"><use href="#i-plus"/></svg></button>
+        <div class="accordion-body text-sm" style="color:var(--ink2)"><p class="pb-7 max-w-md">Yes — separate GST registrations are held for Tamil Nadu and Karnataka, listed under Coverage above.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 11 — CONTACT (dark, closing statement) ============ -->
+<section id="contact" class="t-dark relative py-24 lg:py-36 border-t hair-b overflow-hidden ph-grain">
+  <div class="absolute inset-0 ph opacity-25">
+    <div class="ph-zoom w-full h-full"></div>
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-b from-[#0B0B0C] via-[#0B0B0C]/85 to-[#0B0B0C]"></div>
+  <span class="ph-tag absolute top-8 right-6 sm:right-10 text-[9px] uppercase opacity-40">Shot brief — Aerial, facility or corridor, background only</span>
+  <div class="relative max-w-container mx-auto px-6 sm:px-10">
+    <span class="idx text-xs uppercase rise" style="color:var(--acc)">11 — Contact</span>
+    <h2 class="serif display-lg font-light mt-7 rise" style="transition-delay:80ms">Let's move,<br/>together.</h2>
+
+    <div class="mt-16 grid lg:grid-cols-12 gap-12">
+      <form class="wipe-left lg:col-span-7 grid sm:grid-cols-2 gap-7" onsubmit="event.preventDefault(); this.reset(); document.getElementById('formOk').classList.remove('hidden');">
+        <div><label class="idx text-[11px] uppercase" style="color:var(--ink2)">Name</label><input required type="text" class="mt-3 w-full bg-transparent border-b hair-b pb-3 outline-none focus:border-[var(--acc)]" placeholder="Your name" /></div>
+        <div><label class="idx text-[11px] uppercase" style="color:var(--ink2)">Email</label><input required type="email" class="mt-3 w-full bg-transparent border-b hair-b pb-3 outline-none focus:border-[var(--acc)]" placeholder="you@company.com" /></div>
+        <div><label class="idx text-[11px] uppercase" style="color:var(--ink2)">Mobile Number</label><input required type="tel" class="mt-3 w-full bg-transparent border-b hair-b pb-3 outline-none focus:border-[var(--acc)]" placeholder="+91" /></div>
+        <div><label class="idx text-[11px] uppercase" style="color:var(--ink2)">Subject</label><input required type="text" class="mt-3 w-full bg-transparent border-b hair-b pb-3 outline-none focus:border-[var(--acc)]" placeholder="Staff transport / Cargo / Manpower" /></div>
+        <div class="sm:col-span-2"><label class="idx text-[11px] uppercase" style="color:var(--ink2)">Message</label><textarea required rows="3" class="mt-3 w-full bg-transparent border-b hair-b pb-3 outline-none focus:border-[var(--acc)] resize-none" placeholder="Tell us what you need..."></textarea></div>
+        <button type="submit" class="btn btn-fill sm:col-span-2 w-fit mt-2">Submit Inquiry <svg class="w-4 h-4 arrow"><use href="#i-arrow"/></svg></button>
+        <p id="formOk" class="hidden sm:col-span-2 text-sm" style="color:var(--acc)">This is a design preview, so the form doesn't send yet — use the phone or email below for now.</p>
+      </form>
+
+      <div class="wipe-right lg:col-span-4 lg:col-start-9 space-y-8" style="transition-delay:100ms">
+        <div>
+          <div class="idx text-[11px] uppercase" style="color:var(--ink2)">Call</div>
+          <a href="tel:+919994391696" class="hover-line serif text-2xl font-light mt-2 inline-block">+91 99943 91696</a>
+        </div>
+        <div>
+          <div class="idx text-[11px] uppercase" style="color:var(--ink2)">Email</div>
+          <a href="mailto:vishaladml1@gmail.com" class="hover-line serif text-2xl font-light mt-2 inline-block break-all">vishaladml1@gmail.com</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="t-dark border-t hair-b pt-16 pb-8">
+  <div class="max-w-container mx-auto px-6 sm:px-10">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div>
+        <span class="idx text-xs" style="color:var(--acc)">VG</span>
+        <p class="mt-5 text-sm max-w-xs" style="color:var(--ink2)">Vishal Transport and HR Solutions — staff mobilisation, logistics, and manpower consulting for the manufacturing sector.</p>
+        <div class="mt-6 flex gap-3">
+          <a href="#" aria-label="LinkedIn" class="w-9 h-9 border hair-b flex items-center justify-center hover:border-[var(--acc)] hover:text-[var(--acc)] transition-colors"><svg class="w-4 h-4"><use href="#i-linkedin"/></svg></a>
+          <a href="#" aria-label="Instagram" class="w-9 h-9 border hair-b flex items-center justify-center hover:border-[var(--acc)] hover:text-[var(--acc)] transition-colors"><svg class="w-4 h-4"><use href="#i-instagram"/></svg></a>
+          <a href="#" aria-label="Facebook" class="w-9 h-9 border hair-b flex items-center justify-center hover:border-[var(--acc)] hover:text-[var(--acc)] transition-colors"><svg class="w-4 h-4"><use href="#i-facebook"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4 class="idx text-xs uppercase" style="color:var(--acc)">Quick Links</h4>
+        <ul class="mt-6 space-y-4 text-sm" style="color:var(--ink2)">
+          <li><a href="#about" class="hover-line w-fit block">About</a></li>
+          <li><a href="#services" class="hover-line w-fit block">Services</a></li>
+          <li><a href="#industries" class="hover-line w-fit block">Industries</a></li>
+          <li><a href="#contact" class="hover-line w-fit block">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="idx text-xs uppercase" style="color:var(--acc)">Services</h4>
+        <ul class="mt-6 space-y-4 text-sm" style="color:var(--ink2)"><li>Staff Transportation</li><li>Cargo Management</li><li>Manpower Consulting</li></ul>
+      </div>
+      <div>
+        <h4 class="idx text-xs uppercase" style="color:var(--acc)">Locations</h4>
+        <ul class="mt-6 space-y-5 text-sm" style="color:var(--ink2)">
+          <li><span style="color:var(--ink)">Hosur, Tamil Nadu</span><br/>635114</li>
+          <li><span style="color:var(--ink)">Bengaluru, Karnataka</span><br/>562107</li>
+        </ul>
+      </div>
+    </div>
+    <div class="mt-14 pt-8 border-t hair-b flex flex-col sm:flex-row items-center justify-between gap-4 text-xs" style="color:var(--ink2)">
+      <p>© <span id="year"></span> Vishal Transport and HR Solutions. All rights reserved.</p>
+      <p>Design concept — awaiting final brand photography.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const bar = document.getElementById('progress');
+  function updateProgress(){
+    const h = document.documentElement;
+    bar.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+  }
+
+  const nav = document.getElementById('nav');
+  function navState(){ nav.classList.toggle('nav-scrolled', window.scrollY > 30); nav.classList.toggle('nav-bare', window.scrollY <= 30); }
+
+  const heroSection = document.getElementById('hero');
+  const heroZoom = document.getElementById('heroZoom');
+  function heroParallax(){
+    if (reduceMotion) return;
+    const rect = heroSection.getBoundingClientRect();
+    const progress = Math.min(1, Math.max(0, -rect.top / (rect.height || 1)));
+    heroZoom.style.transform = `scale(${1 + progress * 0.1}) translateY(${progress * 30}px)`;
+  }
+
+  const galleries = Array.from(document.querySelectorAll('.gallery-outer')).map(outer => ({
+    outer, track: outer.querySelector('.gallery-track')
+  }));
+  function galleryScroll(){
+    if (reduceMotion || window.innerWidth < 1024) return;
+    galleries.forEach(({ outer, track }) => {
+      const rect = outer.getBoundingClientRect();
+      const total = rect.height - window.innerHeight;
+      if (total <= 0) { track.style.transform = 'translateX(0px)'; return; }
+      const progress = Math.min(1, Math.max(0, -rect.top / total));
+      const maxTranslate = Math.max(0, track.scrollWidth - window.innerWidth + 80);
+      track.style.transform = `translateX(${-progress * maxTranslate}px)`;
+    });
+  }
+
+  let ticking = false;
+  function onScroll(){
+    if (!ticking){
+      requestAnimationFrame(() => { updateProgress(); navState(); heroParallax(); galleryScroll(); ticking = false; });
+      ticking = true;
+    }
+  }
+  document.addEventListener('scroll', onScroll, { passive:true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
+
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const menuIcon = document.getElementById('menuIcon');
+  menuBtn.addEventListener('click', () => {
+    const nowHidden = mobileMenu.classList.toggle('hidden');
+    menuBtn.setAttribute('aria-expanded', String(!nowHidden));
+    menuIcon.innerHTML = nowHidden ? '<use href="#i-menu"/>' : '<use href="#i-close"/>';
+  });
+  document.querySelectorAll('.mlink').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.add('hidden'); menuBtn.setAttribute('aria-expanded','false'); menuIcon.innerHTML = '<use href="#i-menu"/>';
+  }));
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.mask, .fade, .rise, .wipe-left, .wipe-right').forEach(el => io.observe(el));
+
+  const cio = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = parseInt(el.dataset.count, 10);
+      const suffix = el.dataset.suffix || '';
+      const dur = 1700, start = performance.now();
+      function tick(now){
+        const p = Math.min(1, (now - start) / dur);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.floor(eased * target).toLocaleString('en-IN') + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+      cio.unobserve(el);
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('.counter[data-count]').forEach(el => cio.observe(el));
+
+  const mapPath = document.getElementById('mapPath');
+  const mapPins = document.querySelectorAll('.map-pin');
+  const mapDots = document.querySelectorAll('.map-dot');
+  const mio = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      mapPath.classList.add('in');
+      if (mapDots[0]) mapDots[0].classList.add('in');
+      if (mapDots[1]) setTimeout(() => mapDots[1].classList.add('in'), 1750);
+      mapPins.forEach(pin => setTimeout(() => pin.classList.add('in'), parseInt(pin.dataset.delay,10) * 450 + 800));
+      mio.unobserve(e.target);
+    });
+  }, { threshold: 0.3 });
+  const mapWrap = document.getElementById('mapWrap');
+  if (mapWrap) mio.observe(mapWrap);
+
+  document.querySelectorAll('.accordion .acc-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const acc = btn.closest('.accordion');
+      const wasOpen = acc.classList.contains('open');
+      document.querySelectorAll('.accordion.open').forEach(a => a.classList.remove('open'));
+      if (!wasOpen) acc.classList.add('open');
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   DESIGN SYSTEM — theme tokens
+   Two palettes, applied per-section via .theme-dark / .theme-light.
+   Tailwind's bg / ink / acc / hair utilities resolve to these vars.
+   ============================================================ */
+:root {
+  color-scheme: dark;
+}
+
+.theme-dark {
+  --bg: #0b0b0c;
+  --ink: #f5f3ee;
+  --ink-2: #afaca4;
+  --acc: #d4af6a;
+  --hair: rgba(255, 255, 255, 0.14);
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.theme-light {
+  --bg: #f7f5f0;
+  --ink: #15140f;
+  --ink-2: #635f55;
+  --acc: #9c7a3e;
+  --hair: rgba(0, 0, 0, 0.12);
+  background: var(--bg);
+  color: var(--ink);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply font-sans antialiased bg-brand-black;
+  }
+  ::selection {
+    background: var(--acc, #d4af6a);
+    color: var(--bg, #0b0b0c);
+  }
+  :focus-visible {
+    outline: 2px solid var(--acc, #d4af6a);
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+/* ============================================================
+   COMPONENT UTILITIES
+   ============================================================ */
+@layer components {
+  /* Monospaced index / eyebrow label */
+  .text-idx {
+    @apply font-mono uppercase tracking-idx;
+  }
+
+  /* Hairline border colour bound to the active theme */
+  .border-hair {
+    border-color: var(--hair);
+  }
+
+  /* --- Placeholder visual system (reserved for real photography) --- */
+  .ph {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(155deg, rgba(212, 175, 106, 0.14), rgba(212, 175, 106, 0.02));
+  }
+  .theme-light .ph {
+    background: linear-gradient(155deg, rgba(156, 122, 62, 0.1), rgba(156, 122, 62, 0.02));
+  }
+  .ph-vignette {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 45%, rgba(0, 0, 0, 0.32) 100%);
+  }
+  .ph-grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .ph-image {
+    filter: saturate(0.82) contrast(1.08);
+  }
+
+  /* Animated underline for text links */
+  .hover-line {
+    position: relative;
+  }
+  .hover-line::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 1px;
+    background: var(--acc);
+    transition: width 0.4s ease;
+  }
+  .hover-line:hover::after {
+    width: 100%;
+  }
+}
