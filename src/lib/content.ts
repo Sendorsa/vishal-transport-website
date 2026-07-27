@@ -172,10 +172,10 @@ export const contact = {
   title: ["Let's move,", "together."],
   shotBrief: "Shot brief — Aerial, facility or corridor, background only",
   fields: [
-    { name: "name", label: "Name", type: "text", placeholder: "Your name" },
-    { name: "email", label: "Email", type: "email", placeholder: "you@company.com" },
-    { name: "mobile", label: "Mobile Number", type: "tel", placeholder: "+91" },
-    { name: "subject", label: "Subject", type: "text", placeholder: "Staff transport / Cargo / Manpower" },
+    { name: "name", label: "Name", type: "text", placeholder: "Your name", autoComplete: "name", inputMode: "text" as const },
+    { name: "email", label: "Email", type: "email", placeholder: "you@company.com", autoComplete: "email", inputMode: "email" as const },
+    { name: "mobile", label: "Mobile Number", type: "tel", placeholder: "+91", autoComplete: "tel", inputMode: "tel" as const },
+    { name: "subject", label: "Subject", type: "text", placeholder: "Staff transport / Cargo / Manpower", autoComplete: "off", inputMode: "text" as const },
   ],
 };
 

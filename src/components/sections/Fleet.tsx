@@ -18,7 +18,7 @@ export function Fleet() {
         <Reveal as="span" variant="fadeUp" className="text-idx block text-xs text-acc">
           {fleet.index}
         </Reveal>
-        <div className="mt-14 grid gap-y-16 lg:grid-cols-12">
+        <div className="mt-14 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-12">
           {fleet.stats.map((stat, i) => (
             <Reveal
               key={stat.label}

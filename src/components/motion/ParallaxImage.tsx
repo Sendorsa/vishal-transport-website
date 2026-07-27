@@ -8,6 +8,7 @@ import {
   useReducedMotion,
 } from "framer-motion";
 import { hoverTransition } from "@/lib/motion";
+import { useIsDesktop } from "@/lib/useMediaQuery";
 
 type ParallaxImageProps = {
   className?: string;
@@ -39,6 +40,10 @@ export function ParallaxImage({
 }: ParallaxImageProps) {
   const ref = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion() ?? false;
+  const isDesktop = useIsDesktop();
+  // Scroll parallax/zoom is a desktop-only refinement — on touch it costs
+  // frames for motion that reads as jitter. Mobile keeps the calm reveal only.
+  const enableScrollMotion = isDesktop && !reduced;
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -52,7 +57,7 @@ export function ParallaxImage({
     <div ref={ref} className={`ph ph-grain ${className}`}>
       <motion.div
         className="absolute inset-0"
-        style={reduced ? undefined : { y, scale }}
+        style={enableScrollMotion ? { y, scale } : undefined}
       >
         <motion.div
           className="ph-image h-full w-full"

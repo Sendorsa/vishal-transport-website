@@ -27,6 +27,7 @@ type ButtonProps = {
   /** Render as an anchor when set, otherwise a submit/button element. */
   href?: string;
   type?: "button" | "submit";
+  onClick?: () => void;
 };
 
 /**
@@ -42,6 +43,7 @@ export function Button({
   children,
   href,
   type,
+  onClick,
 }: ButtonProps) {
   const reduced = useReducedMotion() ?? false;
   const cls = `${base} ${sizes[size]} ${variants[variant]} ${className}`;
@@ -75,6 +77,7 @@ export function Button({
     return (
       <motion.a
         href={href}
+        onClick={onClick}
         className={cls}
         initial="rest"
         whileHover="hover"
@@ -88,6 +91,7 @@ export function Button({
   return (
     <motion.button
       type={type ?? "button"}
+      onClick={onClick}
       className={cls}
       initial="rest"
       whileHover="hover"

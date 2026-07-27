@@ -26,7 +26,32 @@ export function Coverage() {
           ))}
         </Reveal>
 
-        <div ref={mapRef} className="relative mt-16 aspect-map">
+        {/* Mobile: a stacked corridor list — the wide map strip would clip
+            its overlaid pin labels on narrow screens. */}
+        <div className="mt-12 lg:hidden">
+          {coverage.pins.map((pin, i) => (
+            <Reveal
+              key={pin.city}
+              variant="fadeUp"
+              delay={i * 0.1}
+              className="relative flex gap-5 pb-8 last:pb-0"
+            >
+              <div className="flex flex-col items-center pt-1.5">
+                <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-acc" />
+                {i < coverage.pins.length - 1 && (
+                  <span className="mt-1 w-px flex-1 bg-acc/30" />
+                )}
+              </div>
+              <div>
+                <div className="text-idx text-xs text-acc">{pin.region}</div>
+                <div className="mt-1 font-serif text-3xl font-light">{pin.city}</div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        {/* Desktop: the drawn route map with overlaid pins. */}
+        <div ref={mapRef} className="relative mt-16 hidden aspect-map lg:block">
           <svg viewBox="0 0 1200 380" className="h-full w-full">
             {/* Route line drawing itself in */}
             <motion.path

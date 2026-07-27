@@ -3,11 +3,13 @@
 import { useRef } from "react";
 import {
   motion,
+  useInView,
   useReducedMotion,
   useScroll,
   useTransform,
 } from "framer-motion";
 import { hero } from "@/lib/content";
+import { useIsDesktop } from "@/lib/useMediaQuery";
 import { MaskText } from "@/components/motion/MaskText";
 import { Button } from "@/components/ui/Button";
 import { easing } from "@/lib/motion";
@@ -15,6 +17,12 @@ import { easing } from "@/lib/motion";
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
   const reduced = useReducedMotion() ?? false;
+  const isDesktop = useIsDesktop();
+  // Ken-burns only runs while the hero is actually on screen (saves battery
+  // once scrolled past); scroll parallax is a desktop-only refinement.
+  const inView = useInView(ref, { amount: 0.1 });
+  const enableParallax = isDesktop && !reduced;
+  const kenBurns = !reduced && inView;
 
   // Parallax: the background drifts and scales as the hero scrolls away.
   const { scrollYProgress } = useScroll({
@@ -35,12 +43,12 @@ export function Hero() {
       {/* Background — slow continuous ken-burns + scroll parallax */}
       <motion.div
         className="ph-grain absolute inset-0"
-        style={reduced ? undefined : { y: bgY, scale: bgScale }}
+        style={enableParallax ? { y: bgY, scale: bgScale } : undefined}
       >
         <motion.div
           className="ph ph-image h-full w-full"
           initial={{ scale: 1.04 }}
-          animate={reduced ? undefined : { scale: 1.12 }}
+          animate={kenBurns ? { scale: 1.12 } : { scale: 1.04 }}
           transition={{
             duration: 18,
             ease: "easeInOut",
@@ -71,7 +79,7 @@ export function Hero() {
       {/* Headline + CTA */}
       <motion.div
         className="relative mx-auto w-full max-w-container px-6 pb-20 sm:px-10"
-        style={reduced ? undefined : { y: contentY, opacity: contentOpacity }}
+        style={enableParallax ? { y: contentY, opacity: contentOpacity } : undefined}
       >
         <MaskText
           immediate

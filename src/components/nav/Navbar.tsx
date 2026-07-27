@@ -20,6 +20,21 @@ export function Navbar() {
 
   useMotionValueEvent(scrollY, "change", (y) => setScrolled(y > 30));
 
+  // Lock body scroll + close on Escape while the mobile overlay is open.
+  useEffect(() => {
+    if (!open) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
   // Scroll-spy: highlight the nav link for the section in view.
   useEffect(() => {
     const ids = navLinks.map((l) => l.href.slice(1));
@@ -91,58 +106,74 @@ export function Navbar() {
         </div>
 
         <button
-          aria-label="Menu"
+          aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
+          aria-controls="mobile-menu"
           onClick={() => setOpen((v) => !v)}
-          className="flex h-11 w-11 items-center justify-center border border-white/20 text-ink lg:hidden"
+          className="relative z-[70] flex h-12 w-12 items-center justify-center border border-white/20 text-ink lg:hidden"
         >
           <Icon name={open ? "close" : "menu"} className="h-5 w-5" />
         </button>
       </div>
 
+      {/* Full-screen mobile overlay */}
       <AnimatePresence>
         {open && (
           <motion.div
+            id="mobile-menu"
             key="mobile-menu"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.4, ease: easing.expo }}
-            className="overflow-hidden border-b border-white/10 bg-bg lg:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, ease: easing.gentle }}
+            className="theme-dark fixed inset-0 z-[55] lg:hidden"
           >
+            <div className="absolute inset-0 bg-brand-black/95 backdrop-blur-xl" />
             <motion.nav
-              className="flex flex-col gap-6 px-6 py-8 text-lg text-ink"
+              className="relative flex h-full flex-col justify-center gap-1 overflow-y-auto px-6 pb-10 pt-24"
               initial="hidden"
               animate="visible"
+              exit="hidden"
               variants={{
-                visible: { transition: { staggerChildren: 0.06, delayChildren: 0.1 } },
+                hidden: {},
+                visible: { transition: { staggerChildren: 0.06, delayChildren: 0.12 } },
               }}
             >
-              {navLinks.map((link) => (
-                <motion.a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  variants={{
-                    hidden: { opacity: 0, x: -16 },
-                    visible: { opacity: 1, x: 0 },
-                  }}
-                  className="hover-line w-fit"
-                >
-                  {link.label}
-                </motion.a>
-              ))}
-              <motion.a
-                href="#contact"
-                onClick={() => setOpen(false)}
+              {navLinks.map((link) => {
+                const isActive = active === link.href.slice(1);
+                return (
+                  <motion.a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    variants={{
+                      hidden: { opacity: 0, y: 24 },
+                      visible: { opacity: 1, y: 0 },
+                    }}
+                    className="flex items-center justify-between border-b border-hair py-5 font-serif text-3xl font-light text-ink transition-colors active:text-acc"
+                    style={{ color: isActive ? "var(--acc)" : undefined }}
+                  >
+                    {link.label}
+                    <Icon name="arrow" className="h-5 w-5 opacity-40" />
+                  </motion.a>
+                );
+              })}
+              <motion.div
                 variants={{
-                  hidden: { opacity: 0, x: -16 },
-                  visible: { opacity: 1, x: 0 },
+                  hidden: { opacity: 0, y: 24 },
+                  visible: { opacity: 1, y: 0 },
                 }}
-                className="text-idx w-fit text-sm text-acc"
+                className="mt-10"
               >
-                Get a Quote →
-              </motion.a>
+                <Button
+                  href="#contact"
+                  arrow
+                  onClick={() => setOpen(false)}
+                  className="w-full"
+                >
+                  Get a Quote
+                </Button>
+              </motion.div>
             </motion.nav>
           </motion.div>
         )}

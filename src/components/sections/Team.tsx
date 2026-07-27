@@ -15,7 +15,7 @@ export function Team() {
           {/* LEFT — large executive portrait */}
           <Reveal
             variant="scaleIn"
-            className="lg:col-span-5"
+            className="mx-auto w-full max-w-sm lg:col-span-5 lg:max-w-none"
           >
             <div className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] shadow-lift ring-1 ring-white/10">
               <ParallaxImage

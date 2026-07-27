@@ -4,7 +4,6 @@ import { motion, useReducedMotion } from "framer-motion";
 import { whyUs } from "@/lib/content";
 import { Reveal } from "@/components/motion/Reveal";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
-import { ParallaxImage } from "@/components/motion/ParallaxImage";
 import { easing } from "@/lib/motion";
 
 export function WhyUs() {
@@ -29,17 +28,16 @@ export function WhyUs() {
           {whyUs.items.map((item, i) => (
             <StaggerItem key={item.label}>
               <motion.div
-                className={`flex items-center gap-5 py-6 ${
+                className={`flex items-center gap-4 py-5 sm:gap-5 sm:py-6 ${
                   i < whyUs.items.length - 1 ? "border-b border-hair" : ""
                 }`}
                 whileHover={reduced ? undefined : { x: 8 }}
                 transition={{ duration: 0.4, ease: easing.expo }}
               >
-                <div className="h-14 w-14 shrink-0 overflow-hidden rounded-lg">
-                  <ParallaxImage className="h-full w-full" parallax={6} zoom={0.04} reveal={false} />
-                </div>
-                <div className="flex flex-1 items-baseline justify-between gap-6">
-                  <span className="text-lg">{item.label}</span>
+                {/* Static placeholder mark — no scroll motion at this size. */}
+                <div className="ph ph-grain h-12 w-12 shrink-0 overflow-hidden rounded-lg sm:h-14 sm:w-14" />
+                <div className="flex flex-1 flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                  <span className="text-base sm:text-lg">{item.label}</span>
                   <span className="text-sm text-ink-muted">{item.meta}</span>
                 </div>
               </motion.div>

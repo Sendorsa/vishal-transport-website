@@ -42,10 +42,11 @@ const config: Config = {
         mono: ["var(--font-plex-mono)", "ui-monospace", "monospace"],
       },
       fontSize: {
-        "display-xl": ["clamp(2.6rem, 8vw, 7.5rem)", { lineHeight: "0.98", letterSpacing: "-0.01em" }],
-        "display-lg": ["clamp(2.2rem, 5.6vw, 4.6rem)", { lineHeight: "1.02", letterSpacing: "-0.01em" }],
-        "display-md": ["clamp(1.8rem, 3.4vw, 2.8rem)", { lineHeight: "1.1" }],
-        "body-lg": ["19px", { lineHeight: "1.75" }],
+        "display-xl": ["clamp(2.75rem, 8vw, 7.5rem)", { lineHeight: "1.0", letterSpacing: "-0.01em" }],
+        "display-lg": ["clamp(2.2rem, 5.6vw, 4.6rem)", { lineHeight: "1.04", letterSpacing: "-0.01em" }],
+        "display-md": ["clamp(1.8rem, 3.4vw, 2.8rem)", { lineHeight: "1.12" }],
+        // Fluid body: ~17px on phones, 19px from tablet up (desktop unchanged).
+        "body-lg": ["clamp(16.5px, 0.6vw + 15px, 19px)", { lineHeight: "1.7" }],
       },
       letterSpacing: {
         idx: "0.14em",

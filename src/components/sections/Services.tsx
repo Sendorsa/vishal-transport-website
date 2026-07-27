@@ -42,7 +42,7 @@ function ServiceRow({
           {item.title}
         </h3>
         <p className="text-body-lg text-ink-muted lg:col-span-5">{item.body}</p>
-        <div className="flex text-acc lg:col-span-1 lg:justify-end">
+        <div className="hidden text-acc lg:col-span-1 lg:flex lg:justify-end">
           <motion.span
             className="inline-flex"
             variants={{ rest: { x: 0 }, hover: { x: reduced ? 0 : 6 } }}

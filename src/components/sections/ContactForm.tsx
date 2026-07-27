@@ -10,14 +10,15 @@ import { easing } from "@/lib/motion";
 
 const initialState: ContactState = { status: "idle", message: "" };
 
+// text-base (16px) prevents iOS from zooming on focus.
 const fieldClass =
-  "mt-3 w-full border-b border-hair bg-transparent pb-3 outline-none transition-colors focus:border-acc";
+  "mt-3 w-full border-b border-hair bg-transparent pb-4 pt-1.5 text-base outline-none transition-colors focus:border-acc";
 
 function SubmitButton() {
   const { pending } = useFormStatus();
   return (
-    <div className="mt-2 sm:col-span-2">
-      <Button type="submit" arrow>
+    <div className="mt-4 sm:col-span-2">
+      <Button type="submit" arrow className="w-full sm:w-auto">
         {pending ? "Sending…" : "Submit Inquiry"}
       </Button>
     </div>
@@ -28,9 +29,9 @@ export function ContactForm() {
   const [state, formAction] = useActionState(submitInquiry, initialState);
 
   return (
-    <form action={formAction} className="grid gap-7 sm:grid-cols-2">
+    <form action={formAction} className="grid gap-6 sm:grid-cols-2 sm:gap-7">
       {contact.fields.map((field) => (
-        <div key={field.name} className={field.name === "message" ? "sm:col-span-2" : ""}>
+        <div key={field.name}>
           <label className="text-idx text-[11px] text-ink-muted" htmlFor={field.name}>
             {field.label}
           </label>
@@ -38,6 +39,8 @@ export function ContactForm() {
             id={field.name}
             name={field.name}
             type={field.type}
+            inputMode={field.inputMode}
+            autoComplete={field.autoComplete}
             required
             placeholder={field.placeholder}
             className={fieldClass}
