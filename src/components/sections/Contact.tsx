@@ -1,6 +1,7 @@
 import { contact, site } from "@/lib/content";
 import { Reveal } from "@/components/motion/Reveal";
 import { ParallaxImage } from "@/components/motion/ParallaxImage";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ContactForm } from "./ContactForm";
 
 export function Contact() {
@@ -12,22 +13,13 @@ export function Contact() {
       <div className="absolute inset-0 opacity-25">
         <ParallaxImage className="h-full w-full" hover={0} reveal={false} parallax={30} />
       </div>
-      <div className="absolute inset-0 bg-gradient-to-b from-brand-black via-brand-black/85 to-brand-black" />
+      <div className="absolute inset-0 bg-gradient-to-b from-brand-navy via-brand-navy/85 to-brand-navy" />
       <span className="text-idx absolute right-6 top-8 text-[9px] opacity-40 sm:right-10">
         {contact.shotBrief}
       </span>
 
       <div className="relative mx-auto max-w-container px-6 sm:px-10">
-        <Reveal as="span" variant="fadeUp" className="text-idx block text-xs text-acc">
-          {contact.index}
-        </Reveal>
-        <Reveal variant="fadeUp" delay={0.08} as="h2" className="mt-7 font-serif text-display-lg font-light">
-          {contact.title.map((line, i) => (
-            <span key={i} className="block">
-              {line}
-            </span>
-          ))}
-        </Reveal>
+        <SectionHeading index={contact.index} title={contact.title} />
 
         <div className="mt-16 grid gap-12 lg:grid-cols-12">
           <Reveal variant="slideRight" className="lg:col-span-7">

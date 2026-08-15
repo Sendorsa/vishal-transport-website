@@ -13,8 +13,8 @@ const sizes = {
   sm: "h-11 px-6 text-sm",
 };
 const variants: Record<Variant, string> = {
-  fill: "bg-ink text-bg hover:bg-acc hover:shadow-gold",
-  line: "border border-hair text-ink hover:border-acc hover:text-acc",
+  fill: "bg-blue text-neutral-white hover:bg-blue-dark hover:shadow-blue",
+  line: "border border-blue bg-neutral-white text-blue hover:bg-blue hover:text-neutral-white hover:shadow-card-hover",
 };
 
 type ButtonProps = {

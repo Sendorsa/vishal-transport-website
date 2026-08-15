@@ -62,9 +62,14 @@ export function buildReveal(
   reduced = false,
 ): Variants {
   if (reduced) {
+    // Spread shownState so the transform is explicitly reset, not just omitted.
+    // useReducedMotion() is false on the server, so the SSR markup already
+    // carries the *non-reduced* hidden transform (e.g. translateX(64px)).
+    // Variants that only touch opacity never clear it, leaving the element
+    // permanently offset for exactly the users who opted out of motion.
     return {
-      hidden: { opacity: 0 },
-      visible: { opacity: 1, transition: { duration: 0.2, delay } },
+      hidden: { ...shownState, opacity: 0 },
+      visible: { ...shownState, opacity: 1, transition: { duration: 0.2, delay } },
     };
   }
   return {
@@ -92,9 +97,10 @@ export function staggerContainer(
 
 export function staggerItem(reduced = false): Variants {
   if (reduced) {
+    // y is reset explicitly — see the note in buildReveal.
     return {
-      hidden: { opacity: 0 },
-      visible: { opacity: 1, transition: { duration: 0.2 } },
+      hidden: { opacity: 0, y: 0 },
+      visible: { opacity: 1, y: 0, transition: { duration: 0.2 } },
     };
   }
   return {
@@ -111,9 +117,11 @@ export function staggerItem(reduced = false): Variants {
    Text slides up from behind an overflow-hidden clip. */
 export function maskLine(delay = 0, reduced = false): Variants {
   if (reduced) {
+    // y is reset explicitly — see the note in buildReveal. Without it the line
+    // keeps the server-rendered y:112% and stays clipped out of sight entirely.
     return {
-      hidden: { opacity: 0 },
-      visible: { opacity: 1, transition: { duration: 0.2, delay } },
+      hidden: { opacity: 0, y: "0%" },
+      visible: { opacity: 1, y: "0%", transition: { duration: 0.2, delay } },
     };
   }
   return {

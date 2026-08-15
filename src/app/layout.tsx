@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://vishal-transport.com"),
   title: "Vishal Group — We Move Industry",
   description:
-    "Vishal Group is a transportation and manpower partner for the automobile and manufacturing sectors in Hosur, Tamil Nadu and Bengaluru, Karnataka. 200+ vehicles, 2,000+ skilled employees, ten years on the road.",
+    "Vishal Group is a transportation and manpower partner for the automobile and manufacturing sectors in Hosur, Tamil Nadu and Bengaluru, Karnataka. 300+ vehicles, 550+ skilled employees, fourteen years on the road.",
   alternates: { canonical: "/" },
   robots: { index: true, follow: true },
   openGraph: {
@@ -48,13 +48,13 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0B0B0C",
+  themeColor: "#1F3265",
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "MovingCompany",
-  name: "Vishal Transport and HR Solutions",
+  name: "Vishal Transport and HR Solutions Pvt. Ltd.",
   alternateName: "Vishal Group",
   email: "vishaladml1@gmail.com",
   telephone: "+91-9994391696",

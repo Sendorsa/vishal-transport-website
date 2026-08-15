@@ -42,7 +42,7 @@ export function Counter({
   }, [inView, reduced, to, duration]);
 
   return (
-    <span ref={ref} className={className}>
+    <span ref={ref} className={`whitespace-nowrap ${className ?? ""}`}>
       {value.toLocaleString("en-IN")}
       {suffix}
     </span>

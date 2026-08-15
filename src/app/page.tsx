@@ -5,7 +5,12 @@ import { About } from "@/components/sections/About";
 import { Corridor } from "@/components/sections/Corridor";
 import { Fleet } from "@/components/sections/Fleet";
 import { Services } from "@/components/sections/Services";
+import { ExtendedCapabilities } from "@/components/sections/ExtendedCapabilities";
 import { TrustedPartners } from "@/components/sections/TrustedPartners";
+import { EmployeeGrowth } from "@/components/sections/EmployeeGrowth";
+import { FleetStrength } from "@/components/sections/FleetStrength";
+import { Operations } from "@/components/sections/Operations";
+import { Maintenance } from "@/components/sections/Maintenance";
 import { Team } from "@/components/sections/Team";
 import { Coverage } from "@/components/sections/Coverage";
 import { WhyUs } from "@/components/sections/WhyUs";
@@ -24,7 +29,12 @@ export default function Home() {
         <Corridor />
         <Fleet />
         <Services />
+        <ExtendedCapabilities />
         <TrustedPartners />
+        <EmployeeGrowth />
+        <FleetStrength />
+        <Operations />
+        <Maintenance />
         <Team />
         <Coverage />
         <WhyUs />

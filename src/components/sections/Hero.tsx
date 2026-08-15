@@ -1,36 +1,26 @@
 "use client";
 
 import { useRef } from "react";
-import {
-  motion,
-  useInView,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-} from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { hero } from "@/lib/content";
 import { useIsDesktop } from "@/lib/useMediaQuery";
 import { MaskText } from "@/components/motion/MaskText";
 import { Button } from "@/components/ui/Button";
+import { GradientMesh } from "@/components/ui/GradientMesh";
+import { BusScene } from "@/components/ui/BusScene";
 import { easing } from "@/lib/motion";
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
   const reduced = useReducedMotion() ?? false;
   const isDesktop = useIsDesktop();
-  // Ken-burns only runs while the hero is actually on screen (saves battery
-  // once scrolled past); scroll parallax is a desktop-only refinement.
-  const inView = useInView(ref, { amount: 0.1 });
   const enableParallax = isDesktop && !reduced;
-  const kenBurns = !reduced && inView;
 
-  // Parallax: the background drifts and scales as the hero scrolls away.
+  // Parallax: the content drifts as the hero scrolls away.
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
-  const bgY = useTransform(scrollYProgress, [0, 1], [0, 120]);
-  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
   const contentY = useTransform(scrollYProgress, [0, 1], [0, 60]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
@@ -40,28 +30,14 @@ export function Hero() {
       id="hero"
       className="theme-dark relative flex min-h-screen flex-col justify-between overflow-hidden"
     >
-      {/* Background — slow continuous ken-burns + scroll parallax */}
-      <motion.div
-        className="ph-grain absolute inset-0"
-        style={enableParallax ? { y: bgY, scale: bgScale } : undefined}
-      >
-        <motion.div
-          className="ph ph-image h-full w-full"
-          initial={{ scale: 1.04 }}
-          animate={kenBurns ? { scale: 1.12 } : { scale: 1.04 }}
-          transition={{
-            duration: 18,
-            ease: "easeInOut",
-            repeat: Infinity,
-            repeatType: "mirror",
-          }}
-        />
-        <div className="ph-vignette" />
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/70 to-brand-black/30" />
+      {/* Background — atmosphere only; the bus scene below carries the motion */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/70 to-brand-navy/30" />
+        <GradientMesh variant="bright" />
         <span className="text-idx absolute right-6 top-1/2 hidden -translate-y-1/2 text-[10px] uppercase opacity-50 [writing-mode:vertical-rl] sm:right-10 sm:block">
           {hero.shotBrief}
         </span>
-      </motion.div>
+      </div>
 
       {/* Top eyebrow row */}
       <motion.div
@@ -76,56 +52,62 @@ export function Hero() {
         </span>
       </motion.div>
 
-      {/* Headline + CTA */}
-      <motion.div
-        className="relative mx-auto w-full max-w-container px-6 pb-20 sm:px-10"
-        style={enableParallax ? { y: contentY, opacity: contentOpacity } : undefined}
-      >
-        <MaskText
-          immediate
-          className="max-w-4xl font-serif text-display-xl font-light"
-          lines={hero.headline}
-          delay={0.15}
-          stagger={0.12}
-        />
-
+      {/* Headline + CTA, then the bus scene directly beneath — both live in
+          normal flow together so the bus can never overlap the CTA, on any
+          viewport height. */}
+      <div className="relative">
         <motion.div
-          className="mt-10 flex flex-wrap items-end justify-between gap-8"
-          initial="hidden"
-          animate="visible"
-          variants={{
-            visible: { transition: { staggerChildren: 0.15, delayChildren: 0.6 } },
-          }}
+          className="relative mx-auto w-full max-w-container px-6 pb-10 sm:px-10"
+          style={enableParallax ? { y: contentY, opacity: contentOpacity } : undefined}
         >
-          <motion.p
-            className="max-w-md text-body-lg text-ink-muted"
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: {
-                opacity: 1,
-                y: 0,
-                transition: { duration: 0.8, ease: easing.smoothOut },
-              },
-            }}
-          >
-            {hero.body}
-          </motion.p>
+          <MaskText
+            immediate
+            className="max-w-4xl font-serif text-display-xl font-light"
+            lines={hero.headline}
+            delay={0.15}
+            stagger={0.12}
+          />
+
           <motion.div
+            className="mt-10 flex flex-wrap items-end justify-between gap-8"
+            initial="hidden"
+            animate="visible"
             variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: {
-                opacity: 1,
-                y: 0,
-                transition: { duration: 0.8, ease: easing.smoothOut },
-              },
+              visible: { transition: { staggerChildren: 0.15, delayChildren: 0.6 } },
             }}
           >
-            <Button href="#contact" arrow>
-              Get a Quote
-            </Button>
+            <motion.p
+              className="max-w-md text-body-lg text-ink-muted"
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.8, ease: easing.smoothOut },
+                },
+              }}
+            >
+              {hero.body}
+            </motion.p>
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.8, ease: easing.smoothOut },
+                },
+              }}
+            >
+              <Button href="#contact" arrow>
+                Get a Quote
+              </Button>
+            </motion.div>
           </motion.div>
         </motion.div>
-      </motion.div>
+
+        <BusScene />
+      </div>
     </section>
   );
 }

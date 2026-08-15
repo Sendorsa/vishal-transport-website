@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { coverage } from "@/lib/content";
 import { Reveal } from "@/components/motion/Reveal";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { easing } from "@/lib/motion";
 
 export function Coverage() {
@@ -15,16 +16,7 @@ export function Coverage() {
   return (
     <section id="coverage" className="theme-light py-section-y lg:py-section-y-lg">
       <div className="mx-auto max-w-container px-6 sm:px-10">
-        <Reveal as="span" variant="fadeUp" className="text-idx block text-xs text-acc">
-          {coverage.index}
-        </Reveal>
-        <Reveal variant="fadeUp" delay={0.08} as="h2" className="mt-7 font-serif text-display-lg font-light">
-          {coverage.title.map((line, i) => (
-            <span key={i} className="block">
-              {line}
-            </span>
-          ))}
-        </Reveal>
+        <SectionHeading index={coverage.index} title={coverage.title} />
 
         {/* Mobile: a stacked corridor list — the wide map strip would clip
             its overlaid pin labels on narrow screens. */}
@@ -39,7 +31,7 @@ export function Coverage() {
               <div className="flex flex-col items-center pt-1.5">
                 <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-acc" />
                 {i < coverage.pins.length - 1 && (
-                  <span className="mt-1 w-px flex-1 bg-acc/30" />
+                  <span className="mt-1 w-px flex-1 bg-acc opacity-30" />
                 )}
               </div>
               <div>
@@ -57,7 +49,7 @@ export function Coverage() {
             <motion.path
               d="M 140 300 C 450 120, 750 60, 1060 110"
               fill="none"
-              stroke="#9C7A3E"
+              stroke="var(--acc)"
               strokeWidth={2}
               strokeLinecap="round"
               initial={{ pathLength: 0 }}
@@ -73,7 +65,7 @@ export function Coverage() {
                 cx={dot.cx}
                 cy={dot.cy}
                 r={5}
-                fill="#9C7A3E"
+                fill="var(--acc)"
                 initial={{ opacity: 0 }}
                 animate={show ? { opacity: 1 } : { opacity: 0 }}
                 transition={{ duration: 0.4, delay: reduced ? 0 : dot.delay }}

@@ -32,7 +32,7 @@ export function About() {
             <div className="mt-12 grid max-w-md grid-cols-3 gap-6 border-t border-hair pt-8">
               {about.stats.map((stat) => (
                 <div key={stat.label}>
-                  <div className="text-idx text-xl">{stat.value}</div>
+                  <div className="whitespace-nowrap text-idx text-xl">{stat.value}</div>
                   <div className="mt-2 text-xs text-ink-muted">{stat.label}</div>
                 </div>
               ))}

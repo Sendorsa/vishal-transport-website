@@ -2,12 +2,14 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { trust, faq } from "@/lib/content";
+import { trust, faq, clients } from "@/lib/content";
 import { Reveal } from "@/components/motion/Reveal";
-import { MaskText } from "@/components/motion/MaskText";
 import { Icon } from "@/components/ui/Icon";
-import { LogoCarousel, placeholderLogos } from "@/components/ui/LogoCarousel";
+import { LogoCarousel } from "@/components/ui/LogoCarousel";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { easing } from "@/lib/motion";
+
+const clientLogos = clients.map((name) => ({ name }));
 
 function FaqItem({
   item,
@@ -65,15 +67,7 @@ export function Trust() {
       <div className="mx-auto max-w-container px-6 sm:px-10">
         {/* Editorial trust block — large heading, short paragraph, whitespace */}
         <div className="max-w-3xl">
-          <Reveal as="span" variant="fadeUp" className="text-idx block text-xs text-acc">
-            {trust.index}
-          </Reveal>
-          <h2 id="trust-heading" className="mt-7">
-            <MaskText
-              className="block font-serif text-display-lg font-light"
-              lines={trust.title}
-            />
-          </h2>
+          <SectionHeading index={trust.index} title={trust.title} mask headingId="trust-heading" />
           <Reveal variant="fadeUp" as="p" delay={0.1} className="mt-9 max-w-xl text-body-lg text-ink-muted">
             {trust.body}
           </Reveal>
@@ -81,7 +75,7 @@ export function Trust() {
 
         {/* Logo marquee */}
         <Reveal variant="fadeUp" delay={0.15} className="mt-16 lg:mt-20">
-          <LogoCarousel logos={placeholderLogos} />
+          <LogoCarousel logos={clientLogos} />
         </Reveal>
         <Reveal variant="fadeUp" as="p" delay={0.2} className="mt-8 text-xs text-ink-muted">
           {trust.footnote}

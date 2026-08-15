@@ -11,6 +11,7 @@ import {
 import { partners } from "@/lib/content";
 import { Reveal } from "@/components/motion/Reveal";
 import { ParallaxImage } from "@/components/motion/ParallaxImage";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const useIsoLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
@@ -39,6 +40,7 @@ export function TrustedPartners() {
   const reduced = useReducedMotion() ?? false;
 
   const [maxTranslate, setMaxTranslate] = useState(0);
+  const [pinHeight, setPinHeight] = useState(0);
   const [pinned, setPinned] = useState(false);
 
   const { scrollYProgress } = useScroll({
@@ -54,11 +56,22 @@ export function TrustedPartners() {
       const enable = desktop && !reduced;
       setPinned(enable);
       if (enable && trackRef.current) {
-        setMaxTranslate(
-          Math.max(0, trackRef.current.scrollWidth - window.innerWidth + 80),
+        const distance = Math.max(
+          0,
+          trackRef.current.scrollWidth - window.innerWidth + 80,
+        );
+        setMaxTranslate(distance);
+        // Vertical scroll budget for the horizontal pan — sized off the actual
+        // track width instead of a fixed vh, so the pace stays consistent
+        // whether the gallery is two cards or ten. Floor keeps a short track
+        // from snapping past in an instant.
+        setPinHeight(
+          window.innerHeight +
+            Math.max(distance * 1.2, window.innerHeight * 0.6),
         );
       } else {
         setMaxTranslate(0);
+        setPinHeight(0);
       }
     };
     measure();
@@ -69,22 +82,13 @@ export function TrustedPartners() {
   return (
     <section id="industries" className="theme-light relative">
       <div className="mx-auto max-w-container px-6 pt-24 sm:px-10 lg:pt-28">
-        <Reveal as="span" variant="fadeUp" className="text-idx block text-xs text-acc">
-          {partners.index}
-        </Reveal>
-        <Reveal variant="fadeUp" delay={0.08} as="h2" className="mt-7 font-serif text-display-lg font-light">
-          {partners.title.map((line, i) => (
-            <span key={i} className="block">
-              {line}
-            </span>
-          ))}
-        </Reveal>
+        <SectionHeading index={partners.index} title={partners.title} />
       </div>
 
       <div
         ref={outerRef}
         className="relative mt-14 lg:mt-20"
-        style={pinned ? { height: "220vh" } : undefined}
+        style={pinned ? { height: pinHeight } : undefined}
       >
         <div
           className={

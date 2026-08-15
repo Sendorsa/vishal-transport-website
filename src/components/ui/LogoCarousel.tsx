@@ -59,23 +59,38 @@ export const placeholderLogos: Logo[] = placeholderMarks.map((mark, i) => ({
 }));
 
 function LogoItem({ logo }: { logo: Logo }) {
-  return (
-    <li className="flex shrink-0 items-center">
-      {logo.src ? (
-        // Real logo path: grayscale + muted, resolves to full colour on hover.
-        // eslint-disable-next-line @next/next/no-img-element
+  if (logo.src) {
+    return (
+      <li className="flex shrink-0 items-center">
+        {/* Real logo path: grayscale + muted, resolves to full colour on hover. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={logo.src}
           alt={logo.name}
           className="h-9 w-auto object-contain opacity-60 grayscale transition-all duration-500 ease-out hover:scale-105 hover:opacity-100 hover:grayscale-0 sm:h-10"
         />
-      ) : (
+      </li>
+    );
+  }
+  if (logo.mark) {
+    return (
+      <li className="flex shrink-0 items-center">
         <span className="block h-9 text-ink-muted opacity-50 transition-all duration-500 ease-out hover:scale-105 hover:text-acc hover:opacity-100 sm:h-10">
           <svg viewBox="0 0 48 48" className="h-full w-auto" aria-hidden="true">
             {logo.mark}
           </svg>
         </span>
-      )}
+      </li>
+    );
+  }
+  // Real client name, no logo file supplied — a clean text wordmark stands
+  // in until artwork lands. Muted-to-ink is the text equivalent of the
+  // grayscale-to-colour treatment used for real logo images above.
+  return (
+    <li className="flex shrink-0 items-center">
+      <span className="block whitespace-nowrap text-sm font-semibold uppercase tracking-wide text-ink-muted opacity-60 transition-all duration-500 ease-out hover:scale-105 hover:text-ink hover:opacity-100 sm:text-base">
+        {logo.name}
+      </span>
     </li>
   );
 }

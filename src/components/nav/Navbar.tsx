@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import {
   AnimatePresence,
   motion,
@@ -56,19 +56,49 @@ export function Navbar() {
 
   return (
     <motion.header
-      className="theme-dark fixed left-0 top-0 z-[60] w-full"
+      className="theme-light fixed left-0 top-0 z-[60] w-full"
       initial={false}
-      animate={{
-        backgroundColor: scrolled ? "rgba(11,11,12,0.82)" : "rgba(11,11,12,0)",
-        backdropFilter: scrolled ? "blur(14px)" : "blur(0px)",
-        borderBottomColor: scrolled
-          ? "rgba(255,255,255,0.1)"
-          : "rgba(255,255,255,0)",
-      }}
-      transition={{ duration: 0.5, ease: easing.gentle }}
-      style={{ borderBottomWidth: 1 }}
+      // .theme-light sets an opaque `background` on whatever it's applied
+      // to — needed for its --ink/--acc/--hair custom properties, but the
+      // header itself must stay see-through so only the dedicated blur
+      // layer below controls what's visible (and can genuinely go
+      // transparent pre-scroll). Inline style beats the class rule.
+      style={{ backgroundColor: "transparent" }}
     >
-      <div className="mx-auto flex h-24 max-w-container items-center justify-between px-6 sm:px-10">
+      {/* Blurred bar background, isolated on its own layer — an animated
+          backdrop-filter on the header itself would make it a containing
+          block for the fixed-position mobile overlay below, clipping that
+          overlay to the header's own (bar-height) box instead of the
+          viewport. Keeping the filter off the header sidesteps that. */}
+      <motion.div
+        className="absolute inset-x-0 top-0 h-24 border-b"
+        animate={{
+          backgroundColor: scrolled ? "rgba(255,255,255,0.88)" : "rgba(255,255,255,0)",
+          backdropFilter: scrolled ? "blur(14px)" : "blur(0px)",
+          borderBottomColor: scrolled
+            ? "rgba(31,50,101,0.1)"
+            : "rgba(31,50,101,0)",
+        }}
+        transition={{ duration: 0.5, ease: easing.gentle }}
+      />
+
+      <div
+        className="relative mx-auto flex h-24 max-w-container items-center justify-between px-6 sm:px-10"
+        style={
+          {
+            // Unscrolled, the bar is transparent and floats over the (dark)
+            // hero — override the theme-light tokens to their dark-theme
+            // equivalents so text stays legible until the solid white bar
+            // takes over on scroll. Scoped to the bar row only (not the
+            // header itself) so it never leaks into the mobile overlay,
+            // which is always on its own solid white background.
+            "--ink": scrolled ? undefined : "#f6f5f2",
+            "--ink-2": scrolled ? undefined : "#adb2be",
+            "--acc": scrolled ? undefined : "#42aef0",
+            "--hair": scrolled ? undefined : "rgba(255,255,255,0.25)",
+          } as CSSProperties
+        }
+      >
         <a href="#top" className="flex items-center gap-3">
           <span className="text-idx text-xs text-acc">VG</span>
           <span className="text-idx hidden text-[11px] text-ink opacity-70 sm:block">
@@ -110,7 +140,7 @@ export function Navbar() {
           aria-expanded={open}
           aria-controls="mobile-menu"
           onClick={() => setOpen((v) => !v)}
-          className="relative z-[70] flex h-12 w-12 items-center justify-center border border-white/20 text-ink lg:hidden"
+          className="relative z-[70] flex h-12 w-12 items-center justify-center border border-hair text-ink lg:hidden"
         >
           <Icon name={open ? "close" : "menu"} className="h-5 w-5" />
         </button>
@@ -126,9 +156,10 @@ export function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3, ease: easing.gentle }}
-            className="theme-dark fixed inset-0 z-[55] lg:hidden"
+            className="theme-light fixed inset-0 z-[55] lg:hidden"
+            style={{ backgroundColor: "transparent" }}
           >
-            <div className="absolute inset-0 bg-brand-black/95 backdrop-blur-xl" />
+            <div className="absolute inset-0 bg-neutral-white/95 backdrop-blur-xl" />
             <motion.nav
               className="relative flex h-full flex-col justify-center gap-1 overflow-y-auto px-6 pb-10 pt-24"
               initial="hidden"

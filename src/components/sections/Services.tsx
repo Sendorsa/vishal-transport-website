@@ -6,6 +6,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import { ParallaxImage } from "@/components/motion/ParallaxImage";
 import { Icon } from "@/components/ui/Icon";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { easing } from "@/lib/motion";
 
 function ServiceRow({
@@ -22,10 +23,10 @@ function ServiceRow({
         whileHover="hover"
         animate="rest"
         variants={{
-          rest: { paddingLeft: 0, backgroundColor: "rgba(212,175,106,0)" },
+          rest: { paddingLeft: 0, backgroundColor: "rgba(14,116,180,0)" },
           hover: reduced
             ? {}
-            : { paddingLeft: 22, backgroundColor: "rgba(212,175,106,0.05)" },
+            : { paddingLeft: 22, backgroundColor: "rgba(14,116,180,0.05)" },
         }}
         transition={{ duration: 0.5, ease: easing.expo }}
       >
@@ -58,18 +59,9 @@ function ServiceRow({
 
 export function Services() {
   return (
-    <section id="services" className="theme-dark py-section-y lg:py-section-y-lg">
+    <section id="services" className="theme-light py-section-y lg:py-section-y-lg">
       <div className="mx-auto max-w-container px-6 sm:px-10">
-        <Reveal as="span" variant="fadeUp" className="text-idx block text-xs text-acc">
-          {services.index}
-        </Reveal>
-        <Reveal variant="fadeUp" delay={0.08} as="h2" className="mt-7 font-serif text-display-lg font-light">
-          {services.title.map((line, i) => (
-            <span key={i} className="block">
-              {line}
-            </span>
-          ))}
-        </Reveal>
+        <SectionHeading index={services.index} title={services.title} />
 
         <Stagger className="mt-16 border-t border-hair" stagger={0.1}>
           {services.items.map((item) => (

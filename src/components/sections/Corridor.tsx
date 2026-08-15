@@ -1,6 +1,7 @@
 import { corridor } from "@/lib/content";
 import { Reveal } from "@/components/motion/Reveal";
 import { ParallaxImage } from "@/components/motion/ParallaxImage";
+import { GradientMesh } from "@/components/ui/GradientMesh";
 
 export function Corridor() {
   return (
@@ -12,7 +13,8 @@ export function Corridor() {
         parallax={40}
         zoom={0.12}
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-transparent to-brand-black/40" />
+      <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-transparent to-brand-navy/40" />
+      <GradientMesh variant="bright" />
 
       <div className="relative mx-auto flex h-full max-w-container flex-col justify-between px-6 py-16 sm:px-10">
         <Reveal

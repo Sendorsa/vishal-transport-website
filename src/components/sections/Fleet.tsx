@@ -27,12 +27,13 @@ export function Fleet() {
               className={layout[i].className}
             >
               <div
-                className="text-idx font-light leading-none"
+                className="whitespace-nowrap text-idx font-light leading-none"
                 style={{ fontSize: stat.size }}
               >
                 <Counter to={stat.count} suffix={stat.suffix} />
               </div>
               <div className="mt-2 text-lg text-ink-muted">{stat.label}</div>
+              <div className="text-idx mt-3 text-[10px] text-acc">{stat.note}</div>
             </Reveal>
           ))}
         </div>

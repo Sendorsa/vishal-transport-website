@@ -4,7 +4,7 @@ import type { IconName } from "@/components/ui/Icon";
 
 export const site = {
   name: "Vishal Group",
-  legalName: "Vishal Transport and HR Solutions",
+  legalName: "Vishal Transport and HR Solutions Pvt. Ltd.",
   tagline: "We Move Industry",
   phone: "+91 99943 91696",
   phoneHref: "tel:+919994391696",
@@ -22,20 +22,20 @@ export const navLinks = [
 
 export const hero = {
   eyebrowLeft: "Hosur — Bengaluru",
-  eyebrowRight: "01 / Est. 10 years",
+  eyebrowRight: "01 / Est. 14 years",
   headline: ["We move", "the machines", "of industry."],
-  body: "Staff transportation. Cargo. Manpower. Ten years, without pause, across Tamil Nadu and Karnataka.",
+  body: "Staff transportation. Cargo. Warehousing. Manpower. Fourteen years, without pause, across Tamil Nadu and Karnataka.",
   shotBrief: "Shot brief — Aerial, empty highway, golden hour, fleet in motion",
 };
 
 export const about = {
   index: "02 — About",
-  title: ["Ten years", "on the road."],
-  body: "Vishal Transport and HR Solutions moves the people and cargo behind the automobile and manufacturing plants of Hosur and Bengaluru — staff mobilisation, domestic logistics, and manpower, under one accountable operation.",
+  title: ["Fourteen years", "on the road."],
+  body: "Vishal Transport and HR Solutions moves the people, cargo, and inventory behind the automobile and manufacturing plants of Hosur and Bengaluru — staff mobilisation, domestic logistics, warehousing, and manpower, under one accountable operation.",
   stats: [
-    { value: "10+", label: "Years" },
+    { value: "14+", label: "Years" },
     { value: "2", label: "States" },
-    { value: "2", label: "Sectors" },
+    { value: "20+", label: "Clients" },
   ],
   shotBrief: "Shot brief — Fleet parked at the operations yard, blue hour",
 };
@@ -49,10 +49,34 @@ export const corridor = {
 export const fleet = {
   index: "04 — Scale",
   stats: [
-    { count: 200, suffix: "+", label: "Vehicles on the road", size: "clamp(3.5rem,9vw,8rem)" },
-    { count: 2000, suffix: "+", label: "Skilled employees", size: "clamp(3rem,7vw,6rem)" },
-    { count: 16000, suffix: "+", label: "Man-hours, daily", size: "clamp(3rem,7vw,6rem)" },
-    { count: 10, suffix: "", label: "Years in operation", size: "clamp(3rem,6vw,5rem)" },
+    {
+      count: 300,
+      suffix: "+",
+      label: "Vehicles on the road",
+      note: "Buses & trucks",
+      size: "clamp(3.5rem,9vw,8rem)",
+    },
+    {
+      count: 550,
+      suffix: "+",
+      label: "Skilled employees",
+      note: "Drivers & support staff",
+      size: "clamp(3rem,7vw,6rem)",
+    },
+    {
+      count: 20,
+      suffix: "+",
+      label: "Companies served",
+      note: "Automobile & manufacturing",
+      size: "clamp(3rem,7vw,6rem)",
+    },
+    {
+      count: 14,
+      suffix: "",
+      label: "Years in operation",
+      note: "Hosur — Bengaluru corridor",
+      size: "clamp(3rem,6vw,5rem)",
+    },
   ],
 };
 
@@ -63,7 +87,7 @@ export const services = {
     {
       num: "01",
       title: "Staff Transportation",
-      body: "200+ buses, daily. Employees moved safely between home and factory, shift after shift.",
+      body: "300+ buses, daily. Employees moved safely between home and factory, shift after shift.",
     },
     {
       num: "02",
@@ -80,8 +104,58 @@ export const services = {
     "Image briefs — 01: bus fleet on the highway, golden hour. 02: distribution centre, wide interior. 03: skilled workforce, industrial floor.",
 };
 
+export const employeeGrowth = {
+  index: "08 — Workforce",
+  title: ["Growing our", "people, every year."],
+  body: "As operations expand across the corridor, the team behind them grows with it. Driver recruitment and support-staff hiring have kept pace with client demand, year after year.",
+  growthNote: "120%+ workforce growth in two years",
+  unit: "Employees",
+  chart: [
+    { year: "FY23–24", count: 250 },
+    { year: "FY24–25", count: 400 },
+    { year: "FY25–26", count: 550 },
+  ],
+  callouts: [
+    { label: "Driver training pipeline", meta: "Recruited, trained, and certified in-house" },
+    { label: "Support staff", meta: "Operations, dispatch, and client coordination" },
+  ],
+};
+
+export const fleetStrength = {
+  index: "09 — Fleet Strength",
+  title: ["A fleet built", "for scale."],
+  body: "Buses for staff mobility. Trucks for cargo and supply chain. Every vehicle runs out of two strategic yards — Hosur and Bengaluru — and is maintained in-house, not outsourced.",
+  growthNote: "65%+ fleet growth in two years",
+  unit: "Vehicles",
+  chart: [
+    { year: "FY23–24", count: 200 },
+    { year: "FY24–25", count: 250 },
+    { year: "FY25–26", count: 330 },
+  ],
+  categories: [
+    {
+      icon: "bus" as IconName,
+      label: "Buses",
+      meta: "Staff mobility, daily shift service",
+    },
+    {
+      icon: "truck" as IconName,
+      label: "Trucks",
+      meta: "Cargo and supply-chain delivery",
+    },
+  ],
+};
+
+export const extendedCapabilities = {
+  index: "06 — Extended Capabilities",
+  title: ["Beyond", "the road."],
+  body: "Transportation is the core of what we do — but manufacturers need more than moving parts. Vishal Group also manages and leases warehouse space, rounding out a complete logistics partnership from a single accountable operator.",
+  stat: { count: 200000, suffix: "+", label: "Sq. ft. of managed warehouse space" },
+  tenants: { value: "6–7", label: "Companies currently leasing space" },
+};
+
 export const partners = {
-  index: "06 — Who We Serve",
+  index: "07 — Who We Serve",
   title: ["Industries we", "move for."],
   cards: [
     { title: ["Automobile", "Manufacturing"], tag: "assembly line, telephoto compression" },
@@ -93,27 +167,78 @@ export const partners = {
 };
 
 export const team = {
-  index: "07 — Leadership",
-  // Name reserved — supply the real MD name to render it above the role.
-  name: "",
+  name: "Vishal Manjunath",
   role: "Managing Director",
-  org: "Vishal Transport and HR Solutions",
+  org: "Vishal Transport and HR Solutions Pvt. Ltd.",
   shotBrief: "Reserved for portrait — executive, studio lighting, neutral backdrop",
   // Executive letter — polished rewrite of the MD's original statement.
   letter: {
     label: "Our Promise to You",
     heading: ["From the Managing", "Director's Desk"],
     paragraphs: [
-      "Over the past decade, Vishal Group has grown into a trusted leader in manpower and transportation for the automobile and manufacturing sectors. With more than 2,000 skilled employees and a fleet of 200+ vehicles, we deliver dependable service to every partner we work with.",
+      "Over the past fourteen years, Vishal Group has grown into a recognised leader in transportation and manpower solutions for the automobile and manufacturing sectors. With a fleet of 300+ vehicles and more than 550 skilled employees, we deliver dependable service to every partner we work with — backed by in-house maintenance facilities in Hosur and Bengaluru that keep our fleet moving without interruption.",
       "Our commitment is simple — to move with the future by continually refining our processes, investing in our people, and raising the standard of what an operations partner should be.",
-      "Discover what's possible with Vishal Group: your trusted partner in transportation and manpower solutions.",
+      "Discover what's possible with Vishal Group — your trusted partner in transportation and manpower solutions.",
     ],
-    signoff: "Managing Director",
   },
 };
 
+// Technology & Safety share one section — two sides of the same commitment
+// (visibility, and the people driving) rather than two thin, similar sections.
+export const operations = {
+  index: "10 — Technology & Safety",
+  title: ["Seen, tracked,", "and driven right."],
+  intro:
+    "Every vehicle reports in, and every driver is trained to the same standard — visibility and safety, as one commitment.",
+  technology: {
+    label: "Technology & Tracking",
+    body: "GPS and a dedicated mobile app give real-time visibility into location and employee safety, while live CCTV inside every bus keeps the ride monitored end to end.",
+    features: [
+      { icon: "gps" as IconName, label: "GPS fleet tracking", meta: "Real-time vehicle location, always on" },
+      { icon: "phone" as IconName, label: "Mobile app visibility", meta: "Live updates for operations and clients" },
+      { icon: "camera" as IconName, label: "Live CCTV monitoring", meta: "Every bus, continuously recorded" },
+      { icon: "pin" as IconName, label: "Route management", meta: "Planned, tracked, and adjusted in real time" },
+    ],
+  },
+  safety: {
+    label: "Driver Training & Safety",
+    body: "Every driver at Vishal Group is trained, tested, and re-trained — because the people we move deserve nothing less.",
+    stat: { count: 500, suffix: "+", label: "Trained drivers" },
+    pillars: [
+      {
+        icon: "check" as IconName,
+        label: "Comprehensive training",
+        detail: "Safety protocols, customer service, and vehicle maintenance — covered before a driver takes the wheel.",
+      },
+      {
+        icon: "clock" as IconName,
+        label: "Continuous education",
+        detail: "Regular workshops and updates on the latest safety regulations and industry standards.",
+      },
+      {
+        icon: "shield" as IconName,
+        label: "Defensive driving",
+        detail: "Emergency response and defensive driving technique are trained and re-tested, not assumed.",
+      },
+    ],
+  },
+};
+
+export const maintenance = {
+  index: "11 — Maintenance",
+  title: ["Kept running.", "Kept ready."],
+  body: "In-house workshops in both Hosur and Bengaluru mean breakdowns are handled fast — minimising downtime and keeping every commitment on schedule.",
+  shotBrief: "Shot brief — Workshop floor, vehicles under service, wide interior",
+  features: [
+    { icon: "wrench" as IconName, label: "In-house workshops", meta: "State-of-the-art equipment, two locations" },
+    { icon: "truck" as IconName, label: "Paint shops & repair bays", meta: "Hosur & Bengaluru" },
+    { icon: "users" as IconName, label: "Trained mechanics", meta: "Fast turnaround on every repair" },
+    { icon: "clock" as IconName, label: "Preventive maintenance", meta: "Minimising downtime before it happens" },
+  ],
+};
+
 export const coverage = {
-  index: "08 — Coverage",
+  index: "12 — Coverage",
   title: ["One corridor.", "Two states."],
   pins: [
     { region: "Tamil Nadu", city: "Hosur", side: "left" as const, style: { left: "11.7%", top: "78.9%" } },
@@ -132,32 +257,49 @@ export const coverage = {
 };
 
 export const whyUs = {
-  index: "09 — Why Us",
+  index: "13 — Why Us",
   title: ["Why manufacturers", "choose us."],
   items: [
-    { label: "A decade of experience", meta: "10+ years" },
-    { label: "Strong client portfolio", meta: "Hosur & region" },
-    { label: "Trained, professional drivers", meta: "Safety-first" },
-    { label: "Cutting-edge tracking technology", meta: "Live visibility" },
-    { label: "A large, modern fleet", meta: "200+ vehicles" },
-    { label: "A deep skilled workforce", meta: "2,000+ people" },
+    { icon: "clock" as IconName, label: "A decade and more of experience", meta: "14+ years" },
+    { icon: "users" as IconName, label: "Strong client portfolio", meta: "20+ companies" },
+    {
+      icon: "check" as IconName,
+      label: "One accountable partner",
+      meta: "Transport, manpower & warehousing",
+    },
+    {
+      icon: "shield" as IconName,
+      label: "Built on safety, not shortcuts",
+      meta: "500+ trained drivers",
+    },
   ],
-  imageBriefs:
-    "Image briefs, top to bottom — archival highway, drone coverage shot, driver inspection, GPS dashboard, truck convoy, workforce portrait.",
 };
 
+// Real clients drawn from the company profile — no logo files supplied, so
+// LogoCarousel renders these as clean text wordmarks (see LogoItem).
+export const clients = [
+  "UNO MINDA",
+  "TATA Electronics",
+  "TITAN",
+  "TEAL — A Tata Enterprise",
+  "Jamna Auto Industries",
+  "AVTEC — CK Birla Group",
+  "Luminous",
+  "Dhoot Transmissions",
+];
+
 export const trust = {
-  index: "10 — Trusted By",
+  index: "14 — Trusted By",
   title: ["Trusted by", "industry leaders."],
-  body: "Vishal Group proudly supports some of South India's leading manufacturing and industrial organisations — moving their people and cargo, dependably, shift after shift.",
+  body: "Vishal Group proudly supports 20+ of South India's leading manufacturing and industrial organisations — moving their people and cargo, dependably, shift after shift.",
   footnote:
-    "Partner marks shown are placeholders, reserved for the logos of the manufacturers we serve.",
+    "A selection of the manufacturing and industrial leaders who trust us with their people and cargo.",
 };
 
 export const faq = [
   {
     q: "What services does Vishal Group provide?",
-    a: "Staff transportation, domestic cargo management, and manpower consulting for the automobile and manufacturing sectors.",
+    a: "Staff transportation, domestic cargo management, warehouse leasing, and manpower consulting for the automobile and manufacturing sectors.",
   },
   {
     q: "Which regions do you operate in?",
@@ -165,7 +307,11 @@ export const faq = [
   },
   {
     q: "How large is your fleet?",
-    a: "200+ trucks and buses, supported by 2,000+ skilled employees delivering 16,000+ man-hours daily.",
+    a: "300+ trucks and buses, supported by 550+ skilled employees, including 500+ professional drivers.",
+  },
+  {
+    q: "Do you offer warehousing?",
+    a: "Yes — we lease and manage 200,000+ sq. ft. of warehouse space for manufacturers across the corridor.",
   },
   {
     q: "Are you GST registered in both states?",
@@ -174,7 +320,7 @@ export const faq = [
 ];
 
 export const contact = {
-  index: "11 — Contact",
+  index: "15 — Contact",
   title: ["Let's move,", "together."],
   shotBrief: "Shot brief — Aerial, facility or corridor, background only",
   fields: [
@@ -187,7 +333,7 @@ export const contact = {
 
 export const footer = {
   blurb:
-    "Vishal Transport and HR Solutions — staff mobilisation, logistics, and manpower consulting for the manufacturing sector.",
+    "Vishal Transport and HR Solutions — staff mobilisation, logistics, warehousing, and manpower consulting for the manufacturing sector.",
   socials: [
     { name: "linkedin" as IconName, label: "LinkedIn", href: "#" },
     { name: "instagram" as IconName, label: "Instagram", href: "#" },
@@ -199,7 +345,12 @@ export const footer = {
     { label: "Industries", href: "#industries" },
     { label: "Contact", href: "#contact" },
   ],
-  servicesList: ["Staff Transportation", "Cargo Management", "Manpower Consulting"],
+  servicesList: [
+    "Staff Transportation",
+    "Cargo Management",
+    "Manpower Consulting",
+    "Warehouse Leasing",
+  ],
   locations: [
     { city: "Hosur, Tamil Nadu", zip: "635114" },
     { city: "Bengaluru, Karnataka", zip: "562107" },

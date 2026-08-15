@@ -12,21 +12,23 @@
 }
 
 .theme-dark {
-  --bg: #0b0b0c;
-  --ink: #f5f3ee;
-  --ink-2: #afaca4;
-  --acc: #d4af6a;
+  --bg: #1f3265;
+  --surface: #223066;
+  --ink: #f6f5f2;
+  --ink-2: #adb2be;
+  --acc: #42aef0;
   --hair: rgba(255, 255, 255, 0.14);
   background: var(--bg);
   color: var(--ink);
 }
 
 .theme-light {
-  --bg: #f7f5f0;
-  --ink: #15140f;
-  --ink-2: #635f55;
-  --acc: #9c7a3e;
-  --hair: rgba(0, 0, 0, 0.12);
+  --bg: #ffffff;
+  --surface: #f5f5f3;
+  --ink: #14161b;
+  --ink-2: #63666c;
+  --acc: #0e74b4;
+  --hair: rgba(20, 22, 27, 0.1);
   background: var(--bg);
   color: var(--ink);
 }
@@ -36,17 +38,17 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply font-sans antialiased bg-brand-black;
+    @apply font-sans antialiased bg-brand-navy;
     /* Guard against any accidental horizontal scroll on mobile.
        `clip` (not `hidden`) so it doesn't break the sticky pinned gallery. */
     overflow-x: clip;
   }
   ::selection {
-    background: var(--acc, #d4af6a);
-    color: var(--bg, #0b0b0c);
+    background: var(--acc, #0e74b4);
+    color: var(--bg, #f6f5f2);
   }
   :focus-visible {
-    outline: 2px solid var(--acc, #d4af6a);
+    outline: 2px solid var(--acc, #0e74b4);
     outline-offset: 3px;
   }
   @media (prefers-reduced-motion: reduce) {
@@ -74,10 +76,10 @@
   .ph {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(155deg, rgba(212, 175, 106, 0.14), rgba(212, 175, 106, 0.02));
+    background: linear-gradient(155deg, rgba(14, 116, 180, 0.14), rgba(14, 116, 180, 0.02));
   }
   .theme-light .ph {
-    background: linear-gradient(155deg, rgba(156, 122, 62, 0.1), rgba(156, 122, 62, 0.02));
+    background: linear-gradient(155deg, rgba(14, 116, 180, 0.08), rgba(14, 116, 180, 0.02));
   }
   .ph-vignette {
     position: absolute;
