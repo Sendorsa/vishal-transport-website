@@ -4,7 +4,7 @@ import type { PhotoKey } from "@/lib/photos";
 /* All site copy in one place — components stay presentational. */
 
 export const site = {
-  name: "Vishal Group",
+  name: "Vishal Transport",
   legalName: "Vishal Transport and HR Solutions Pvt. Ltd.",
   tagline: "We Move Industry",
   phone: "+91 99943 91696",
@@ -146,7 +146,7 @@ export const fleetStrength = {
 export const extendedCapabilities = {
   index: "06 — Extended Capabilities",
   title: ["Beyond", "the road."],
-  body: "Transportation is the core of what we do — but manufacturers need more than moving parts. Vishal Group also manages and leases warehouse space, rounding out a complete logistics partnership from a single accountable operator.",
+  body: "Transportation is the core of what we do — but manufacturers need more than moving parts. Vishal Transport also manages and leases warehouse space, rounding out a complete logistics partnership from a single accountable operator.",
   stat: { count: 200000, suffix: "+", label: "Sq. ft. of managed warehouse space" },
   tenants: { value: "6–7", label: "Companies currently leasing space" },
 };
@@ -189,9 +189,9 @@ export const team = {
     label: "Our Promise to You",
     heading: ["From the Managing", "Director's Desk"],
     paragraphs: [
-      "Over the past fourteen years, Vishal Group has grown into a recognised leader in transportation and manpower solutions for the automobile and manufacturing sectors. With a fleet of 300+ vehicles and more than 550 skilled employees, we deliver dependable service to every partner we work with — backed by in-house maintenance facilities in Hosur and Bengaluru that keep our fleet moving without interruption.",
+      "Over the past fourteen years, Vishal Transport has grown into a recognised leader in transportation and manpower solutions for the automobile and manufacturing sectors. With a fleet of 300+ vehicles and more than 550 skilled employees, we deliver dependable service to every partner we work with — backed by in-house maintenance facilities in Hosur and Bengaluru that keep our fleet moving without interruption.",
       "Our commitment is simple — to move with the future by continually refining our processes, investing in our people, and raising the standard of what an operations partner should be.",
-      "Discover what's possible with Vishal Group — your trusted partner in transportation and manpower solutions.",
+      "Discover what's possible with Vishal Transport — your trusted partner in transportation and manpower solutions.",
     ],
   },
 };
@@ -215,7 +215,7 @@ export const operations = {
   },
   safety: {
     label: "Driver Training & Safety",
-    body: "Every driver at Vishal Group is trained, tested, and re-trained — because the people we move deserve nothing less.",
+    body: "Every driver at Vishal Transport is trained, tested, and re-trained — because the people we move deserve nothing less.",
     stat: { count: 500, suffix: "+", label: "Trained drivers" },
     pillars: [
       {
@@ -332,7 +332,7 @@ export const trust = {
 
 export const faq = [
   {
-    q: "What services does Vishal Group provide?",
+    q: "What services does Vishal Transport provide?",
     a: "Staff transportation, domestic cargo management, warehouse leasing, and manpower consulting for the automobile and manufacturing sectors.",
   },
   {

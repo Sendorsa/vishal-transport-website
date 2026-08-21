@@ -59,9 +59,9 @@ function LogoItem({ partner, hidden }: { partner: Partner; hidden?: boolean }) {
 export function LogoMarquee() {
   return (
     <div
-      className="group relative overflow-hidden py-2 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]"
+      className="logo-band group relative overflow-hidden py-2 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]"
       role="img"
-      aria-label="Logos of the industrial organisations Vishal Group serves"
+      aria-label="Logos of the industrial organisations Vishal Transport serves"
     >
       {/* Reduced motion: the band becomes a static centred wrap. `w-max` has to
           be overridden too — left in place it pins the track to its intrinsic

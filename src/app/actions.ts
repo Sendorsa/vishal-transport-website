@@ -56,7 +56,7 @@ export async function submitInquiry(
   try {
     const resend = new Resend(apiKey);
     const { error } = await resend.emails.send({
-      from: `Vishal Group Website <${from}>`,
+      from: `Vishal Transport Website <${from}>`,
       to,
       replyTo: email,
       subject: `New inquiry — ${subject}`,

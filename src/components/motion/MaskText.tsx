@@ -39,6 +39,26 @@ export function MaskText({
         viewport: { once: true, amount: 0.5 },
       };
 
+  // Immediate mode (the hero) is pure CSS: no Framer, so the headline paints
+  // and reveals without waiting for the JS bundle. Scroll-triggered headings
+  // keep the Framer path — they are below the fold and never the LCP element.
+  if (immediate) {
+    return (
+      <Tag className={className} id={id}>
+        {lines.map((line, i) => (
+          <span key={i} className="block overflow-hidden pb-[0.05em]">
+            <span
+              className="mask-line-css block"
+              style={{ animationDelay: `${delay + i * stagger}s` }}
+            >
+              {line}
+            </span>
+          </span>
+        ))}
+      </Tag>
+    );
+  }
+
   return (
     <Tag className={className} id={id}>
       {lines.map((line, i) => (

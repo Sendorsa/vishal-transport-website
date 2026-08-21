@@ -7,41 +7,41 @@ const fraunces = Fraunces({
   weight: ["300", "400", "500", "600"],
   style: ["normal", "italic"],
   variable: "--font-fraunces",
-  display: "swap",
+  display: "optional",
 });
 
 const inter = Inter({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
   variable: "--font-inter",
-  display: "swap",
+  display: "optional",
 });
 
 const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
   variable: "--font-plex-mono",
-  display: "swap",
+  display: "optional",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://vishal-transport.com"),
-  title: "Vishal Group — We Move Industry",
+  title: "Vishal Transport — Transportation & HR Solutions",
   description:
-    "Vishal Group is a transportation and manpower partner for the automobile and manufacturing sectors in Hosur, Tamil Nadu and Bengaluru, Karnataka. 300+ vehicles, 550+ skilled employees, fourteen years on the road.",
+    "Vishal Transport and HR Solutions Pvt. Ltd. is a transportation and manpower partner for the automobile and manufacturing sectors in Hosur, Tamil Nadu and Bengaluru, Karnataka. 300+ vehicles, 550+ skilled employees, fourteen years on the road.",
   alternates: { canonical: "/" },
   robots: { index: true, follow: true },
   openGraph: {
     type: "website",
-    siteName: "Vishal Group",
-    title: "Vishal Group — We Move Industry",
+    siteName: "Vishal Transport",
+    title: "Vishal Transport — Transportation & HR Solutions",
     description:
       "A transportation and manpower partner for manufacturing operations across Tamil Nadu and Karnataka.",
     locale: "en_IN",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vishal Group — We Move Industry",
+    title: "Vishal Transport — Transportation & HR Solutions",
     description:
       "Staff transportation, cargo management and manpower consulting for manufacturing companies in Hosur and Bengaluru.",
   },
@@ -51,11 +51,46 @@ export const viewport: Viewport = {
   themeColor: "#1F3265",
 };
 
+/**
+ * Runs before hydration and owns the mobile menu.
+ *
+ * The menu button is server-rendered, so on a mid-range phone it is visible
+ * and tappable-looking about two seconds before React attaches any handler —
+ * taps in that window did nothing, which is why the menu "sometimes didn't
+ * open". Delegating from `document` means this works the moment the parser
+ * reaches it, with no dependency on the React bundle at all.
+ */
+const menuBootstrap = `
+(function(){
+  var d=document.documentElement;
+  function set(open){
+    d.setAttribute('data-menu-open', open?'true':'false');
+    var b=document.getElementById('menu-toggle');
+    if(b){
+      b.setAttribute('aria-expanded', open?'true':'false');
+      b.setAttribute('aria-label', open?'Close menu':'Open menu');
+    }
+  }
+  document.addEventListener('click',function(e){
+    var t=e.target;
+    if(!t||!t.closest) return;
+    if(t.closest('#menu-toggle')){
+      set(d.getAttribute('data-menu-open')!=='true');
+      return;
+    }
+    if(t.closest('#mobile-menu a')) set(false);
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape') set(false);
+  });
+  set(false);
+})();`;
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "MovingCompany",
   name: "Vishal Transport and HR Solutions Pvt. Ltd.",
-  alternateName: "Vishal Group",
+  alternateName: "Vishal Transport",
   email: "vishaladml1@gmail.com",
   telephone: "+91-9994391696",
   areaServed: ["Hosur", "Bengaluru", "Tamil Nadu", "Karnataka"],
@@ -90,6 +125,7 @@ export default function RootLayout({
       className={`${fraunces.variable} ${inter.variable} ${plexMono.variable}`}
     >
       <body>
+        <script dangerouslySetInnerHTML={{ __html: menuBootstrap }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

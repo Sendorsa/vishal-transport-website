@@ -42,6 +42,10 @@ export function Contact() {
                 {site.email}
               </a>
             </div>
+            <div className="border-t border-hair pt-6">
+              <div className="text-idx text-[11px] text-ink-muted">Registered entity</div>
+              <p className="mt-2 text-sm text-ink-muted">{site.legalName}</p>
+            </div>
           </Reveal>
         </div>
       </div>

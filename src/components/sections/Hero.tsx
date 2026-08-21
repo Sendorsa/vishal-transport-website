@@ -40,17 +40,15 @@ export function Hero() {
       </div>
 
       {/* Top eyebrow row */}
-      <motion.div
-        className="relative mx-auto flex w-full max-w-container items-center justify-between px-6 pt-32 sm:px-10"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 0.2 }}
+      <div
+        className="fade-up-css relative mx-auto flex w-full max-w-container items-center justify-between px-6 pt-32 sm:px-10"
+        style={{ animationDelay: "0.2s" }}
       >
         <span className="text-idx text-xs opacity-60">{hero.eyebrowLeft}</span>
         <span className="text-idx hidden text-xs opacity-60 sm:block">
           {hero.eyebrowRight}
         </span>
-      </motion.div>
+      </div>
 
       {/* Headline + CTA, then the bus scene directly beneath — both live in
           normal flow together so the bus can never overlap the CTA, on any
@@ -69,42 +67,19 @@ export function Hero() {
             stagger={0.12}
           />
 
-          <motion.div
-            className="mt-10 flex flex-wrap items-end justify-between gap-8"
-            initial="hidden"
-            animate="visible"
-            variants={{
-              visible: { transition: { staggerChildren: 0.15, delayChildren: 0.6 } },
-            }}
-          >
-            <motion.p
-              className="max-w-md text-body-lg text-ink-muted"
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: {
-                  opacity: 1,
-                  y: 0,
-                  transition: { duration: 0.8, ease: easing.smoothOut },
-                },
-              }}
+          <div className="mt-10 flex flex-wrap items-end justify-between gap-8">
+            <p
+              className="fade-up-css max-w-md text-body-lg text-ink-muted"
+              style={{ animationDelay: "0.45s" }}
             >
               {hero.body}
-            </motion.p>
-            <motion.div
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: {
-                  opacity: 1,
-                  y: 0,
-                  transition: { duration: 0.8, ease: easing.smoothOut },
-                },
-              }}
-            >
+            </p>
+            <div className="fade-up-css" style={{ animationDelay: "0.6s" }}>
               <Button href="#contact" arrow>
                 Get a Quote
               </Button>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </motion.div>
 
         <BusScene />

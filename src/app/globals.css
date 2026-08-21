@@ -117,6 +117,124 @@
     }
   }
 
+  /* ---------------------------------------------------------------
+     Mobile menu, driven by [data-menu-open] on <html> rather than React
+     state. The overlay is server-rendered and toggled by a tiny inline
+     script, so it opens on the first tap — roughly two seconds before
+     React finishes hydrating on a mid-range phone.
+     --------------------------------------------------------------- */
+  #mobile-menu {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.18s ease-out, visibility 0s linear 0.18s;
+  }
+  html[data-menu-open="true"] #mobile-menu {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.18s ease-out, visibility 0s linear 0s;
+  }
+  /* Both elements: <html> is the scrolling element in standards mode, so
+     locking only <body> leaves the page scrolling behind the overlay. */
+  html[data-menu-open="true"],
+  html[data-menu-open="true"] body {
+    overflow: hidden;
+  }
+
+  .menu-item {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.18s ease-out, transform 0.18s ease-out;
+  }
+  html[data-menu-open="true"] .menu-item {
+    opacity: 1;
+    transform: none;
+  }
+  /* Stagger via delay — cheap, compositor-friendly, and no JS timeline. */
+  html[data-menu-open="true"] .menu-item:nth-child(2) { transition-delay: 0.03s; }
+  html[data-menu-open="true"] .menu-item:nth-child(3) { transition-delay: 0.06s; }
+  html[data-menu-open="true"] .menu-item:nth-child(4) { transition-delay: 0.09s; }
+  html[data-menu-open="true"] .menu-item:nth-child(5) { transition-delay: 0.12s; }
+  html[data-menu-open="true"] .menu-item:nth-child(6) { transition-delay: 0.15s; }
+
+  /* Icon swap without a React round-trip. */
+  .icon-close { display: none; }
+  html[data-menu-open="true"] .icon-open { display: none; }
+  html[data-menu-open="true"] .icon-close { display: block; }
+
+  @media (prefers-reduced-motion: reduce) {
+    #mobile-menu,
+    .menu-item {
+      transition: none;
+    }
+    .menu-item {
+      transform: none;
+    }
+  }
+
+  /* Above-the-fold fade-up, in CSS for the same reason as the headline:
+     Framer ships these as opacity:0 and they stay invisible until the bundle
+     hydrates, which made the hero body the LCP element at 3.8s. */
+  @keyframes fade-up-css {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .fade-up-css {
+    opacity: 0;
+    animation: fade-up-css 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fade-up-css {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Hero headline reveal, in CSS.
+     Driven by Framer it shipped as style="translateY(112%)" and stayed
+     invisible until ~176KB of JS had loaded and hydrated — pushing LCP past
+     3.8s on a throttled phone. As a CSS animation it starts at first paint. */
+  @keyframes mask-line-in {
+    from {
+      transform: translateY(112%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+  .mask-line-css {
+    transform: translateY(112%);
+    animation: mask-line-in 0.72s cubic-bezier(0.19, 1, 0.22, 1) both;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mask-line-css {
+      animation: none;
+      transform: none;
+    }
+  }
+
+  /* The band's 60s transform would otherwise run for the entire session,
+     including while it is thousands of pixels off-screen. content-visibility
+     lets the browser skip it until it scrolls near; the intrinsic size keeps
+     the scrollbar honest so nothing shifts. */
+  .logo-band {
+    content-visibility: auto;
+    /* Must match the real rendered height or the reveal shifts layout —
+       measured 50px on mobile, 60px from sm up. */
+    contain-intrinsic-size: auto 50px;
+  }
+  @media (min-width: 640px) {
+    .logo-band {
+      contain-intrinsic-size: auto 60px;
+    }
+  }
+
   /* Animated underline for text links */
   .hover-line {
     position: relative;
