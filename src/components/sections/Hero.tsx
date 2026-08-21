@@ -34,8 +34,8 @@ export function Hero() {
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/70 to-brand-navy/30" />
         <GradientMesh variant="bright" />
-        <span className="text-idx absolute right-6 top-1/2 hidden -translate-y-1/2 text-[10px] uppercase opacity-50 [writing-mode:vertical-rl] sm:right-10 sm:block">
-          {hero.shotBrief}
+        <span className="text-idx absolute right-6 top-1/2 hidden -translate-y-1/2 text-[10px] uppercase opacity-80 [writing-mode:vertical-rl] sm:right-10 sm:block">
+          {hero.sideNote}
         </span>
       </div>
 
@@ -61,6 +61,7 @@ export function Hero() {
           style={enableParallax ? { y: contentY, opacity: contentOpacity } : undefined}
         >
           <MaskText
+            as="h1"
             immediate
             className="max-w-4xl font-serif text-display-xl font-light"
             lines={hero.headline}

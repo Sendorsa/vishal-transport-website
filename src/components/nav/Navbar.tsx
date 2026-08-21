@@ -8,6 +8,7 @@ import {
   useScroll,
 } from "framer-motion";
 import { navLinks, site } from "@/lib/content";
+import { Logo } from "@/components/ui/Logo";
 import { Icon } from "@/components/ui/Icon";
 import { Button } from "@/components/ui/Button";
 import { easing } from "@/lib/motion";
@@ -16,6 +17,33 @@ export function Navbar() {
   const { scrollY } = useScroll();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+
+  // The bar renders light-on-dark only while it floats over the hero. Once the
+  // page is scrolled the white bar takes over, and while the mobile overlay is
+  // open it paints solid white behind the bar — both need the dark-ink tokens.
+  const lightBar = scrolled || open;
+
+  // Lock the page behind the overlay. Scroll position is restored on close so
+  // the user lands exactly where they left.
+  useEffect(() => {
+    if (!open) return;
+    const { overflow, paddingRight } = document.body.style;
+    const gap = window.innerWidth - document.documentElement.clientWidth;
+    document.body.style.overflow = "hidden";
+    if (gap > 0) document.body.style.paddingRight = `${gap}px`;
+    return () => {
+      document.body.style.overflow = overflow;
+      document.body.style.paddingRight = paddingRight;
+    };
+  }, [open]);
+
+  // Escape closes the menu — expected for any full-screen overlay.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
   const [active, setActive] = useState<string>("");
 
   useMotionValueEvent(scrollY, "change", (y) => setScrolled(y > 30));
@@ -92,17 +120,42 @@ export function Navbar() {
             // takes over on scroll. Scoped to the bar row only (not the
             // header itself) so it never leaks into the mobile overlay,
             // which is always on its own solid white background.
-            "--ink": scrolled ? undefined : "#f6f5f2",
-            "--ink-2": scrolled ? undefined : "#adb2be",
-            "--acc": scrolled ? undefined : "#42aef0",
-            "--hair": scrolled ? undefined : "rgba(255,255,255,0.25)",
+            "--ink": lightBar ? undefined : "#f6f5f2",
+            "--ink-2": lightBar ? undefined : "#adb2be",
+            "--acc": lightBar ? undefined : "#42aef0",
+            "--hair": lightBar ? undefined : "rgba(255,255,255,0.25)",
           } as CSSProperties
         }
       >
-        <a href="#top" className="flex items-center gap-3">
-          <span className="text-idx text-xs text-acc">VG</span>
-          <span className="text-idx hidden text-[11px] text-ink opacity-70 sm:block">
-            Vishal&nbsp;Group
+        {/* Both variants are stacked and cross-faded rather than swapped, so
+            the bar never flashes an unpainted box mid-transition. The link
+            carries the accessible name; the images are decorative. */}
+        <a
+          href="#top"
+          aria-label={`${site.legalName} — home`}
+          // z-70 for the same reason as the menu button: the mobile overlay is
+          // a sibling at z-55, so anything in the bar row without its own
+          // z-index gets painted over while the menu is open.
+          // Padding grows the tap target to 46px without changing the mark's
+          // size — the crossfade layers are absolute, so they must be measured
+          // against an inner box, not the padded anchor.
+          className="relative z-[70] -my-2 flex shrink-0 items-center py-2"
+        >
+          <span className="relative block h-[30px] w-[117px] sm:h-9 sm:w-[140px]">
+            <motion.span
+              className="absolute inset-0 block"
+              animate={{ opacity: lightBar ? 1 : 0 }}
+              transition={{ duration: 0.5, ease: easing.gentle }}
+            >
+              <Logo variant="full" height={36} priority className="h-full w-auto" />
+            </motion.span>
+            <motion.span
+              className="absolute inset-0 block"
+              animate={{ opacity: lightBar ? 0 : 1 }}
+              transition={{ duration: 0.5, ease: easing.gentle }}
+            >
+              <Logo variant="mono" height={36} priority className="h-full w-auto" />
+            </motion.span>
           </span>
         </a>
 
@@ -155,11 +208,11 @@ export function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3, ease: easing.gentle }}
+            transition={{ duration: 0.16, ease: easing.smoothOut }}
             className="theme-light fixed inset-0 z-[55] lg:hidden"
             style={{ backgroundColor: "transparent" }}
           >
-            <div className="absolute inset-0 bg-neutral-white/95 backdrop-blur-xl" />
+            <div className="absolute inset-0 bg-neutral-white" />
             <motion.nav
               className="relative flex h-full flex-col justify-center gap-1 overflow-y-auto px-6 pb-10 pt-24"
               initial="hidden"
@@ -167,7 +220,7 @@ export function Navbar() {
               exit="hidden"
               variants={{
                 hidden: {},
-                visible: { transition: { staggerChildren: 0.06, delayChildren: 0.12 } },
+                visible: { transition: { staggerChildren: 0.03 } },
               }}
             >
               {navLinks.map((link) => {
@@ -178,8 +231,12 @@ export function Navbar() {
                     href={link.href}
                     onClick={() => setOpen(false)}
                     variants={{
-                      hidden: { opacity: 0, y: 24 },
-                      visible: { opacity: 1, y: 0 },
+                      hidden: { opacity: 0, y: 10 },
+                      visible: {
+                        opacity: 1,
+                        y: 0,
+                        transition: { duration: 0.18, ease: easing.smoothOut },
+                      },
                     }}
                     className="flex items-center justify-between border-b border-hair py-5 font-serif text-3xl font-light text-ink transition-colors active:text-acc"
                     style={{ color: isActive ? "var(--acc)" : undefined }}
@@ -191,8 +248,12 @@ export function Navbar() {
               })}
               <motion.div
                 variants={{
-                  hidden: { opacity: 0, y: 24 },
-                  visible: { opacity: 1, y: 0 },
+                  hidden: { opacity: 0, y: 10 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: { duration: 0.18, ease: easing.smoothOut },
+                  },
                 }}
                 className="mt-10"
               >

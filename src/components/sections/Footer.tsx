@@ -1,5 +1,6 @@
 import { footer, site } from "@/lib/content";
 import { Icon } from "@/components/ui/Icon";
+import { Logo } from "@/components/ui/Logo";
 import { Reveal } from "@/components/motion/Reveal";
 
 export function Footer() {
@@ -9,7 +10,8 @@ export function Footer() {
       <div className="mx-auto max-w-container px-6 sm:px-10">
         <Reveal variant="fadeUp" className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <span className="text-idx text-xs text-acc">VG</span>
+            {/* Mono knockout: the navy emblem would vanish on this section. */}
+            <Logo variant="mono" height={40} alt={`${site.legalName} logo`} />
             <p className="mt-5 max-w-xs text-sm text-ink-muted">{footer.blurb}</p>
             <div className="mt-6 flex gap-3">
               {footer.socials.map((s) => (
@@ -17,7 +19,7 @@ export function Footer() {
                   key={s.label}
                   href={s.href}
                   aria-label={s.label}
-                  className="flex h-9 w-9 items-center justify-center border border-hair transition-colors hover:border-acc hover:text-acc"
+                  className="flex h-11 w-11 items-center justify-center border border-hair transition-colors hover:border-acc hover:text-acc"
                 >
                   <Icon name={s.name} className="h-4 w-4" />
                 </a>
@@ -26,11 +28,11 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-idx text-xs text-acc">Quick Links</h4>
-            <ul className="mt-6 space-y-4 text-sm text-ink-muted">
+            <h3 className="text-idx text-xs text-acc">Quick Links</h3>
+            <ul className="mt-4 text-sm text-ink-muted">
               {footer.quickLinks.map((l) => (
                 <li key={l.href}>
-                  <a href={l.href} className="hover-line block w-fit">
+                  <a href={l.href} className="hover-line block w-fit min-w-[44px] py-3">
                     {l.label}
                   </a>
                 </li>
@@ -39,7 +41,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-idx text-xs text-acc">Services</h4>
+            <h3 className="text-idx text-xs text-acc">Services</h3>
             <ul className="mt-6 space-y-4 text-sm text-ink-muted">
               {footer.servicesList.map((s) => (
                 <li key={s}>{s}</li>
@@ -48,7 +50,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-idx text-xs text-acc">Locations</h4>
+            <h3 className="text-idx text-xs text-acc">Locations</h3>
             <ul className="mt-6 space-y-5 text-sm text-ink-muted">
               {footer.locations.map((loc) => (
                 <li key={loc.zip}>
@@ -62,8 +64,7 @@ export function Footer() {
         </Reveal>
 
         <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-hair pt-8 text-xs text-ink-muted sm:flex-row">
-          <p>© {year} {site.legalName}. All rights reserved.</p>
-          <p>Design concept — awaiting final brand photography.</p>
+          <p>© {year} {site.legalName} All rights reserved.</p>
         </div>
       </div>
     </footer>

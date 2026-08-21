@@ -16,18 +16,28 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 const useIsoLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
+// Landscape, not portrait: every client-site photograph is a wide line of
+// people and vehicles, and a tall crop cuts the ends off the group.
 function GalleryCard({ card }: { card: (typeof partners.cards)[number] }) {
   return (
-    <div className="relative h-[62vh] w-[86vw] shrink-0 sm:w-[560px] lg:h-[70vh]">
-      <ParallaxImage className="h-full w-full" parallax={16} zoom={0.06}>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+    <div className="relative h-[46vh] w-[86vw] shrink-0 sm:h-[52vh] sm:w-[720px] lg:h-[58vh]">
+      <ParallaxImage
+        className="h-full w-full"
+        parallax={16}
+        zoom={0.06}
+        photo={card.photo}
+        sizes="(min-width: 640px) 720px, 86vw"
+        // Groups stand in the lower half of frame — hold them, not the sky.
+        position="50% 60%"
+      >
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
         <span className="absolute bottom-7 left-7 font-serif text-2xl font-light text-white">
           {card.title.map((line, i) => (
             <span key={i} className="block">
               {line}
             </span>
           ))}
-          <span className="text-idx block text-[10px] opacity-70">{card.tag}</span>
+          <span className="text-idx block text-[10px] opacity-80">{card.tag}</span>
         </span>
       </ParallaxImage>
     </div>

@@ -13,6 +13,9 @@ type MaskTextProps = {
   className?: string;
   /** Trigger immediately on mount instead of on scroll (hero). */
   immediate?: boolean;
+  /** Element to render. The hero passes "h1" so the page has one. */
+  as?: "span" | "h1" | "h2";
+  id?: string;
 };
 
 /**
@@ -25,6 +28,8 @@ export function MaskText({
   delay = 0,
   className,
   immediate = false,
+  as: Tag = "span",
+  id,
 }: MaskTextProps) {
   const reduced = useReducedMotion() ?? false;
   const trigger = immediate
@@ -35,7 +40,7 @@ export function MaskText({
       };
 
   return (
-    <span className={className}>
+    <Tag className={className} id={id}>
       {lines.map((line, i) => (
         /* The trigger lives on the clip wrapper, not on the line inside it.
            The inner span starts at y:112% — fully below this wrapper's
@@ -58,6 +63,6 @@ export function MaskText({
           </motion.span>
         </motion.span>
       ))}
-    </span>
+    </Tag>
   );
 }

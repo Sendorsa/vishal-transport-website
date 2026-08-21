@@ -28,7 +28,7 @@ export function ExtendedCapabilities() {
           </div>
 
           <Reveal variant="slideLeft" className="lg:col-span-6 lg:col-start-7">
-            <div className="flex h-full flex-col justify-center gap-10 border-t border-hair pt-10 lg:flex-row lg:items-center lg:gap-16">
+            <div className="flex h-full flex-col justify-center gap-10 border-t border-hair pt-10 xl:flex-row xl:items-center xl:gap-16">
               <div className="flex items-start gap-4">
                 <Icon
                   name="warehouse"

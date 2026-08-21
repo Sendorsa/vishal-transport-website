@@ -12,6 +12,11 @@ export function Corridor() {
         reveal={false}
         parallax={40}
         zoom={0.12}
+        photo="fleet-tata-dusk"
+        sizes="100vw"
+        // Bias downward: the navy gradient eats the top band, so hold the
+        // vehicles rather than centring on empty sky.
+        position="50% 62%"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-transparent to-brand-navy/40" />
       <GradientMesh variant="bright" />
@@ -19,9 +24,8 @@ export function Corridor() {
       <div className="relative mx-auto flex h-full max-w-container flex-col justify-between px-6 py-16 sm:px-10">
         <Reveal
           variant="fadeUp"
-          className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between"
+          className="flex justify-end"
         >
-          <span className="text-idx text-[10px] opacity-45">{corridor.shotBrief}</span>
           <span className="text-idx text-xs opacity-70">{corridor.metric}</span>
         </Reveal>
         <Reveal

@@ -44,37 +44,25 @@ export function FleetStrength() {
             ))}
           </Stagger>
 
-          {/* Fleet mosaic — the yard, in operation, rather than another card. */}
+          {/* The yard at scale — the section's argument in a single frame,
+              rather than a mosaic padded out with weaker crops. */}
           <Reveal
             variant="scaleIn"
             delay={0.1}
-            className="grid grid-cols-3 grid-rows-2 gap-3 lg:col-span-7 sm:gap-4"
-            style={{ height: "clamp(280px, 34vw, 420px)" }}
+            className="lg:col-span-7"
           >
-            <div className="relative col-span-2 row-span-2 overflow-hidden rounded-2xl">
+            <div
+              className="relative overflow-hidden rounded-2xl"
+              style={{ height: "clamp(280px, 34vw, 420px)" }}
+            >
               <ParallaxImage
                 className="absolute inset-0 h-full w-full"
                 parallax={14}
                 zoom={0.06}
                 reveal={false}
-              />
-            </div>
-            <div className="relative overflow-hidden rounded-2xl">
-              <ParallaxImage
-                className="absolute inset-0 h-full w-full"
-                parallax={10}
-                zoom={0.06}
-                hover={1.04}
-                reveal={false}
-              />
-            </div>
-            <div className="relative overflow-hidden rounded-2xl">
-              <ParallaxImage
-                className="absolute inset-0 h-full w-full"
-                parallax={10}
-                zoom={0.06}
-                hover={1.04}
-                reveal={false}
+                photo="fleet-row-marcopolo"
+                sizes="(min-width: 1024px) 58vw, 100vw"
+                position="50% 58%"
               />
             </div>
           </Reveal>

@@ -2,9 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { services } from "@/lib/content";
-import { Reveal } from "@/components/motion/Reveal";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
-import { ParallaxImage } from "@/components/motion/ParallaxImage";
 import { Icon } from "@/components/ui/Icon";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { easing } from "@/lib/motion";
@@ -36,13 +34,10 @@ function ServiceRow({
         >
           {item.num}
         </motion.div>
-        <div className="aspect-[4/3] overflow-hidden rounded-xl lg:col-span-2">
-          <ParallaxImage className="h-full w-full" parallax={12} zoom={0.06} reveal={false} />
-        </div>
         <h3 className="font-serif text-3xl font-light lg:col-span-3 lg:text-4xl">
           {item.title}
         </h3>
-        <p className="text-body-lg text-ink-muted lg:col-span-5">{item.body}</p>
+        <p className="text-body-lg text-ink-muted lg:col-span-7">{item.body}</p>
         <div className="hidden text-acc lg:col-span-1 lg:flex lg:justify-end">
           <motion.span
             className="inline-flex"
@@ -68,10 +63,6 @@ export function Services() {
             <ServiceRow key={item.num} item={item} />
           ))}
         </Stagger>
-
-        <Reveal variant="fadeUp" as="p" className="mt-8 text-xs text-ink-muted">
-          {services.imageBriefs}
-        </Reveal>
       </div>
     </section>
   );

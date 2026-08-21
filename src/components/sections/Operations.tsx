@@ -58,8 +58,10 @@ function TrackingIllustration() {
         </g>
       </svg>
       <div
-        className="absolute bottom-5 right-5 flex items-center gap-2 rounded-full px-3 py-2 shadow-card backdrop-blur"
-        style={{ backgroundColor: "color-mix(in srgb, var(--bg) 90%, transparent)" }}
+        className="absolute bottom-5 right-5 flex items-center gap-2 rounded-full px-3 py-2 shadow-card"
+        // Opaque, not 90% + blur: over the tinted panel the translucency put
+        // this 10px label at 3.63:1, and the blur bought nothing visually.
+        style={{ backgroundColor: "var(--bg)" }}
       >
         <Icon name="camera" className="h-4 w-4 text-acc" />
         <span className="text-idx text-[10px] text-ink-muted">Live — Cam 04</span>

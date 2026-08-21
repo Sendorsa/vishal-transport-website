@@ -14,9 +14,6 @@ export function Contact() {
         <ParallaxImage className="h-full w-full" hover={0} reveal={false} parallax={30} />
       </div>
       <div className="absolute inset-0 bg-gradient-to-b from-brand-navy via-brand-navy/85 to-brand-navy" />
-      <span className="text-idx absolute right-6 top-8 text-[9px] opacity-40 sm:right-10">
-        {contact.shotBrief}
-      </span>
 
       <div className="relative mx-auto max-w-container px-6 sm:px-10">
         <SectionHeading index={contact.index} title={contact.title} />
@@ -31,7 +28,7 @@ export function Contact() {
               <div className="text-idx text-[11px] text-ink-muted">Call</div>
               <a
                 href={site.phoneHref}
-                className="hover-line mt-2 inline-block font-serif text-2xl font-light"
+                className="hover-line mt-1 inline-block py-2 font-serif text-2xl font-light"
               >
                 {site.phone}
               </a>
@@ -40,7 +37,7 @@ export function Contact() {
               <div className="text-idx text-[11px] text-ink-muted">Email</div>
               <a
                 href={site.emailHref}
-                className="hover-line mt-2 inline-block break-all font-serif text-2xl font-light"
+                className="hover-line mt-1 inline-block break-all py-2 font-serif text-2xl font-light"
               >
                 {site.email}
               </a>

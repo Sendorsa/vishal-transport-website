@@ -1,4 +1,5 @@
 import type { IconName } from "@/components/ui/Icon";
+import type { PhotoKey } from "@/lib/photos";
 
 /* All site copy in one place — components stay presentational. */
 
@@ -25,7 +26,7 @@ export const hero = {
   eyebrowRight: "01 / Est. 14 years",
   headline: ["We move", "the machines", "of industry."],
   body: "Staff transportation. Cargo. Warehousing. Manpower. Fourteen years, without pause, across Tamil Nadu and Karnataka.",
-  shotBrief: "Shot brief — Aerial, empty highway, golden hour, fleet in motion",
+  sideNote: "300+ vehicles in daily service",
 };
 
 export const about = {
@@ -37,11 +38,9 @@ export const about = {
     { value: "2", label: "States" },
     { value: "20+", label: "Clients" },
   ],
-  shotBrief: "Shot brief — Fleet parked at the operations yard, blue hour",
 };
 
 export const corridor = {
-  shotBrief: "Shot brief — Highway, dusk, long exposure, Hosur–Bengaluru corridor",
   metric: "5,000,000+ km covered",
   quote: "The corridor between Hosur and Bengaluru never stops.",
 };
@@ -100,8 +99,6 @@ export const services = {
       body: "Skilled people, matched precisely to the machines and methods of manufacturing.",
     },
   ],
-  imageBriefs:
-    "Image briefs — 01: bus fleet on the highway, golden hour. 02: distribution centre, wide interior. 03: skilled workforce, industrial floor.",
 };
 
 export const employeeGrowth = {
@@ -158,19 +155,35 @@ export const partners = {
   index: "07 — Who We Serve",
   title: ["Industries we", "move for."],
   cards: [
-    { title: ["Automobile", "Manufacturing"], tag: "assembly line, telephoto compression" },
-    { title: ["Industrial", "Engineering"], tag: "heavy machinery, plant floor" },
-    { title: ["Warehousing &", "Distribution"], tag: "interior, wide angle" },
-    { title: ["Corporate", "Workforce"], tag: "environmental portrait" },
+    {
+      photo: "client-uno-minda" as PhotoKey,
+      title: ["Automobile", "Components"],
+      tag: "UNO MINDA — Hosur",
+    },
+    {
+      photo: "client-tata-electronics" as PhotoKey,
+      title: ["Electronics", "Manufacturing"],
+      tag: "TATA Electronics — Hosur",
+    },
+    {
+      photo: "client-jbm-ogihara" as PhotoKey,
+      title: ["Automotive", "Stamping"],
+      tag: "JBM Ogihara — Hosur",
+    },
+    {
+      photo: "client-teal" as PhotoKey,
+      title: ["Corporate", "Workforce"],
+      tag: "Daily staff mobilisation",
+    },
   ],
-  footnote: "All photography is a placeholder, reserved for original imagery.",
+  footnote:
+    "Photographed on site, at the plants we serve every shift.",
 };
 
 export const team = {
   name: "Vishal Manjunath",
   role: "Managing Director",
   org: "Vishal Transport and HR Solutions Pvt. Ltd.",
-  shotBrief: "Reserved for portrait — executive, studio lighting, neutral backdrop",
   // Executive letter — polished rewrite of the MD's original statement.
   letter: {
     label: "Our Promise to You",
@@ -228,7 +241,6 @@ export const maintenance = {
   index: "11 — Maintenance",
   title: ["Kept running.", "Kept ready."],
   body: "In-house workshops in both Hosur and Bengaluru mean breakdowns are handled fast — minimising downtime and keeping every commitment on schedule.",
-  shotBrief: "Shot brief — Workshop floor, vehicles under service, wide interior",
   features: [
     { icon: "wrench" as IconName, label: "In-house workshops", meta: "State-of-the-art equipment, two locations" },
     { icon: "truck" as IconName, label: "Paint shops & repair bays", meta: "Hosur & Bengaluru" },
@@ -275,25 +287,47 @@ export const whyUs = {
   ],
 };
 
-// Real clients drawn from the company profile — no logo files supplied, so
-// LogoCarousel renders these as clean text wordmarks (see LogoItem).
-export const clients = [
-  "UNO MINDA",
-  "TATA Electronics",
-  "TITAN",
-  "TEAL — A Tata Enterprise",
-  "Jamna Auto Industries",
-  "AVTEC — CK Birla Group",
-  "Luminous",
-  "Dhoot Transmissions",
+/**
+ * Partner logos for the marquee. Flat and logo-only by design: a company
+ * without artwork is omitted rather than shown as a text tile, so the band
+ * reads as a wall of recognisable marks at a glance.
+ *
+ * `scale` is optical correction. Balance is by rendered AREA, not height — a
+ * 1:1 crest at the same height as a 5:1 wordmark covers a fraction of the
+ * space. Regenerate with `node scripts/build-partner-logos.mjs`.
+ *
+ * Order is hand-set to alternate wide wordmarks with compact marks, so the
+ * band never shows two long logos back to back as it scrolls.
+ */
+export type PartnerLogo = {
+  src: string;
+  width: number;
+  height: number;
+  scale: number;
+};
+
+export type Partner = {
+  /** Registered name — the image's accessible name. */
+  name: string;
+  logo: PartnerLogo;
+};
+
+export const partnerLogos: Partner[] = [
+  { name: "UNO Minda Ltd", logo: { src: "/partners/uno-minda.png", width: 315, height: 160, scale: 1 } },
+  { name: "Tata Electronics Pvt Ltd", logo: { src: "/partners/tata-electronics.png", width: 182, height: 160, scale: 1.25 } },
+  { name: "Titan Watches Ltd", logo: { src: "/partners/titan-watches.png", width: 166, height: 160, scale: 1.3 } },
+  { name: "Dhoot Transmission Ltd", logo: { src: "/partners/dhoot-transmission.png", width: 687, height: 160, scale: 0.85 } },
+  { name: "JBM Ogihara Automotive India Ltd", logo: { src: "/partners/jbm-ogihara.png", width: 403, height: 160, scale: 1 } },
+  { name: "Titan Jewellery Ltd", logo: { src: "/partners/titan-jewellery.png", width: 166, height: 160, scale: 1.3 } },
+  { name: "Titan Engineering & Automation Ltd", logo: { src: "/partners/teal.png", width: 784, height: 160, scale: 0.85 } },
+  { name: "Suman Nirmal Minda School", logo: { src: "/partners/suman-nirmal-minda-school.png", width: 153, height: 160, scale: 1.3 } },
 ];
 
 export const trust = {
   index: "14 — Trusted By",
   title: ["Trusted by", "industry leaders."],
-  body: "Vishal Group proudly supports 20+ of South India's leading manufacturing and industrial organisations — moving their people and cargo, dependably, shift after shift.",
-  footnote:
-    "A selection of the manufacturing and industrial leaders who trust us with their people and cargo.",
+  body:
+    "Supporting leading automotive, manufacturing, engineering, and technology companies across India.",
 };
 
 export const faq = [
@@ -322,7 +356,6 @@ export const faq = [
 export const contact = {
   index: "15 — Contact",
   title: ["Let's move,", "together."],
-  shotBrief: "Shot brief — Aerial, facility or corridor, background only",
   fields: [
     { name: "name", label: "Name", type: "text", placeholder: "Your name", autoComplete: "name", inputMode: "text" as const },
     { name: "email", label: "Email", type: "email", placeholder: "you@company.com", autoComplete: "email", inputMode: "email" as const },

@@ -64,21 +64,29 @@ export function ContactForm() {
 
       <SubmitButton />
 
-      <AnimatePresence>
-        {state.status !== "idle" && (
-          <motion.p
-            key={state.message}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4, ease: easing.gentle }}
-            className="text-sm sm:col-span-2"
-            style={{ color: state.status === "error" ? "#e07a5f" : "var(--acc)" }}
-          >
-            {state.message}
-          </motion.p>
-        )}
-      </AnimatePresence>
+      {/* The live region is always mounted. A container that only appears
+          alongside its message is never announced — screen readers watch an
+          existing region for changes, they do not announce a new one. */}
+      <div role="status" aria-live="polite" className="min-h-[1.25rem] sm:col-span-2">
+        <AnimatePresence mode="wait">
+          {state.status !== "idle" && (
+            <motion.p
+              key={state.message}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4, ease: easing.gentle }}
+              className={`text-sm ${state.status === "error" ? "text-danger" : "text-acc"}`}
+            >
+              {/* Status is never colour-only: the word carries it too. */}
+              <span className="font-semibold">
+                {state.status === "error" ? "Error: " : "Sent: "}
+              </span>
+              {state.message}
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </div>
     </form>
   );
 }

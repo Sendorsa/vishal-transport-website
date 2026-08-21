@@ -1,19 +1,49 @@
-import { about } from "@/lib/content";
+import { about, site } from "@/lib/content";
 import { Reveal } from "@/components/motion/Reveal";
-import { ParallaxImage } from "@/components/motion/ParallaxImage";
+import { Logo } from "@/components/ui/Logo";
 
 export function About() {
   return (
     <section id="about" className="theme-light">
       <div className="grid lg:grid-cols-12">
-        {/* Height comes from the wrapper (aspect on mobile, min-h on desktop);
-            the image absolutely fills it — no aspect/min-h conflict. */}
-        <div className="relative aspect-[4/3] w-full overflow-hidden sm:aspect-[3/2] lg:col-span-6 lg:aspect-auto lg:min-h-[640px]">
-          <ParallaxImage className="absolute inset-0 h-full w-full">
-            <span className="text-idx absolute bottom-6 left-6 text-[10px] opacity-60">
-              {about.shotBrief}
+        {/* Brand plate rather than a photograph: the mark sits on its own
+            tonal ground so it reads as a deliberate statement, not a logo
+            dropped onto white. Height comes from padding — no aspect box to
+            leave dead space now that there is no image to fill it. */}
+        <div className="relative flex items-center justify-center overflow-hidden bg-surface px-8 py-24 sm:px-12 sm:py-28 lg:col-span-6 lg:min-h-[640px] lg:px-16 lg:py-0">
+          {/* Soft brand wash. Deliberately not GradientMesh — that device is
+              rationed to Hero, Corridor and Leadership (§7). Explicit rgba
+              because Tailwind opacity modifiers do not compile on
+              CSS-variable colours (§4). */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(ellipse 68% 58% at 50% 44%, rgba(14, 116, 180, 0.14), transparent 70%)",
+            }}
+          />
+          {/* Hairline seam against the copy column, desktop only. */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-y-0 right-0 hidden w-px bg-hair lg:block"
+          />
+
+          <Reveal variant="scaleIn" className="relative flex flex-col items-center">
+            <Logo
+              // Intrinsic size, not display size: CSS caps the mark at 100px
+              // tall, so 200 guarantees >=2x pixels on retina whichever srcset
+              // candidate the browser picks.
+              variant="full"
+              height={200}
+              alt={site.legalName}
+              className="h-14 w-auto sm:h-[4.75rem] lg:h-[6.25rem]"
+            />
+            <span aria-hidden="true" className="mt-9 block h-px w-12 bg-acc" />
+            <span className="text-idx mt-6 text-[11px] text-ink-muted">
+              {site.tagline}
             </span>
-          </ParallaxImage>
+          </Reveal>
         </div>
 
         <div className="flex items-center px-6 py-16 sm:px-10 sm:py-20 lg:col-span-5 lg:col-start-8 lg:px-0 lg:py-0">

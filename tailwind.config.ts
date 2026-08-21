@@ -41,6 +41,7 @@ const config: Config = {
         },
         acc: "var(--acc)",
         hair: "var(--hair)",
+        danger: "var(--danger)",
       },
       fontFamily: {
         serif: ["var(--font-fraunces)", "ui-serif", "Georgia", "serif"],

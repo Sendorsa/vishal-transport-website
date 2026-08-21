@@ -1,5 +1,6 @@
 import { employeeGrowth } from "@/lib/content";
 import { Reveal } from "@/components/motion/Reveal";
+import { ParallaxImage } from "@/components/motion/ParallaxImage";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { GrowthTimeline } from "@/components/ui/GrowthTimeline";
@@ -19,6 +20,23 @@ export function EmployeeGrowth() {
             {employeeGrowth.body}
           </Reveal>
         </div>
+
+        {/* A wide strip, not a side-by-side panel — the composition is a long
+            line of people, and it keeps this section distinct from the
+            categories-plus-image layout used by Fleet Strength. */}
+        <Reveal variant="fadeUp" delay={0.16} className="mt-14 lg:mt-20">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl sm:aspect-[2/1] lg:aspect-[16/7]">
+            <ParallaxImage
+              className="absolute inset-0 h-full w-full"
+              parallax={18}
+              zoom={0.06}
+              reveal={false}
+              photo="workforce-uno-minda"
+              sizes="(min-width: 1480px) 1400px, 100vw"
+              position="50% 62%"
+            />
+          </div>
+        </Reveal>
 
         <Reveal variant="fadeUp" delay={0.1} className="mt-16 lg:mt-24">
           <div className="text-idx mb-10 text-xs text-acc lg:mb-14">

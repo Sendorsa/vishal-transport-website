@@ -2,14 +2,12 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { trust, faq, clients } from "@/lib/content";
+import { trust, faq } from "@/lib/content";
 import { Reveal } from "@/components/motion/Reveal";
 import { Icon } from "@/components/ui/Icon";
-import { LogoCarousel } from "@/components/ui/LogoCarousel";
+import { LogoMarquee } from "@/components/ui/LogoMarquee";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { easing } from "@/lib/motion";
-
-const clientLogos = clients.map((name) => ({ name }));
 
 function FaqItem({
   item,
@@ -73,12 +71,9 @@ export function Trust() {
           </Reveal>
         </div>
 
-        {/* Logo marquee */}
-        <Reveal variant="fadeUp" delay={0.15} className="mt-16 lg:mt-20">
-          <LogoCarousel logos={clientLogos} />
-        </Reveal>
-        <Reveal variant="fadeUp" as="p" delay={0.2} className="mt-8 text-xs text-ink-muted">
-          {trust.footnote}
+        {/* Continuous logo band — recognisable marks, nothing to parse */}
+        <Reveal variant="fadeUp" delay={0.15} className="mt-14 lg:mt-16">
+          <LogoMarquee />
         </Reveal>
 
         {/* FAQ — retained, subordinate to the trust block */}

@@ -18,6 +18,8 @@
   --ink-2: #adb2be;
   --acc: #42aef0;
   --hair: rgba(255, 255, 255, 0.14);
+  /* Form error. Light tint on navy; see .theme-light for the inverse. */
+  --danger: #ff9b84;
   background: var(--bg);
   color: var(--ink);
 }
@@ -27,6 +29,7 @@
   --surface: #f5f5f3;
   --ink: #14161b;
   --ink-2: #63666c;
+  --danger: #b3341a;
   --acc: #0e74b4;
   --hair: rgba(20, 22, 27, 0.1);
   background: var(--bg);
@@ -98,6 +101,20 @@
   }
   .ph-image {
     filter: saturate(0.82) contrast(1.08);
+  }
+
+  /* Logo band sizing — the custom properties are set per logo inline so each
+     mark keeps its own optical scale while sharing one breakpoint rule. */
+  .logo-band-img {
+    width: var(--lw);
+    height: var(--lh);
+    max-width: none;
+  }
+  @media (min-width: 640px) {
+    .logo-band-img {
+      width: var(--lw-d);
+      height: var(--lh-d);
+    }
   }
 
   /* Animated underline for text links */
