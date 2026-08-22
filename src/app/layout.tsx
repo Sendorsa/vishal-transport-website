@@ -64,7 +64,12 @@ const menuBootstrap = `
 (function(){
   var d=document.documentElement;
   function set(open){
-    d.setAttribute('data-menu-open', open?'true':'false');
+    /* Absence of the attribute IS the closed state. Writing
+       data-menu-open="false" here would put an attribute on <html> that the
+       server never rendered, and React reports that as a hydration mismatch
+       (it explicitly does not patch attribute mismatches). */
+    if(open) d.setAttribute('data-menu-open','true');
+    else d.removeAttribute('data-menu-open');
     var b=document.getElementById('menu-toggle');
     if(b){
       b.setAttribute('aria-expanded', open?'true':'false');
@@ -75,7 +80,7 @@ const menuBootstrap = `
     var t=e.target;
     if(!t||!t.closest) return;
     if(t.closest('#menu-toggle')){
-      set(d.getAttribute('data-menu-open')!=='true');
+      set(!d.hasAttribute('data-menu-open'));
       return;
     }
     if(t.closest('#mobile-menu a')) set(false);
@@ -83,7 +88,6 @@ const menuBootstrap = `
   document.addEventListener('keydown',function(e){
     if(e.key==='Escape') set(false);
   });
-  set(false);
 })();`;
 
 const jsonLd = {

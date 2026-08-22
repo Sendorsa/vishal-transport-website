@@ -13,6 +13,11 @@ import { Reveal } from "@/components/motion/Reveal";
 import { ParallaxImage } from "@/components/motion/ParallaxImage";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
+/** Sticky viewport height as a fraction of the viewport. Kept in sync with
+ *  the `h-[62vh]` class below — cards are 58vh, leaving 2vh of breathing
+ *  room top and bottom, and centred at 50vh while pinned. */
+const STICKY_VH = 0.62;
+
 const useIsoLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
@@ -55,7 +60,7 @@ export function TrustedPartners() {
 
   const { scrollYProgress } = useScroll({
     target: outerRef,
-    offset: ["start start", "end end"],
+    offset: ["start 19%", "end 81%"],
   });
   const rawX = useTransform(scrollYProgress, [0, 1], [0, -maxTranslate]);
   const x = useSpring(rawX, { stiffness: 120, damping: 30, mass: 0.4 });
@@ -75,10 +80,8 @@ export function TrustedPartners() {
         // track width instead of a fixed vh, so the pace stays consistent
         // whether the gallery is two cards or ten. Floor keeps a short track
         // from snapping past in an instant.
-        setPinHeight(
-          window.innerHeight +
-            Math.max(distance * 1.2, window.innerHeight * 0.6),
-        );
+        const stickyPx = window.innerHeight * STICKY_VH;
+        setPinHeight(stickyPx + Math.max(distance, window.innerHeight * 0.4));
       } else {
         setMaxTranslate(0);
         setPinHeight(0);
@@ -103,7 +106,7 @@ export function TrustedPartners() {
         <div
           className={
             pinned
-              ? "sticky top-0 flex h-screen items-center overflow-hidden"
+              ? "sticky top-[19vh] flex h-[62vh] items-center overflow-hidden"
               : "overflow-hidden"
           }
         >
