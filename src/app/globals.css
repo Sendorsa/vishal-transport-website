@@ -269,6 +269,128 @@
     }
   }
 
+  /* ---------------------------------------------------------------
+     Branded first-paint screen.
+
+     Navy matches body's own background and the theme-color meta, so the very
+     first frame is already the brand colour — there is no white flash to
+     cover. Motion is a single translateX on a compositor layer; no SVG, no
+     extra asset (the mark reuses the mono logo the navbar already preloads).
+     --------------------------------------------------------------- */
+  #site-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1f3265;
+    opacity: 1;
+    /* Failsafe reveal at 2.6s, independent of JavaScript.
+       The whole page is server-rendered and its above-the-fold animation is
+       CSS, so it is fully formed before React hydrates — revealing on this
+       timer shows a complete page, just one that is not yet interactive.
+       Without it, a slow connection kept the cover up for 9.4s. */
+    animation: loader-failsafe 0.5s ease-out 2.6s forwards;
+  }
+  @keyframes loader-failsafe {
+    to {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+  }
+
+  /* The reveal. `visibility` is delayed by the fade duration so the element
+     stays painted while it fades, then stops taking hit-tests entirely. */
+  html[data-loaded] #site-loader {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    animation: none;
+    transition: opacity 0.5s ease-out, visibility 0s linear 0.5s;
+  }
+
+  /* Nothing scrolls behind the cover. */
+  html:not([data-loaded]) body {
+    overflow: hidden;
+  }
+
+  .site-loader__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.75rem;
+    padding: 0 1.5rem;
+  }
+  /* The mark is inlined rather than fetched. On a slow connection an
+     <img> had not arrived by the time the loader was on screen, leaving the
+     cover branded with nothing — the exact case the loader exists for.
+     240px wide, palette-reduced mono: ~2KB, paints with the first CSS frame.
+     Regenerate from public/brand/vishal-logo-mono.png at width 240. */
+  .site-loader__mark {
+    width: 120px;
+    height: 31px;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAAA+AgMAAABo2X7FAAAADFBMVEX////////////////1pQ5zAAAABHRSTlP7AapSMrv5sAAAAAlwSFlzAAAD6AAAA+gBtXtSawAABH9JREFUeNqdl09oHFUcx3+7Q8ShDp4WPEkpDIX65+QkIcSy4MWDwYXmzSzJsgyChw0ERnqpeuiSUmiwsJdMFSsqSAiZ1AQia1EvY0GQRF3RToQipSKFEkWkoZdSqb8/b2Z2yWUmCzszvNnPe+/3/X3f772FRB39Aw8ONXnF4TcPNbWLw51DTW8Vh88eauoUh5s60HtwSod/sTjcCvl+BwCqrLxnF4ddh25NoM8L9DhbKw57Y3TrMgw0dDMsDqtlvLaE5aGDpAR8A6++hg18vlHCYcpPslkD4JQvlIGDmvJSFoN2zTJwA1MTa7aK4VtlYPp1GnNFcV/F4VkkAg1TP04Z2K3mqaIIwjKwIpUysT1ISsFd9GMudlWVguNMbvRI0ygH+5ncmOLALAcHOFiDYVwjdcuNNugF3haixPu0uwRPLs9FfaX4os6R/71oXcPNTG7MUtf29OKCSh0SyaHVpFd8UV0SxQNTwy0U2c3EdtDotKIDsBAWLZwcdtn/w7Cj5cZKgM91SjdenTr8pjOYwy2eXw43KdZYi41gQEbD8cM67GnH53CDbTgMmyK3RZO1KVp6DTj4TYaXh2Cfc5LDDRlSzIk9zPLiwkaCZY3lcMxLL4cDAJG7RpO1FMtN0yF4TMO2hsWHI3DI9YA9bimW20eMYPPx4//S4oqwC1V6m8O+JFgmS60kd8yyi2DHcrhF2bdHYZa7wlqanGJFs8lS1c/gBlgBRzYEa0I/NsFwaR5okm7qMA37YFMyRmCdYdLSJKdUSWyC9YLJ4BhC6ncEZm+FrCVnEX6meSDc5qGNFKZEyHcYlhLiCoziHad51KWqeF2DsxSAw9Gg3KMwvjMk2abeQGoZrOKqdqbTEjPaI3lGuanYN8Sj3JLkcDeDA7GwNQqbqjWWGZzSWuWFlUiwRgr74PAKki2mCjKeoQIxLsOuzD4rBpUURrGZErgC2nvKF4uymT3pIysGpoYnQHtOzGPpNQHhkpJywrtNzBUnM4mt4XEwpF5NSOZSeEKLzRQGHzK8N1xJGjANpsRxUppBD/iUpXcsPpG0j0kXv/OPnkvX8ySMieWelgIDSu/Oti7eSbm6LcWvps8HqiQcp+VBtvdysC8125Xt3YuKfjZAuxEVacr2XhyOID3+2dKHXXbaruyQdX2WKgcr2ZtLiy1wnJndoL11//3r129tbix8uBUli4v/rLfn98OFjz8P+19vvvPl7YX+/lfz+CKK+gxztDf1ccjb3Ro/+cRnjx72pg521bev/H3Qmus5vV/+dFZPT+9efraXDKbO7qqZ+39dZJhNPZk6e6Y3PTi1fW17Nfqjo6Ze3Zxrneg5O1+ccVbHV757LdoJB9M/dtTMmcUZCbKbnwARvvTBe898cnl9a3K54x3/6fn7rVuXwvMnDl5eG18Z/PDGeWdnz+48eP3XzkDg9ATIxWVx7Zt3V7ZfVHeuvr3o3r57zWzPr/W//8hciq9c+feluZ3wrud0Vv2r/mmB2xruq/JqDx2ljgK3jzJwCqtz6f+To8DqYbRV+o/o//sFNBpX3W2ZAAAAAElFTkSuQmCC");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+  }
+  @media (min-width: 640px) {
+    .site-loader__mark {
+      width: 156px;
+      height: 40px;
+    }
+  }
+
+  /* The road: a hairline track with a single lit segment travelling it. */
+  .site-loader__road {
+    position: relative;
+    width: min(180px, 42vw);
+    height: 2px;
+    overflow: hidden;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.16);
+  }
+  .site-loader__sweep {
+    position: absolute;
+    inset-block: 0;
+    left: 0;
+    width: 42%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, transparent, #42aef0, transparent);
+    animation: loader-sweep 1.15s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    will-change: transform;
+  }
+  @keyframes loader-sweep {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(340%);
+    }
+  }
+
+  .site-loader__word {
+    font-family: var(--font-plex-mono), ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(246, 245, 242, 0.55);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-loader__sweep {
+      animation: none;
+      width: 100%;
+      background: #42aef0;
+      opacity: 0.7;
+    }
+    html[data-loaded] #site-loader {
+      transition: none;
+    }
+  }
+
   /* Navbar logo retires once scrolled. Opacity only — the box keeps its
      size, so the bar never reflows. CSS transition rather than Framer: this
      runs on the compositor and costs nothing on the main thread. */
