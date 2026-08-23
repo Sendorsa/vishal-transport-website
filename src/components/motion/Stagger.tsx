@@ -5,7 +5,8 @@ import {
   useReducedMotion,
   type HTMLMotionProps,
 } from "framer-motion";
-import { staggerContainer, staggerItem, viewportOnce } from "@/lib/motion";
+import { staggerContainer, staggerItem } from "@/lib/motion";
+import { useRevealArm } from "@/lib/useRevealArm";
 
 type StaggerProps = {
   /** Delay between each child, in seconds. */
@@ -15,7 +16,11 @@ type StaggerProps = {
   as?: "div" | "ul" | "section";
 } & Omit<HTMLMotionProps<"div">, "variants" | "initial" | "whileInView" | "viewport">;
 
-/** Container that reveals its <StaggerItem> children in sequence. */
+/**
+ * Container that reveals its <StaggerItem> children in sequence.
+ * Only arms below-the-fold instances, so nothing ships hidden — see
+ * useRevealArm.
+ */
 export function Stagger({
   stagger = 0.08,
   delayChildren = 0,
@@ -23,13 +28,14 @@ export function Stagger({
   children,
   ...rest
 }: StaggerProps) {
+  const { ref, controls } = useRevealArm<HTMLDivElement>();
   const MotionTag = motion[as] as typeof motion.div;
   return (
     <MotionTag
+      ref={ref}
       variants={staggerContainer(stagger, delayChildren)}
-      initial="hidden"
-      whileInView="visible"
-      viewport={viewportOnce}
+      initial={false}
+      animate={controls}
       {...rest}
     >
       {children}

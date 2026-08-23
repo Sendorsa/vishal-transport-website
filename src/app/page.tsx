@@ -1,49 +1,31 @@
-import { Suspense } from "react";
-import dynamic from "next/dynamic";
-
 import { ScrollProgress } from "@/components/nav/ScrollProgress";
 import { Navbar } from "@/components/nav/Navbar";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
 import { Corridor } from "@/components/sections/Corridor";
 import { Fleet } from "@/components/sections/Fleet";
+import { Services } from "@/components/sections/Services";
 import { ExtendedCapabilities } from "@/components/sections/ExtendedCapabilities";
+import { TrustedPartners } from "@/components/sections/TrustedPartners";
 import { EmployeeGrowth } from "@/components/sections/EmployeeGrowth";
 import { FleetStrength } from "@/components/sections/FleetStrength";
+import { Operations } from "@/components/sections/Operations";
 import { Maintenance } from "@/components/sections/Maintenance";
 import { Team } from "@/components/sections/Team";
+import { Coverage } from "@/components/sections/Coverage";
 import { WhyUs } from "@/components/sections/WhyUs";
+import { Trust } from "@/components/sections/Trust";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/sections/Footer";
 
 /**
- * Below-the-fold interactive sections are split out.
+ * Every section is imported statically and rendered in one pass.
  *
- * Every one of these is a client component, and until they had all downloaded
- * and hydrated, React had not attached a single event handler anywhere on the
- * page — including the navbar's menu button, which is server-rendered and so
- * *looks* ready roughly two seconds before it actually is. Splitting them into
- * their own chunks keeps that work off the critical path.
- *
- * `ssr` stays on: the markup is still server-rendered, so content, SEO and
- * layout are unchanged. Only the JavaScript is deferred.
+ * These were briefly split with next/dynamic + Suspense to shave hydration
+ * work. It cost more than it saved: the split chunks hydrated later, and
+ * because the reveal primitives only become visible after hydration, those
+ * sections stayed blank longer. The whole page ships and renders together.
  */
-const Services = dynamic(() =>
-  import("@/components/sections/Services").then((m) => m.Services),
-);
-const TrustedPartners = dynamic(() =>
-  import("@/components/sections/TrustedPartners").then((m) => m.TrustedPartners),
-);
-const Operations = dynamic(() =>
-  import("@/components/sections/Operations").then((m) => m.Operations),
-);
-const Coverage = dynamic(() =>
-  import("@/components/sections/Coverage").then((m) => m.Coverage),
-);
-const Trust = dynamic(() =>
-  import("@/components/sections/Trust").then((m) => m.Trust),
-);
-
 export default function Home() {
   return (
     <>
@@ -54,30 +36,17 @@ export default function Home() {
         <About />
         <Corridor />
         <Fleet />
-        {/* Each boundary is its own hydration unit, so React can hydrate the
-            navbar first and yield between sections instead of blocking on one
-            long uninterruptible pass. */}
-        <Suspense>
-          <Services />
-        </Suspense>
+        <Services />
         <ExtendedCapabilities />
-        <Suspense>
-          <TrustedPartners />
-        </Suspense>
+        <TrustedPartners />
         <EmployeeGrowth />
         <FleetStrength />
-        <Suspense>
-          <Operations />
-        </Suspense>
+        <Operations />
         <Maintenance />
         <Team />
-        <Suspense>
-          <Coverage />
-        </Suspense>
+        <Coverage />
         <WhyUs />
-        <Suspense>
-          <Trust />
-        </Suspense>
+        <Trust />
         <Contact />
       </main>
       <Footer />

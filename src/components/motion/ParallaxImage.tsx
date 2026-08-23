@@ -11,6 +11,7 @@ import {
 import { hoverTransition } from "@/lib/motion";
 import { useIsDesktop } from "@/lib/useMediaQuery";
 import { photos, type PhotoKey } from "@/lib/photos";
+import { useRevealArm } from "@/lib/useRevealArm";
 
 type ParallaxImageProps = {
   className?: string;
@@ -63,14 +64,21 @@ function ImageLayer({
   priority: boolean;
   alt?: string;
 }) {
+  // Same rule as Reveal: only images still below the fold may start hidden,
+  // so a photo is never blank waiting on hydration.
+  const { ref, controls } = useRevealArm<HTMLDivElement>(reveal && !reduced);
   return (
     <motion.div
+      ref={ref}
       className="ph-image relative h-full w-full"
       whileHover={reduced || hover === 0 ? undefined : { scale: hover }}
       transition={hoverTransition}
-      initial={reveal && !reduced ? { opacity: 0, scale: 1.04 } : false}
-      whileInView={reveal && !reduced ? { opacity: 1, scale: 1 } : undefined}
-      viewport={{ once: true, amount: 0.2 }}
+      variants={{
+        hidden: { opacity: 0, scale: 1.04 },
+        visible: { opacity: 1, scale: 1 },
+      }}
+      initial={false}
+      animate={controls}
     >
       {asset ? (
         <Image

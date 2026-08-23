@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { maskLine } from "@/lib/motion";
+import { useRevealArm } from "@/lib/useRevealArm";
 
 type MaskTextProps = {
   /** Lines rendered one above the other, each revealing in sequence. */
@@ -32,12 +33,12 @@ export function MaskText({
   id,
 }: MaskTextProps) {
   const reduced = useReducedMotion() ?? false;
+  const { ref, controls, armed } = useRevealArm<HTMLElement>();
+  // Immediate mode animates on mount; scroll mode is driven by the arm hook,
+  // which only hides lines that are still below the fold.
   const trigger = immediate
     ? { animate: "visible" as const }
-    : {
-        whileInView: "visible" as const,
-        viewport: { once: true, amount: 0.5 },
-      };
+    : { animate: controls };
 
   // Immediate mode (the hero) is pure CSS: no Framer, so the headline paints
   // and reveals without waiting for the JS bundle. Scroll-triggered headings
@@ -60,7 +61,9 @@ export function MaskText({
   }
 
   return (
-    <Tag className={className} id={id}>
+    // Tag is polymorphic (span | h1 | h2), so its ref type is a union React
+    // cannot narrow here; the hook only ever calls getBoundingClientRect.
+    <Tag className={className} id={id} ref={ref as React.Ref<HTMLHeadingElement>}>
       {lines.map((line, i) => (
         /* The trigger lives on the clip wrapper, not on the line inside it.
            The inner span starts at y:112% — fully below this wrapper's
@@ -72,7 +75,7 @@ export function MaskText({
         <motion.span
           key={i}
           className="block overflow-hidden pb-[0.05em]"
-          initial="hidden"
+          initial={false}
           {...trigger}
         >
           <motion.span

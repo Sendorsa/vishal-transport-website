@@ -1,8 +1,9 @@
 "use client";
 
 import { motion, useReducedMotion, type HTMLMotionProps } from "framer-motion";
-import { buildReveal, viewportOnce, type RevealVariant } from "@/lib/motion";
+import { buildReveal, type RevealVariant } from "@/lib/motion";
 import { useIsDesktop } from "@/lib/useMediaQuery";
+import { useRevealArm } from "@/lib/useRevealArm";
 
 type RevealProps = {
   /** Entrance identity — give each section its own. */
@@ -14,8 +15,12 @@ type RevealProps = {
 } & Omit<HTMLMotionProps<"div">, "variants" | "initial" | "whileInView" | "viewport">;
 
 /**
- * Scroll-triggered reveal. Composes a variant from the central motion
- * system and respects prefers-reduced-motion automatically.
+ * Scroll-triggered reveal. Composes a variant from the central motion system
+ * and respects prefers-reduced-motion automatically.
+ *
+ * Renders visible unless `useRevealArm` says the element is still below the
+ * fold — so content is never server-rendered hidden and never depends on JS
+ * to become readable. See that hook for the reasoning.
  */
 export function Reveal({
   variant = "fadeUp",
@@ -26,6 +31,7 @@ export function Reveal({
 }: RevealProps) {
   const reduced = useReducedMotion() ?? false;
   const isDesktop = useIsDesktop();
+  const { ref, controls } = useRevealArm<HTMLDivElement>();
   const MotionTag = motion[as] as typeof motion.div;
 
   // Horizontal slide-ins translate full-width elements ±64px, which pushes
@@ -38,10 +44,10 @@ export function Reveal({
 
   return (
     <MotionTag
+      ref={ref}
       variants={buildReveal(safeVariant, delay, reduced)}
-      initial="hidden"
-      whileInView="visible"
-      viewport={viewportOnce}
+      initial={false}
+      animate={controls}
       {...rest}
     >
       {children}
