@@ -11,6 +11,7 @@ import { easing } from "@/lib/motion";
 export function Navbar() {
   const { scrollY } = useScroll();
   const [scrolled, setScrolled] = useState(false);
+  const [pastLogo, setPastLogo] = useState(false);
   // Mirrors [data-menu-open]; the attribute is the source of truth.
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<string>("");
@@ -19,6 +20,20 @@ export function Navbar() {
   // page is scrolled the white bar takes over, and while the mobile overlay is
   // open it paints solid white behind the bar — both need the dark-ink tokens.
   const lightBar = scrolled || open;
+
+  // The logo retires once the user is genuinely reading. Separate, higher
+  // threshold than `scrolled` (30px) so the bar's colour change and the logo
+  // fade are not tied to the same trigger. Always shown while the mobile
+  // overlay is open — that is the only branding in the menu.
+  const logoHidden = pastLogo && !open;
+
+  // Two thresholds off one subscription: 30px flips the bar to its solid
+  // white/dark-ink state, 100px retires the logo. Without this the bar stays
+  // transparent with near-white links over white content.
+  useMotionValueEvent(scrollY, "change", (y) => {
+    setScrolled(y > 30);
+    setPastLogo(y > 100);
+  });
 
   // The inline script in <head> owns [data-menu-open]; React mirrors it so
   // the bar's colour tokens stay in sync. Body scroll lock is handled in CSS
@@ -107,7 +122,11 @@ export function Navbar() {
           // Padding grows the tap target to 46px without changing the mark's
           // size — the crossfade layers are absolute, so they must be measured
           // against an inner box, not the padded anchor.
-          className="relative z-[70] -my-2 flex shrink-0 items-center py-2"
+          className={`nav-logo relative z-[70] -my-2 flex shrink-0 items-center py-2${
+            logoHidden ? " nav-logo--hidden" : ""
+          }`}
+          aria-hidden={logoHidden || undefined}
+          tabIndex={logoHidden ? -1 : undefined}
         >
           <span className="relative block h-[30px] w-[117px] sm:h-9 sm:w-[140px]">
             <motion.span

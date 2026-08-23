@@ -32,3 +32,4 @@ next-env.d.ts
 
 # Isolated build dir for verification runs (see next.config.mjs)
 /.next-verify/
+/.next-dev/

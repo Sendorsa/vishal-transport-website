@@ -240,6 +240,57 @@
     }
   }
 
+  /* ---------------------------------------------------------------
+     Deferred rendering for below-the-fold sections.
+
+     The page is ~19,000px tall on mobile. Without this the browser styles,
+     lays out and paints all of it before the hero is interactive.
+     content-visibility lets it skip a section until it nears the viewport.
+
+     Excluded:
+       #hero       — above the fold, must render immediately.
+       #industries — contains position: sticky; the containment implied by
+                     content-visibility would break the pinned pan.
+
+     `contain-intrinsic-size: auto <fallback>` is load-bearing: `auto` makes
+     the browser remember each section's real height after its first render,
+     so the fallback only affects the initial scrollbar estimate.
+
+     Scoped to <1024px deliberately. Measured on desktop it overshot one nav
+     anchor by ~600px and took CLS from 0 to 0.019; on mobile every anchor
+     still lands exactly and CLS stays at 0.006. Mobile is also where the
+     19,000px of layout actually hurts, so that is where it earns its place.
+     --------------------------------------------------------------- */
+  @media (max-width: 1023px) {
+    main > section:not(#hero):not(#industries),
+    body > footer {
+      content-visibility: auto;
+      contain-intrinsic-size: auto 1100px;
+    }
+  }
+
+  /* Navbar logo retires once scrolled. Opacity only — the box keeps its
+     size, so the bar never reflows. CSS transition rather than Framer: this
+     runs on the compositor and costs nothing on the main thread. */
+  .nav-logo {
+    transition: opacity 0.35s ease-out;
+  }
+  .nav-logo--hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  /* The menu overlay carries no other branding, so the mark always returns
+     while it is open — including before React hydrates. */
+  html[data-menu-open="true"] .nav-logo--hidden {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .nav-logo {
+      transition: none;
+    }
+  }
+
   /* Animated underline for text links */
   .hover-line {
     position: relative;
