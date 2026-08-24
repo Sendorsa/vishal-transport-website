@@ -88,6 +88,11 @@ function ImageLayer({
           sizes={sizes}
           placeholder="blur"
           blurDataURL={asset.blurDataURL}
+          // Eager site-wide. Some of these live in horizontally translated
+          // tracks (the pinned gallery on desktop), where lazy loading never
+          // fires at all; the rest must be decoded before the cover lifts so
+          // nothing appears after it. See §11a.
+          loading={priority ? undefined : "eager"}
           priority={priority}
           className="object-cover"
           style={{ objectPosition: position }}

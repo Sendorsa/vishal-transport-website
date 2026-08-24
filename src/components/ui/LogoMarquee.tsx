@@ -48,7 +48,12 @@ function LogoItem({ partner, hidden }: { partner: Partner; hidden?: boolean }) {
           width={Math.round(w.d * 2)}
           height={Math.round(h.d * 2)}
           sizes={`${Math.round(w.d)}px`}
-          loading="lazy"
+          // Eager, and it must stay eager. These sit in a `w-max` track far
+          // wider than the viewport, so their *layout* position never
+          // intersects it — the marquee only moves them via transform, which
+          // does not re-run the native lazy check. Lazy here meant 4 of 8
+          // brands were permanently blank on every visit (§15).
+          loading="eager"
           className="logo-band-img object-contain opacity-90 grayscale transition-all duration-500 ease-out group-hover/logo:scale-110 group-hover/logo:opacity-100 group-hover/logo:grayscale-0"
         />
       </span>

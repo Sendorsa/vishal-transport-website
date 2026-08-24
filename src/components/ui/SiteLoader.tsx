@@ -14,15 +14,25 @@ import { site } from "@/lib/content";
  * Dismissal is gated on real signals, never a timer:
  *   1. hydration complete — this effect running IS that signal
  *   2. document.fonts.ready
- *   3. decode() on every above-the-fold image
- *   4. window load (all critical page resources)
+ *   3. window load (all page resources; no image is lazy any more)
+ *   4. decode() on EVERY image on the page, not just the first screen
  *
- * A CSS failsafe retires the cover regardless, so a stalled font or a JS
- * failure can never trap a visitor behind it.
+ * (3) and (4) together are what make the promise "the whole site is ready"
+ * rather than "the first screen is ready". Because nothing is lazy, `load`
+ * has already settled every image at the network layer by the time (4) runs,
+ * so decoding is the only work left.
+ *
+ * FAILSAFE_MS is the one concession: a single hung request must not trap a
+ * visitor behind the cover forever. It sits far past the honest worst case
+ * (~17s for the full image set on Slow 3G) so it never fires on a real load.
+ * Keep it in sync with the failsafe delays in globals.css.
  */
+const FAILSAFE_MS = 25_000;
+
 export function SiteLoader() {
   useEffect(() => {
     let done = false;
+    let timer = 0;
     const reveal = () => {
       if (done) return;
       done = true;
@@ -38,24 +48,26 @@ export function SiteLoader() {
             window.addEventListener("load", () => r(), { once: true }),
           );
 
-    // Above-the-fold set: every image whose box intersects the first viewport.
-    // decode() resolves only once the bitmap is ready to paint, so the reveal
-    // never lands on a half-drawn image.
-    const decoded = loadEvent.then(() => {
-      const aboveFold = [...document.querySelectorAll("img")].filter((img) => {
-        const r = img.getBoundingClientRect();
-        return r.top < window.innerHeight && r.bottom > 0 && r.width > 0;
-      });
-      return Promise.all(
-        aboveFold.map((img) =>
+    // EVERY image on the page. decode() resolves only once the bitmap is ready
+    // to paint, so the reveal never lands on a half-drawn image — and a
+    // rejection (404, decode failure) is swallowed rather than blocking, so a
+    // single broken asset degrades to a gap instead of a stuck cover.
+    const decoded = loadEvent.then(() =>
+      Promise.all(
+        [...document.querySelectorAll("img")].map((img) =>
           img.complete && img.naturalWidth > 0
             ? Promise.resolve()
             : img.decode().catch(() => undefined),
         ),
-      );
+      ),
+    );
+
+    const ready = Promise.all([fonts, loadEvent, decoded]);
+    const failsafe = new Promise<void>((r) => {
+      timer = window.setTimeout(r, FAILSAFE_MS);
     });
 
-    Promise.all([fonts, loadEvent, decoded]).then(() => {
+    Promise.race([ready, failsafe]).then(() => {
       // Two frames after everything resolves, so the page underneath has
       // painted its final state before the cover lifts.
       requestAnimationFrame(() => requestAnimationFrame(reveal));
@@ -63,6 +75,7 @@ export function SiteLoader() {
 
     return () => {
       done = true;
+      window.clearTimeout(timer);
     };
   }, []);
 

@@ -244,7 +244,12 @@
     justify-content: center;
     background: #1f3265;
     opacity: 1;
-    animation: loader-failsafe 0.4s ease-out 6s forwards;
+    /* Backstop for the JS-disabled case only. The in-component failsafe
+       (FAILSAFE_MS in SiteLoader.tsx) handles every case where JS runs; keep
+       the two delays in sync. It was 6s, which now fires *during* an honest
+       load — the full image set takes ~17s on Slow 3G — and would reveal a
+       half-loaded page, which is the exact thing the cover exists to prevent. */
+    animation: loader-failsafe 0.4s ease-out 25s forwards;
   }
   @keyframes loader-failsafe {
     to { opacity: 0; visibility: hidden; pointer-events: none; }
@@ -256,10 +261,27 @@
   #site-content {
     opacity: 0;
     transition: opacity 0.4s ease-out;
+    /* Without this the JS-disabled backstop above hid the cover but left the
+       page at opacity 0 — a permanently blank screen. The content has to be
+       released on the same timer the cover is. */
+    animation: content-failsafe 0.4s ease-out 25s forwards;
   }
-  html:not([data-loaded]) body { overflow: hidden; }
+  @keyframes content-failsafe {
+    to { opacity: 1; }
+  }
 
-  html[data-loaded] #site-content { opacity: 1; }
+  /* Same reasoning for the scroll lock: released on the backstop timer so a
+     no-JS visitor is never left with an unscrollable page. `overflow` is a
+     discrete property, so it flips at the keyframe rather than tweening. */
+  html:not([data-loaded]) body {
+    overflow: hidden;
+    animation: scroll-unlock 0s linear 25s forwards;
+  }
+  @keyframes scroll-unlock {
+    to { overflow: visible; }
+  }
+
+  html[data-loaded] #site-content { opacity: 1; animation: none; }
   html[data-loaded] #site-loader {
     opacity: 0;
     visibility: hidden;
