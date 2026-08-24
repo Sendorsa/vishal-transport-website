@@ -18,6 +18,19 @@ import { useAnimationControls } from "framer-motion";
  * animates. Entry is observed directly rather than via `whileInView`, because
  * `whileInView` would re-introduce an `initial` dependency.
  */
+/**
+ * Master switch for scroll-triggered entrance reveals.
+ *
+ * Off: every section is fully painted the moment it exists, and nothing waits
+ * on viewport entry. This is deliberate — the reveal was the last mechanism
+ * that left content invisible until scrolled to, which read as "sections
+ * loading late" on mobile.
+ *
+ * Flip to `true` to bring the entrances back; all the plumbing below still
+ * works and is exercised by the rest of the motion system.
+ */
+const SCROLL_REVEALS_ENABLED = false;
+
 export function useRevealArm<T extends HTMLElement>(enabled = true) {
   const ref = useRef<T>(null);
   const controls = useAnimationControls();
@@ -25,7 +38,7 @@ export function useRevealArm<T extends HTMLElement>(enabled = true) {
 
   useEffect(() => {
     const el = ref.current;
-    if (!el || !enabled) return;
+    if (!el || !enabled || !SCROLL_REVEALS_ENABLED) return;
 
     // Already visible or scrolled past — leave it be.
     if (el.getBoundingClientRect().top <= window.innerHeight) return;

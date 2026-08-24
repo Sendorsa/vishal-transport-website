@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
-import { SiteLoader } from "@/components/ui/SiteLoader";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -130,7 +129,6 @@ export default function RootLayout({
       className={`${fraunces.variable} ${inter.variable} ${plexMono.variable}`}
     >
       <body>
-        <SiteLoader />
         <script dangerouslySetInnerHTML={{ __html: menuBootstrap }} />
         <script
           type="application/ld+json"
