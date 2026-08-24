@@ -36,6 +36,7 @@ export function About() {
               // candidate the browser picks.
               variant="full"
               height={200}
+              sizes="(min-width: 1024px) 389px, (min-width: 640px) 296px, 218px"
               alt={site.legalName}
               className="h-14 w-auto sm:h-[4.75rem] lg:h-[6.25rem]"
             />

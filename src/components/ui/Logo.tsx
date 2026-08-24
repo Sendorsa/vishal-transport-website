@@ -5,20 +5,26 @@ import Image from "next/image";
  * from the supplied lockup — see that file for the colour-flattening rationale.
  *
  * `mono` is the white knockout, for navy/dark surfaces where the navy emblem
- * would otherwise disappear. `emblem` is the reduced "V" icon for square or
- * very small slots — the full lockup's tagline turns illegible below ~30px.
+ * would otherwise disappear.
  */
 const ASSETS = {
   full: { src: "/brand/vishal-logo.png", width: 2083, height: 535 },
   mono: { src: "/brand/vishal-logo-mono.png", width: 2083, height: 535 },
-  emblem: { src: "/brand/vishal-logo-emblem.png", width: 617, height: 536 },
-  emblemMono: { src: "/brand/vishal-logo-mono-emblem.png", width: 617, height: 536 },
 } as const;
 
 type LogoProps = {
   variant?: keyof typeof ASSETS;
-  /** Rendered height in CSS px — drives the reserved box, so there is no CLS. */
+  /** Intrinsic height in CSS px — reserves the box, so there is no CLS. */
   height: number;
+  /**
+   * Responsive `sizes` describing the width the mark is ACTUALLY painted at.
+   *
+   * This must be passed whenever CSS overrides the intrinsic size. Deriving it
+   * from `height` (the old behaviour) made the browser fetch for the intrinsic
+   * box rather than the rendered one — the About plate asked for a 1280px
+   * candidate to paint a 218px mark, 36KB instead of 6KB.
+   */
+  sizes?: string;
   className?: string;
   priority?: boolean;
   /**
@@ -31,6 +37,7 @@ type LogoProps = {
 export function Logo({
   variant = "full",
   height,
+  sizes,
   className = "",
   priority = false,
   alt = "",
@@ -44,7 +51,7 @@ export function Logo({
       alt={alt}
       width={width}
       height={height}
-      sizes={`${width}px`}
+      sizes={sizes ?? `${width}px`}
       priority={priority}
       aria-hidden={alt === "" ? true : undefined}
       className={className}

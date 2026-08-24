@@ -134,7 +134,12 @@ export function Navbar() {
               animate={{ opacity: lightBar ? 1 : 0 }}
               transition={{ duration: 0.5, ease: easing.gentle }}
             >
-              <Logo variant="full" height={36} className="h-full w-auto" />
+              <Logo
+                variant="full"
+                height={36}
+                sizes="(min-width: 640px) 140px, 117px"
+                className="h-full w-auto"
+              />
             </motion.span>
             <motion.span
               className="absolute inset-0 block"

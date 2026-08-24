@@ -11,7 +11,12 @@ export function Footer() {
         <Reveal variant="fadeUp" className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             {/* Mono knockout: the navy emblem would vanish on this section. */}
-            <Logo variant="mono" height={40} alt={`${site.legalName} logo`} />
+            <Logo
+              variant="mono"
+              height={40}
+              sizes="156px"
+              alt={`${site.legalName} logo`}
+            />
             <p className="mt-5 max-w-xs text-sm text-ink-muted">{footer.blurb}</p>
             <div className="mt-6 flex gap-3">
               {footer.socials.map((s) => (
