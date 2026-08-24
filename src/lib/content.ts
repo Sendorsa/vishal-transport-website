@@ -313,14 +313,14 @@ export type Partner = {
 };
 
 export const partnerLogos: Partner[] = [
-  { name: "UNO Minda Ltd", logo: { src: "/partners/uno-minda.png", width: 134, height: 68, scale: 1 } },
-  { name: "Tata Electronics Pvt Ltd", logo: { src: "/partners/tata-electronics.png", width: 96, height: 84, scale: 1.25 } },
-  { name: "Titan Watches Ltd", logo: { src: "/partners/titan-watches.png", width: 92, height: 89, scale: 1.3 } },
-  { name: "Dhoot Transmission Ltd", logo: { src: "/partners/dhoot-transmission.png", width: 248, height: 58, scale: 0.85 } },
-  { name: "JBM Ogihara Automotive India Ltd", logo: { src: "/partners/jbm-ogihara.png", width: 172, height: 68, scale: 1 } },
-  { name: "Titan Jewellery Ltd", logo: { src: "/partners/titan-jewellery.png", width: 92, height: 89, scale: 1.3 } },
-  { name: "Titan Engineering & Automation Ltd", logo: { src: "/partners/teal.png", width: 284, height: 58, scale: 0.85 } },
-  { name: "Suman Nirmal Minda School", logo: { src: "/partners/suman-nirmal-minda-school.png", width: 84, height: 88, scale: 1.3 } },
+  { name: "UNO Minda Ltd", logo: { src: "/partners/uno-minda.webp", width: 134, height: 68, scale: 1 } },
+  { name: "Tata Electronics Pvt Ltd", logo: { src: "/partners/tata-electronics.webp", width: 96, height: 84, scale: 1.25 } },
+  { name: "Titan Watches Ltd", logo: { src: "/partners/titan-watches.webp", width: 92, height: 89, scale: 1.3 } },
+  { name: "Dhoot Transmission Ltd", logo: { src: "/partners/dhoot-transmission.webp", width: 248, height: 58, scale: 0.85 } },
+  { name: "JBM Ogihara Automotive India Ltd", logo: { src: "/partners/jbm-ogihara.webp", width: 172, height: 68, scale: 1 } },
+  { name: "Titan Jewellery Ltd", logo: { src: "/partners/titan-jewellery.webp", width: 92, height: 89, scale: 1.3 } },
+  { name: "Titan Engineering & Automation Ltd", logo: { src: "/partners/teal.webp", width: 284, height: 58, scale: 0.85 } },
+  { name: "Suman Nirmal Minda School", logo: { src: "/partners/suman-nirmal-minda-school.webp", width: 84, height: 88, scale: 1.3 } },
 ];
 
 export const trust = {

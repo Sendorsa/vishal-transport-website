@@ -8,8 +8,8 @@ import Image from "next/image";
  * would otherwise disappear.
  */
 const ASSETS = {
-  full: { src: "/brand/vishal-logo.png", width: 780, height: 200 },
-  mono: { src: "/brand/vishal-logo-mono.png", width: 780, height: 200 },
+  full: { src: "/brand/vishal-logo.webp", width: 780, height: 200 },
+  mono: { src: "/brand/vishal-logo-mono.webp", width: 780, height: 200 },
 } as const;
 
 type LogoProps = {

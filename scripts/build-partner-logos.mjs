@@ -73,6 +73,7 @@ for (const s of SOURCES) {
   );
 }
 
+// Values are copied straight into content.ts; no runtime manifest is needed.
 await writeFile(
   "src/lib/partner-logos.json",
   JSON.stringify(Object.fromEntries(manifest.map((m) => [m.slug, m])), null, 2) + "\n",
