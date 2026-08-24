@@ -178,10 +178,20 @@
 
   /* Above-the-fold fade-up, in CSS for the same reason as the headline:
      Framer ships these as opacity:0 and they stay invisible until the bundle
-     hydrates, which made the hero body the LCP element at 3.8s. */
+     hydrates, which made the hero body the LCP element at 3.8s.
+
+     The start opacity is 0.01, NOT 0, and that is load-bearing. Chrome will
+     not accept an element with opacity:0 as an LCP candidate, so the hero
+     paragraph — the largest element on the page — was excluded until its fade
+     had run, costing ~720ms of LCP on Fast 3G and ~3.7s on Slow 3G. Neither
+     the delay nor the duration was responsible: removing the delay, shortening
+     the duration and dropping the transform were each measured on production
+     and changed nothing. Only the literal zero mattered. 0.01 is measurably
+     invisible (max 2/255 per channel at the animation's first frame) and the
+     animation is otherwise untouched. See §11. */
   @keyframes fade-up-css {
     from {
-      opacity: 0;
+      opacity: 0.01;
       transform: translateY(20px);
     }
     to {
@@ -190,7 +200,7 @@
     }
   }
   .fade-up-css {
-    opacity: 0;
+    opacity: 0.01;
     animation: fade-up-css 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
   @media (prefers-reduced-motion: reduce) {

@@ -244,11 +244,36 @@ Motion is **smooth, purposeful, cinematic, minimal, never distracting.** If an a
 - **Server-render content**; keep client JS to interactive leaves. All 17 sections ship complete in the initial HTML — verified. Nothing mounts after hydration.
 - **Never ship real content at `opacity: 0` in SSR.** This regressed once at 92 elements; it is now 8, all `pointer-events: none` decorative overlays. Re-check after any motion change (§19).
 - Prioritize **LCP**: hero text first (BusScene is decorative, not LCP-critical). Real images use `next/image` with an explicit `sizes` prop — every image on the page has one, and none is over-delivered.
-- Trim unused font weights (`layout.tsx`) — every weight is a download. Fonts are the heaviest layer on the page: 5 WOFF2 files ≈ 128 KB, more than double the entire image payload.
+- **Never start an entrance animation at exactly `opacity: 0`.** Chrome excludes zero-opacity elements from the LCP candidate set entirely, so an animated hero element is either measured late or not at all. `.fade-up-css` starts at `0.01` for this reason — see §11b.
+- **Fonts: check whether the family is variable before trimming weights.** Fraunces and Inter are variable — one file serves 300–600, so their `weight` arrays cost nothing. IBM Plex Mono is *not*: each weight is its own file. What actually costs money is adding a **style** (italic is a separate file) or a non-variable weight. Measured and removed: Fraunces italic (44.6 KB, used by one pull-quote) and Plex Mono 500 (9.8 KB, painted on zero elements) — fonts went 147 KB → 93 KB, FCP −536 ms, LCP −544 ms, JS completion −787 ms. The Corridor quote now renders as synthetic oblique.
 - Avoid redundant scroll listeners; reuse Framer's `useScroll` and don't over-instrument small elements.
 - No layout shift from animations (animate transform/opacity, not layout properties). CLS is currently **0.0000** with 0 shift events — treat any regression as a bug.
 - **The mobile menu must not wait on hydration.** It is driven by a pre-hydration inline script (`menuBootstrap` in `layout.tsx`) using event delegation, with the overlay styled from `html[data-menu-open="true"]` in CSS. Hydration-gated, it had a 2294 ms dead window (34 dead taps); it is now ~92 ms on the first tap. Do not add an `onClick` to `#menu-toggle` — the delegated bootstrap owns it.
 - **Absence of the attribute means closed.** `menuBootstrap` must never write `data-menu-open="false"` before React hydrates — that is a hydration mismatch. Removing the attribute is the closed state.
+
+### 11b. The `opacity: 0` LCP trap
+
+`.fade-up-css` (`globals.css`) starts at **`opacity: 0.01`, not `0`**, in both the keyframe `from` state and the base rule. This is load-bearing, not a typo.
+
+**The behaviour:** Chrome will not accept an element with `opacity: 0` as an LCP candidate. The hero paragraph is the largest element on the page (37,620 px² at 390 px, 43,407 px² at 1440 px), so with a zero-start fade it was either recorded late or silently skipped in favour of a much smaller element — which also made LCP *look* artificially good in some runs.
+
+**What was ruled out, each measured on live production:**
+
+| Change | LCP gap | Effect |
+|---|---|---|
+| Remove the 0.45s delay | 864 ms | none |
+| Duration 0.8s → 0.3s | 824 ms | none |
+| Remove delay on the LCP element only | 772 ms | none |
+| Keep the opacity fade, drop the transform | 816 ms | none |
+| **Start at 0.01 instead of 0** | **0 ms** | **fixes it** |
+
+Neither the delay, the duration, nor the transform mattered. Only the literal zero did. 0.02 and 0.05 also work; 0.01 was chosen as the smallest value that clears it.
+
+**Measured gain:** Fast 3G LCP 2756 → 2116 ms. Slow 3G LCP 10176 → 6508 ms (−36%). FCP unchanged, CLS 0.0000 throughout.
+
+**Visual cost:** none measurable. Freezing every animation at `currentTime = 0` — the instant of maximum difference — and comparing both frames through an identical clip gives a **max per-channel difference of 2/255**, with 0.00% of channels differing by more than 3.
+
+**Caveat:** this relies on a Chrome implementation detail, not a spec guarantee. It was verified twelve ways here, but if Chrome ever admits zero-opacity elements as LCP candidates the fix becomes a no-op — it degrades to neutral, never to a regression. `.mask-line-css` (the h1) needs no equivalent change: it animates `transform` only and has always been eligible.
 
 ### 11a. The startup loader (`ui/SiteLoader.tsx`)
 
