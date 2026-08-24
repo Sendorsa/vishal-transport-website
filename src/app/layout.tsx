@@ -2,10 +2,15 @@ import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
+// The italic axis is deliberately NOT requested. Fraunces ships italic as a
+// separate 44.6KB file, and exactly one element on the site is italic (the
+// Corridor pull-quote) — it now renders as synthetic oblique instead.
+// The weight array is free: Fraunces is variable, so 300-600 come from one
+// file. Only adding a *style* costs another download.
 const fraunces = Fraunces({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
-  style: ["normal", "italic"],
+  style: ["normal"],
   variable: "--font-fraunces",
   display: "optional",
 });
@@ -17,9 +22,12 @@ const inter = Inter({
   display: "optional",
 });
 
+// Unlike Fraunces and Inter, IBM Plex Mono is NOT variable — each weight is
+// its own file. Weight 500 was measured painting on zero elements, so it was
+// 9.8KB of pure waste. Check with computed styles before adding a weight back.
 const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400"],
   variable: "--font-plex-mono",
   display: "optional",
 });
