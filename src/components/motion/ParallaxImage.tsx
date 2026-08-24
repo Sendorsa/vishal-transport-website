@@ -33,6 +33,16 @@ type ParallaxImageProps = {
   position?: string;
   /** Opt this image into eager loading (above-the-fold slots only). */
   priority?: boolean;
+  /**
+   * Force eager loading without the preload hint `priority` adds.
+   *
+   * Only for images that live in a horizontally TRANSFORMED track, where
+   * native lazy-loading never fires: it keys off the element's layout
+   * position, and a transform slides items into view without changing it.
+   * Everything else must stay lazy — eager images are Low priority, the same
+   * as Next's deferred scripts, so they compete with the bundle byte for byte.
+   */
+  eager?: boolean;
   /** Override the manifest alt — use when context makes a shorter one better. */
   alt?: string;
 };
@@ -53,6 +63,7 @@ function ImageLayer({
   sizes,
   position,
   priority,
+  eager,
   alt,
 }: {
   reduced: boolean;
@@ -62,6 +73,7 @@ function ImageLayer({
   sizes: string;
   position: string;
   priority: boolean;
+  eager: boolean;
   alt?: string;
 }) {
   // Same rule as Reveal: only images still below the fold may start hidden,
@@ -88,11 +100,8 @@ function ImageLayer({
           sizes={sizes}
           placeholder="blur"
           blurDataURL={asset.blurDataURL}
-          // Eager site-wide. Some of these live in horizontally translated
-          // tracks (the pinned gallery on desktop), where lazy loading never
-          // fires at all; the rest must be decoded before the cover lifts so
-          // nothing appears after it. See §11a.
-          loading={priority ? undefined : "eager"}
+          // undefined → next/image's default, which is lazy.
+          loading={priority || !eager ? undefined : "eager"}
           priority={priority}
           className="object-cover"
           style={{ objectPosition: position }}
@@ -115,6 +124,7 @@ function ParallaxImageMotion(props: ParallaxImageProps & { reduced: boolean }) {
     sizes = "100vw",
     position = "50% 50%",
     priority = false,
+    eager = false,
     alt,
     reduced,
   } = props;
@@ -138,6 +148,7 @@ function ParallaxImageMotion(props: ParallaxImageProps & { reduced: boolean }) {
           sizes={sizes}
           position={position}
           priority={priority}
+          eager={eager}
           alt={alt}
         />
       </motion.div>
@@ -158,6 +169,7 @@ function ParallaxImageStatic(props: ParallaxImageProps & { reduced: boolean }) {
     sizes = "100vw",
     position = "50% 50%",
     priority = false,
+    eager = false,
     alt,
     reduced,
   } = props;
@@ -174,6 +186,7 @@ function ParallaxImageStatic(props: ParallaxImageProps & { reduced: boolean }) {
           sizes={sizes}
           position={position}
           priority={priority}
+          eager={eager}
           alt={alt}
         />
       </div>

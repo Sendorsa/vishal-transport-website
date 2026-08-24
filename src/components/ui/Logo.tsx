@@ -52,9 +52,6 @@ export function Logo({
       width={width}
       height={height}
       sizes={sizes ?? `${width}px`}
-      // Never lazy: the loader gates on every image having decoded, so a
-      // deferred logo would either stall the cover or pop in behind it.
-      loading={priority ? undefined : "eager"}
       priority={priority}
       aria-hidden={alt === "" ? true : undefined}
       className={className}

@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
-import { SiteLoader } from "@/components/ui/SiteLoader";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -130,22 +129,12 @@ export default function RootLayout({
       className={`${fraunces.variable} ${inter.variable} ${plexMono.variable}`}
     >
       <body>
-        {/* Path 2 of the cover's three retirement paths (see globals.css).
-            With JS off the cover can never be dismissed by script, so remove
-            it outright — deterministically, with no timer. The content
-            underneath is not gated on anything, so the site is simply usable. */}
-        <noscript>
-          <style>{`#site-loader{display:none}`}</style>
-        </noscript>
-        <SiteLoader />
         <script dangerouslySetInnerHTML={{ __html: menuBootstrap }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        {/* Wrapped so the entire site can fade in as one unit once the
-            cover lifts — no section appears before any other. */}
-        <div id="site-content">{children}</div>
+        {children}
       </body>
     </html>
   );

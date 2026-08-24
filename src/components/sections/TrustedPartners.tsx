@@ -23,7 +23,14 @@ const useIsoLayoutEffect =
 
 // Landscape, not portrait: every client-site photograph is a wide line of
 // people and vehicles, and a tall crop cuts the ends off the group.
-function GalleryCard({ card }: { card: (typeof partners.cards)[number] }) {
+function GalleryCard({
+  card,
+  eager,
+}: {
+  card: (typeof partners.cards)[number];
+  /** True only while the desktop pinned track is active — see below. */
+  eager: boolean;
+}) {
   return (
     <div className="relative h-[46vh] w-[86vw] shrink-0 sm:h-[52vh] sm:w-[720px] lg:h-[58vh]">
       <ParallaxImage
@@ -31,6 +38,11 @@ function GalleryCard({ card }: { card: (typeof partners.cards)[number] }) {
         parallax={16}
         zoom={0.06}
         photo={card.photo}
+        // The pinned desktop track moves cards with a transform, so native
+        // lazy-loading never fires and cards past the first would stay blank
+        // forever. The mobile fallback is a real scroll container, where lazy
+        // works normally and saves ~150KB on the critical path.
+        eager={eager}
         sizes="(min-width: 640px) 720px, 86vw"
         // Groups stand in the lower half of frame — hold them, not the sky.
         position="50% 60%"
@@ -113,7 +125,7 @@ export function TrustedPartners() {
           {pinned ? (
             <motion.div ref={trackRef} className="flex gap-6 pl-6 will-change-transform sm:pl-10" style={{ x }}>
               {partners.cards.map((card, i) => (
-                <GalleryCard key={i} card={card} />
+                <GalleryCard key={i} card={card} eager={pinned} />
               ))}
               <div className="w-[8vw] shrink-0" aria-hidden />
             </motion.div>
@@ -123,7 +135,7 @@ export function TrustedPartners() {
               className="flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 pb-2 sm:px-10 [&>*]:snap-start"
             >
               {partners.cards.map((card, i) => (
-                <GalleryCard key={i} card={card} />
+                <GalleryCard key={i} card={card} eager={pinned} />
               ))}
             </div>
           )}
