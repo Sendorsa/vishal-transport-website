@@ -7,9 +7,9 @@ import { site } from "@/lib/content";
  * Full-page branded startup cover.
  *
  * Server-rendered, so it paints with the first frame and never waits on React.
- * The site underneath is held at opacity 0 (not visibility:hidden) so layout
- * still resolves and images still download and decode while it is covered —
- * that is what lets the whole page appear at once, fully formed.
+ * It is an OPAQUE OVERLAY, not a visibility gate: the site underneath is fully
+ * visible at all times and is simply covered. Nothing here can hide content,
+ * so no failure of this component can produce a blank screen.
  *
  * Dismissal is gated on real signals, never a timer:
  *   1. hydration complete — this effect running IS that signal
@@ -22,12 +22,13 @@ import { site } from "@/lib/content";
  * has already settled every image at the network layer by the time (4) runs,
  * so decoding is the only work left.
  *
- * FAILSAFE_MS is the one concession: a single hung request must not trap a
- * visitor behind the cover forever. It sits far past the honest worst case
- * (~17s for the full image set on Slow 3G) so it never fires on a real load.
- * Keep it in sync with the failsafe delays in globals.css.
+ * FAILSAFE_MS bounds the wait. It is deliberately SHORT now: under the
+ * additive-cover model (see globals.css) the content underneath is never
+ * hidden, so retiring the cover early reveals a working, scrollable site
+ * rather than a blank one. Firing is a graceful degradation, not a failure,
+ * which is why 8s beats the old 25s. Keep in sync with `loader-retire`.
  */
-const FAILSAFE_MS = 25_000;
+const FAILSAFE_MS = 8_000;
 
 export function SiteLoader() {
   useEffect(() => {

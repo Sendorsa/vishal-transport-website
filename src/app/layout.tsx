@@ -130,6 +130,13 @@ export default function RootLayout({
       className={`${fraunces.variable} ${inter.variable} ${plexMono.variable}`}
     >
       <body>
+        {/* Path 2 of the cover's three retirement paths (see globals.css).
+            With JS off the cover can never be dismissed by script, so remove
+            it outright — deterministically, with no timer. The content
+            underneath is not gated on anything, so the site is simply usable. */}
+        <noscript>
+          <style>{`#site-loader{display:none}`}</style>
+        </noscript>
         <SiteLoader />
         <script dangerouslySetInnerHTML={{ __html: menuBootstrap }} />
         <script
