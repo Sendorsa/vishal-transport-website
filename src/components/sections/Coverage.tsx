@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
+import { useArmed } from "@/lib/useRevealArm";
 import { coverage } from "@/lib/content";
 import { Reveal } from "@/components/motion/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -11,7 +12,11 @@ export function Coverage() {
   const mapRef = useRef<HTMLDivElement>(null);
   const inView = useInView(mapRef, { once: true, amount: 0.3 });
   const reduced = useReducedMotion() ?? false;
+  // `show` drives the decorative route line and dots only.
   const show = inView || reduced;
+  // The location labels are business content, so they render immediately and
+  // only animate when they started below the fold.
+  const { ref: pinsRef, armed: pinsArmed } = useArmed<HTMLDivElement>();
 
   return (
     <section id="coverage" className="theme-light py-section-y lg:py-section-y-lg">
@@ -78,9 +83,15 @@ export function Coverage() {
               key={pin.city}
               className={`absolute ${pin.side === "right" ? "text-right" : ""}`}
               style={pin.style}
-              initial={{ opacity: 0, y: 8 }}
-              animate={show ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
-              transition={{ duration: 0.5, delay: reduced ? 0 : 0.8 + i * 0.45 }}
+              ref={i === 0 ? pinsRef : undefined}
+              initial={false}
+              animate={
+                pinsArmed && show ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }
+              }
+              transition={{
+                duration: pinsArmed ? 0.5 : 0,
+                delay: pinsArmed && !reduced ? 0.8 + i * 0.45 : 0,
+              }}
             >
               <div
                 className={pin.side === "right" ? "border-r pr-4" : "border-l pl-4"}

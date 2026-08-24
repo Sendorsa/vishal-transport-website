@@ -29,7 +29,7 @@ import { useAnimationControls } from "framer-motion";
  * Flip to `true` to bring the entrances back; all the plumbing below still
  * works and is exercised by the rest of the motion system.
  */
-const SCROLL_REVEALS_ENABLED = false;
+export const SCROLL_REVEALS_ENABLED = false;
 
 export function useRevealArm<T extends HTMLElement>(enabled = true) {
   const ref = useRef<T>(null);
@@ -60,4 +60,26 @@ export function useRevealArm<T extends HTMLElement>(enabled = true) {
   }, [controls, enabled]);
 
   return { ref, controls, armed };
+}
+
+/**
+ * Lightweight sibling of useRevealArm for components that animate their own
+ * content rather than a Framer variant (counters, map pins).
+ *
+ * Same contract: `armed` is false on the server and on first paint, and only
+ * becomes true for elements that were below the fold at mount. Callers must
+ * render their FINAL content when `armed` is false — never a placeholder —
+ * so business content is never gated on viewport visibility.
+ */
+export function useArmed<T extends HTMLElement>() {
+  const ref = useRef<T>(null);
+  const [armed, setArmed] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || !SCROLL_REVEALS_ENABLED) return;
+    if (el.getBoundingClientRect().top > window.innerHeight) setArmed(true);
+  }, []);
+
+  return { ref, armed };
 }

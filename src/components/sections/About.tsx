@@ -31,9 +31,8 @@ export function About() {
 
           <Reveal variant="scaleIn" className="relative flex flex-col items-center">
             <Logo
-              // Intrinsic size, not display size: CSS caps the mark at 100px
-              // tall, so 200 guarantees >=2x pixels on retina whichever srcset
-              // candidate the browser picks.
+              // The asset is 780x200 — exactly 2x the 390px the plate paints
+              // at its widest, so this is the full useful resolution.
               variant="full"
               height={200}
               sizes="(min-width: 1024px) 389px, (min-width: 640px) 296px, 218px"

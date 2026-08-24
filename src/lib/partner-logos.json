@@ -1,38 +1,38 @@
 {
   "uno-minda": {
     "slug": "uno-minda",
-    "width": 315,
-    "height": 160,
+    "width": 134,
+    "height": 68,
     "scale": 1
   },
   "dhoot-transmission": {
     "slug": "dhoot-transmission",
-    "width": 687,
-    "height": 160,
+    "width": 248,
+    "height": 58,
     "scale": 0.85
   },
   "titan-watches": {
     "slug": "titan-watches",
-    "width": 166,
-    "height": 160,
+    "width": 92,
+    "height": 89,
     "scale": 1.3
   },
   "titan-jewellery": {
     "slug": "titan-jewellery",
-    "width": 166,
-    "height": 160,
+    "width": 92,
+    "height": 89,
     "scale": 1.3
   },
   "teal": {
     "slug": "teal",
-    "width": 784,
-    "height": 160,
+    "width": 284,
+    "height": 58,
     "scale": 0.85
   },
   "tata-electronics": {
     "slug": "tata-electronics",
-    "width": 182,
-    "height": 160,
+    "width": 96,
+    "height": 84,
     "scale": 1.25
   },
   "tata-electronics-wordmark": {
@@ -43,14 +43,14 @@
   },
   "jbm-ogihara": {
     "slug": "jbm-ogihara",
-    "width": 403,
-    "height": 160,
+    "width": 172,
+    "height": 68,
     "scale": 1
   },
   "suman-nirmal-minda-school": {
     "slug": "suman-nirmal-minda-school",
-    "width": 153,
-    "height": 160,
+    "width": 84,
+    "height": 88,
     "scale": 1.3
   }
 }

@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useInView, useReducedMotion, animate } from "framer-motion";
+import { useReducedMotion, animate } from "framer-motion";
+import { useArmed } from "@/lib/useRevealArm";
 import { easing } from "@/lib/motion";
 
 type CounterProps = {
@@ -22,24 +23,23 @@ export function Counter({
   duration = 1.7,
   className,
 }: CounterProps) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.4 });
+  const { ref, armed } = useArmed<HTMLSpanElement>();
   const reduced = useReducedMotion() ?? false;
-  const [value, setValue] = useState(0);
+  // Starts at the real figure, not zero. Previously this rendered "0" until
+  // scrolled into view, so "300+ vehicles" and "550+ employees" read as "0+"
+  // on first paint — business data gated on viewport visibility.
+  const [value, setValue] = useState(to);
 
   useEffect(() => {
-    if (!inView) return;
-    if (reduced) {
-      setValue(to);
-      return;
-    }
+    if (!armed || reduced) return;
+    setValue(0);
     const controls = animate(0, to, {
       duration,
       ease: easing.smoothOut,
       onUpdate: (v) => setValue(Math.floor(v)),
     });
     return () => controls.stop();
-  }, [inView, reduced, to, duration]);
+  }, [armed, reduced, to, duration]);
 
   return (
     <span ref={ref} className={`whitespace-nowrap ${className ?? ""}`}>
